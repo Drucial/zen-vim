@@ -3,6 +3,7 @@
 ## Completed ✓
 
 ### Initial Setup
+
 - [x] Set up lazy.nvim plugin manager
 - [x] Create modular configuration structure (opts, keybinds, lazy, autocmds)
 - [x] Set leader keys (Space for both leader and local leader)
@@ -10,6 +11,7 @@
 - [x] Set up rose-pine colorscheme
 
 ### Keybindings
+
 - [x] Configure window management keybinds
 - [x] Configure tab management keybinds
 - [x] Add Option+Shift+Arrow for moving lines up/down
@@ -19,6 +21,7 @@
 - [x] Remove conflicting navigation keys for vim-kitty-navigator
 
 ### Plugins - Navigation & UI
+
 - [x] Install vim-kitty-navigator for seamless kitty/nvim navigation
 - [x] Install oil.nvim for file exploration
 - [x] Install telescope.nvim for fuzzy finding
@@ -26,6 +29,7 @@
 - [x] Configure telescope keybindings (<leader>f prefix)
 
 ### Plugins - LSP & Code Intelligence
+
 - [x] Install mason.nvim for LSP server management
 - [x] Install mason-lspconfig.nvim for automatic LSP setup
 - [x] Install nvim-lspconfig with modern vim.lsp.config() API
@@ -42,6 +46,7 @@
 - [x] Update to modern diagnostic navigation (vim.diagnostic.jump)
 
 ### Plugins - Formatting & Linting
+
 - [x] Install conform.nvim for autoformatting
 - [x] Install mason-tool-installer for formatter management
 - [x] Configure format on save for all languages
@@ -55,10 +60,26 @@
   - [x] shfmt (Bash)
 
 ### Documentation
+
 - [x] Create comprehensive CLAUDE.md
 - [x] Document all keybindings
 - [x] Document plugin architecture
 - [x] Document configuration load order
+
+### Plugins - Treesitter & Code Understanding
+
+- [x] Install nvim-treesitter for better syntax highlighting
+- [x] Configure treesitter for all languages (TS, Ruby, Python, Lua, etc.)
+- [x] Set up incremental selection (Ctrl+Space)
+- [x] Configure treesitter textobjects (af, if, ac, ic, aa, ia)
+- [x] Add navigation for functions and classes ([f, ]f, [c, ]c)
+
+### Plugins - Which-Key
+
+- [x] Install and configure which-key.nvim
+- [x] Set up keybinding groups (find, code, split, tab)
+- [x] Configure helix preset for clean vertical layout
+- [x] Add buffer local keymaps helper (<leader>?)
 
 ## In Progress 🚧
 
@@ -66,29 +87,33 @@ None currently
 
 ## Todo 📋
 
-### Future Enhancements
-- [ ] Add completion engine (nvim-cmp)
-- [ ] Add snippets support
-- [ ] Add treesitter for better syntax highlighting
+### Required Enhancements
+
 - [ ] Add git integration (gitsigns)
 - [ ] Add status line (lualine)
-- [ ] Add buffer line/tab line
-- [ ] Add which-key configuration for keybinding discovery
 - [ ] Add debugging support (nvim-dap)
+- [ ] Add completion engine (nvim-cmp or ???)
+- [ ] Copilot or other AI assistance (we want ghost text explicitly for Ai)
+
+### Possible Enhacments
+
+- [ ] Add snippets support
 - [ ] Add testing integration
-- [ ] Consider adding copilot or other AI assistance
 
 ### Kitty Terminal Integration
+
 - [ ] Document kitty.conf requirements for vim-kitty-navigator
 - [ ] Resolve Option key binding issues in Kitty
 
 ## Notes
 
 ### Known Issues
+
 - Option+Arrow keys don't work in Kitty without additional terminal configuration
 - Currently using Option+Shift+Arrow as workaround for line movement
 
 ### Configuration Philosophy
+
 - Use modern Neovim 0.11+ APIs (vim.lsp.config, vim.diagnostic.jump)
 - Keep configuration modular and maintainable
 - Align with kickstart.nvim best practices

@@ -27,7 +27,9 @@ This is a Neovim configuration using lazy.nvim as the plugin manager. The config
 │       ├── ui.lua             # UI plugins (oil, telescope)
 │       ├── lsp.lua            # LSP configuration (mason, lspconfig)
 │       ├── code.lua           # Formatting & linting (conform)
-│       └── editor.lua         # Editor enhancements (scrollbar)
+│       ├── editor.lua         # Editor enhancements (scrollbar)
+│       ├── treesitter.lua     # Treesitter for syntax highlighting
+│       └── which-key.lua      # Keybinding discovery
 └── lazy-lock.json             # Plugin version lockfile
 ```
 
@@ -85,7 +87,6 @@ nvim --clean
 
 ### Core & UI (lua/plugins/init.lua, ui.lua, editor.lua)
 - **rose-pine**: Color scheme (rose-pine-moon variant)
-- **which-key.nvim**: Keybinding help (lazy-loaded)
 - **nvim-web-devicons**: Icon support (lazy-loaded)
 - **plenary.nvim**: Utility library for other plugins (lazy-loaded)
 - **dressing.nvim**: UI improvements (loaded on VeryLazy event)
@@ -121,6 +122,26 @@ nvim --clean
 - **rubocop**: Ruby formatter/linter
 - **shfmt**: Shell script formatter
 
+### Treesitter (lua/plugins/treesitter.lua)
+- **nvim-treesitter**: Advanced syntax highlighting and code understanding
+- **nvim-treesitter-textobjects**: Textobject selections based on treesitter
+
+**Features:**
+- Auto-installs parsers for all configured languages
+- Incremental selection with `<C-space>` (expand) and `<bs>` (shrink)
+- Smart indentation for most languages
+- Textobjects: `af`/`if` (functions), `ac`/`ic` (classes), `aa`/`ia` (parameters)
+- Navigation: `]f`/`[f` (functions), `]c`/`[c` (classes)
+
+### Which-Key (lua/plugins/which-key.lua)
+- **which-key.nvim**: Interactive keybinding discovery and help
+
+**Features:**
+- Helix preset for clean, vertical layout
+- Auto-discovers all keybindings with descriptions
+- Organized groups: find, code, split, tab, goto, prev, next
+- `<leader>?` - Show buffer-local keymaps
+
 ## Adding New Plugins
 
 Add plugin specifications to `lua/plugins/init.lua` following the lazy.nvim spec format:
@@ -150,6 +171,8 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
   - LSP: `lua/plugins/lsp.lua`
   - Formatting: `lua/plugins/code.lua`
   - Editor: `lua/plugins/editor.lua`
+  - Treesitter: `lua/plugins/treesitter.lua`
+  - Which-Key: `lua/plugins/which-key.lua`
 - **Bootstrap logic**: Located in `lua/config/lazy.lua:1-16`
 - **Lazy.nvim settings**: Configured in `lua/config/lazy.lua`
 
@@ -214,6 +237,20 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - `:FormatDisable` - Disable format-on-save globally
 - `:FormatDisable!` - Disable format-on-save for current buffer
 - `:FormatEnable` - Re-enable format-on-save
+
+### Treesitter
+- `<C-space>` - Expand selection to next syntax node (incremental selection)
+- `<bs>` - Shrink selection to previous syntax node
+- `af` / `if` - Select around/inside function (with operator: `daf`, `yif`, `vaf`)
+- `ac` / `ic` - Select around/inside class
+- `aa` / `ia` - Select around/inside parameter
+- `]f` / `[f` - Jump to next/previous function
+- `]c` / `[c` - Jump to next/previous class
+
+### Which-Key
+- `<Space>` (wait 500ms) - Show all leader keybindings
+- `<leader>?` - Show buffer-local keymaps
+- Press any prefix key (like `g`, `[`, `]`) and wait to see available commands
 
 ### Utilities
 - `jk` in insert mode - Exit to normal mode
