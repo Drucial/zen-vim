@@ -77,9 +77,28 @@
 ### Plugins - Which-Key
 
 - [x] Install and configure which-key.nvim
-- [x] Set up keybinding groups (find, code, split, tab)
+- [x] Set up keybinding groups (find, buffer, code, split)
 - [x] Configure helix preset for clean vertical layout
-- [x] Add buffer local keymaps helper (<leader>?)
+- [x] Remove duplicative keybindings
+
+### Keybinding Refinements
+
+- [x] Reorganize all code commands under <leader>c
+  - [x] Move format from <leader>f to <leader>cf
+  - [x] Add <leader>ci for code info (hover documentation)
+  - [x] Move rename from <leader>rn to <leader>cr
+  - [x] Move diagnostics from <leader>e to <leader>cd
+- [x] Change <leader>fg to <leader>fs (Find String)
+- [x] Remove tab management (use buffers instead)
+- [x] Organize buffer commands under <leader>b
+
+### LSP Expansion
+
+- [x] Add Prisma language server (prismals)
+- [x] Add Markdown language server (marksman)
+- [x] Add JSON language server (jsonls)
+- [x] Add HTML language server (html)
+- [x] Add CSS language server (cssls)
 
 ## In Progress 🚧
 
@@ -111,6 +130,12 @@ None currently
 
 - Option+Arrow keys don't work in Kitty without additional terminal configuration
 - Currently using Option+Shift+Arrow as workaround for line movement
+
+### Maintenance Notes
+
+- **Mason cleanup needed**: Uninstall vtsls (conflicts with ts_ls) and other unused LSP servers
+  - Keep: ts_ls, eslint, ruby_lsp, pyright, bashls, tailwindcss, prismals, marksman, jsonls, html, cssls, lua_ls
+  - Remove: vtsls, gopls, rust-analyzer, and other unused servers
 
 ### Configuration Philosophy
 

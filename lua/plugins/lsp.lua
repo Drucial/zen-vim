@@ -29,9 +29,18 @@ return {
         "pyright",       -- Python
         "bashls",        -- Bash scripts
         "tailwindcss",   -- Tailwind CSS
+        "prismals",      -- Prisma
+        "marksman",      -- Markdown
+        "jsonls",        -- JSON
+        "html",          -- HTML
+        "cssls",         -- CSS
       },
       -- Automatically enable installed servers (default: true)
       automatic_enable = true,
+      -- Automatically uninstall servers not in ensure_installed
+      automatic_installation = {
+        exclude = {},
+      },
     },
   },
 
@@ -64,13 +73,14 @@ return {
 
           -- Code actions
           map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-          map("<leader>rn", vim.lsp.buf.rename, "Rename")
+          map("<leader>ci", vim.lsp.buf.hover, "Code Info")
+          map("<leader>cr", vim.lsp.buf.rename, "Code Rename")
+          map("<leader>cd", vim.diagnostic.open_float, "Code Diagnostics")
 
           -- Diagnostics
           map("<leader>q", vim.diagnostic.setloclist, "Quickfix Diagnostics")
           map("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Previous Diagnostic")
           map("]d", function() vim.diagnostic.jump({ count = 1 }) end, "Next Diagnostic")
-          map("<leader>e", vim.diagnostic.open_float, "Show Diagnostic")
 
           -- Workspace management
           map("<leader>wa", vim.lsp.buf.add_workspace_folder, "Workspace Add Folder")
@@ -186,6 +196,21 @@ return {
           },
         },
       })
+
+      -- Prisma
+      vim.lsp.config("prismals", {})
+
+      -- Markdown
+      vim.lsp.config("marksman", {})
+
+      -- JSON
+      vim.lsp.config("jsonls", {})
+
+      -- HTML
+      vim.lsp.config("html", {})
+
+      -- CSS
+      vim.lsp.config("cssls", {})
     end,
   },
 }

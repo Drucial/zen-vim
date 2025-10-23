@@ -34,6 +34,3 @@ keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without yanking" })
 
 -- Delete without yanking
 keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yanking" })
-
--- Save file
-keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })

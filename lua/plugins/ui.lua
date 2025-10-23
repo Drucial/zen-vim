@@ -1,4 +1,15 @@
 return {
+  -- Theme
+  {
+    "rose-pine/neovim",
+    lazy = false,
+    priority = 1000,
+    name = "rose-pine",
+    config = function()
+      vim.cmd("colorscheme rose-pine-moon")
+    end,
+  },
+
   {
     'stevearc/oil.nvim',
     lazy = false,
@@ -60,9 +71,10 @@ return {
 
       -- Keybindings
       local builtin = require("telescope.builtin")
+
+      -- Find commands
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find by Grep" })
-      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
+      vim.keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Find String" })
       vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help" })
       vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Find Recent Files" })
       vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word under cursor" })
@@ -75,6 +87,14 @@ return {
           previewer = false,
         }))
       end, { desc = "Fuzzy search in current buffer" })
+
+      -- Buffer commands
+      vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "List Buffers" })
+      vim.keymap.set("n", "<leader>bb", builtin.buffers, { desc = "List Buffers" })
+      vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete Buffer" })
+      vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "Next Buffer" })
+      vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "Previous Buffer" })
+      vim.keymap.set("n", "<leader>bw", "<cmd>write<CR>", { desc = "Write Buffer" })
     end,
   },
 }

@@ -109,6 +109,11 @@ nvim --clean
 - **pyright**: Python (with workspace analysis)
 - **bashls**: Bash scripts
 - **tailwindcss**: Tailwind CSS (with custom class regex patterns)
+- **prismals**: Prisma schema files
+- **marksman**: Markdown
+- **jsonls**: JSON
+- **html**: HTML
+- **cssls**: CSS
 
 ### Formatting & Code Quality (lua/plugins/code.lua)
 - **conform.nvim**: Fast, async formatter with format-on-save
@@ -139,7 +144,7 @@ nvim --clean
 **Features:**
 - Helix preset for clean, vertical layout
 - Auto-discovers all keybindings with descriptions
-- Organized groups: find, code, split, tab, goto, prev, next
+- Organized groups: find, buffer, code, split, goto, prev, next
 - `<leader>?` - Show buffer-local keymaps
 
 ## Adding New Plugins
@@ -188,12 +193,13 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - `<leader>se` - Make splits equal size
 - `<leader>sx` - Close current split
 
-### Tab Management
-- `<leader>to` - Open new tab
-- `<leader>tx` - Close current tab
-- `<leader>tn` - Go to next tab
-- `<leader>tp` - Go to previous tab
-- `<leader>tf` - Open current buffer in new tab
+### Buffer Management
+- `<leader><leader>` - List Buffers (quick access)
+- `<leader>bb` - List Buffers
+- `<leader>bd` - Delete Buffer
+- `<leader>bn` - Next Buffer
+- `<leader>bp` - Previous Buffer
+- `<leader>bw` - Write/Save Buffer
 
 ### Line Manipulation
 - `Option+Shift+Up/Down` - Move line(s) up/down (works in normal and visual mode)
@@ -206,10 +212,9 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 
 ### Telescope (Fuzzy Finder)
 - `<leader>ff` - Find Files
-- `<leader>fg` - Live Grep (search in files)
-- `<leader>fb` - Find Buffers
+- `<leader>fs` - Find String (search in files)
 - `<leader>fh` - Find Help tags
-- `<leader>fr` - Recent Files
+- `<leader>fr` - Find Recent Files
 - `<leader>fw` - Find Word under cursor
 - `<leader>fd` - Find Diagnostics
 - `<leader>fc` - Find Commands
@@ -224,15 +229,20 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - `gy` - Goto Type Definition (Telescope)
 - `K` - Hover Documentation
 - `gK` - Signature Help
-- `<leader>ca` - Code Action
-- `<leader>rn` - Rename Symbol
-- `<leader>e` - Show Diagnostic Float
 - `<leader>q` - Quickfix Diagnostics
 - `[d` - Previous Diagnostic
 - `]d` - Next Diagnostic
 
+### Code Actions (always available)
+- `<leader>cf` - Code Format
+
+### Code Actions (when LSP attached)
+- `<leader>ca` - Code Action
+- `<leader>ci` - Code Info (hover documentation)
+- `<leader>cr` - Code Rename
+- `<leader>cd` - Code Diagnostics
+
 ### Formatting
-- `<leader>f` - Format current buffer
 - Auto-format on save (enabled by default)
 - `:FormatDisable` - Disable format-on-save globally
 - `:FormatDisable!` - Disable format-on-save for current buffer
@@ -249,7 +259,6 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 
 ### Which-Key
 - `<Space>` (wait 500ms) - Show all leader keybindings
-- `<leader>?` - Show buffer-local keymaps
 - Press any prefix key (like `g`, `[`, `]`) and wait to see available commands
 
 ### Utilities
