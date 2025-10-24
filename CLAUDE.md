@@ -92,11 +92,14 @@ nvim --clean
 - **plenary.nvim**: Utility library for other plugins (lazy-loaded)
 - **dressing.nvim**: UI improvements (loaded on VeryLazy event)
 - **vim-kitty-navigator**: Seamless navigation between Kitty terminal and Neovim splits
-- **oil.nvim**: File explorer that lets you edit your filesystem like a buffer
-- **snacks.nvim**: Modern plugin collection including picker (fuzzy finder), dashboard, and bigfile handling
+- **oil.nvim**: File explorer with hidden files enabled (shows dotfiles)
+- **snacks.nvim**: Modern plugin collection with picker (fuzzy finder with hidden files), dashboard, and bigfile handling
 - **nvim-scrollbar**: Scrollbar with diagnostic, search, and cursor position markers
 - **lualine.nvim**: Statusline with custom breadcrumb navigation, git branch, and diff info
 - **mini.nvim**: Collection of minimal plugins (pairs, surround, comment, bufremove, icons)
+- **flash.nvim**: Quick navigation with search labels and Treesitter integration
+- **grug-far.nvim**: Search and replace across files
+- **todo-comments.nvim**: Highlight and search TODO comments
 
 ### LSP & Language Support (lua/plugins/lsp.lua)
 - **mason.nvim**: Package manager for LSP servers, formatters, and linters
@@ -177,8 +180,9 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
   - UI: `lua/plugins/ui.lua`
   - Picker: `lua/plugins/picker.lua`
   - LSP: `lua/plugins/lsp.lua`
-  - Formatting: `lua/plugins/code.lua`
+  - Code: `lua/plugins/code.lua` (formatting, search/replace, flash, todo-comments)
   - Editor: `lua/plugins/editor.lua`
+  - Git: `lua/plugins/git.lua`
   - Treesitter: `lua/plugins/treesitter.lua`
   - Which-Key: `lua/plugins/which-key.lua`
 - **Bootstrap logic**: Located in `lua/config/lazy.lua:1-16`
@@ -191,10 +195,11 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - Note: Do NOT manually set `<C-h/j/k/l>` keybinds as they conflict with vim-kitty-navigator
 
 ### Window Management
-- `<leader>sv` - Split window vertically
-- `<leader>sh` - Split window horizontally
-- `<leader>se` - Make splits equal size
-- `<leader>sx` - Close current split
+- `<leader>w-` - Split window below (horizontal)
+- `<leader>w|` - Split window right (vertical)
+- `<leader>w=` - Balance windows
+- `<leader>wd` - Delete window
+- `<leader>ww` - Switch to other window
 
 ### Buffer Management
 - `<leader><leader>` - List Buffers (quick access)
@@ -225,6 +230,29 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - `<leader>fC` - Find Commands
 - `<leader>fk` - Find Keymaps
 - `<leader>/` - Fuzzy search in current buffer
+
+### Search & Navigation
+- `<leader>sr` - Search and Replace (grug-far)
+- `<leader>st` - Search Todo Comments
+- `<leader>sT` - Search Todo/Fix/Fixme
+- `s` - Flash jump (quick navigation)
+- `S` - Flash Treesitter (jump to treesitter nodes)
+- `]t` / `[t` - Next/Previous todo comment
+
+### Git Hunks
+- `]h` / `[h` - Next/Previous hunk
+- `]H` / `[H` - Last/First hunk
+- `<leader>ghs` - Stage hunk
+- `<leader>ghr` - Reset hunk
+- `<leader>ghS` - Stage buffer
+- `<leader>ghu` - Undo stage hunk
+- `<leader>ghR` - Reset buffer
+- `<leader>ghp` - Preview hunk inline
+- `<leader>ghb` - Blame line
+- `<leader>ghB` - Blame buffer
+- `<leader>ghd` - Diff this
+- `<leader>ghD` - Diff this ~
+- `ih` - Select hunk (text object)
 
 ### LSP (when attached to buffer)
 - `gd` - Goto Definition (Snacks picker)

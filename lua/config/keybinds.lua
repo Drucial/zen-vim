@@ -34,3 +34,10 @@ keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without yanking" })
 
 -- Delete without yanking
 keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yanking" })
+
+-- Window management
+keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below" })
+keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right" })
+keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window" })
+keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Other Window" })
+keymap.set("n", "<leader>w=", "<C-W>=", { desc = "Balance Windows" })

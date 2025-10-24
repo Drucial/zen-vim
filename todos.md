@@ -114,6 +114,14 @@
 - [x] Remove tilde characters on empty lines
 - [x] Add mini.nvim suite (pairs, surround, comment, bufremove, icons)
 - [x] Add GitHub Copilot with ghost text and smart Tab acceptance
+- [x] Replace telescope with snacks picker (including LSP pickers)
+- [x] Configure hidden files in snacks picker and oil.nvim
+- [x] Add grug-far for search and replace
+- [x] Add flash.nvim for quick navigation
+- [x] Add todo-comments.nvim for TODO highlighting
+- [x] Refactor gitsigns keybindings to LazyVim style (with <leader>gh prefix)
+- [x] Add window management keybindings under <leader>w
+- [x] Separate search (<leader>s) from window (<leader>w) commands
 
 ## In Progress 🚧
 
@@ -141,7 +149,6 @@ None currently
 
 - [ ] Clean up visible shortcuts (which-key display options)
 - [ ] Fix dashboard ASCII art formatting
-- [ ] Replace telescope with snacks picker (including project picker with eza preview)
 
 ### Kitty Terminal Integration
 
