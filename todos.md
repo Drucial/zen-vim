@@ -145,6 +145,7 @@ None currently
 
 ### Possible Enhacments
 
+- [ ] Investigate edgy.nvim for better window/panel management
 - [ ] Add debugging support (nvim-dap)
 - [ ] Add snippets support
 - [ ] Add testing integration
