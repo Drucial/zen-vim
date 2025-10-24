@@ -92,23 +92,6 @@ return {
 					},
 				},
 				lualine_b = {
-					-- {
-					--   function()
-					--     local repo = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-					--     return repo
-					--   end,
-					--   icon = { "", align = "left" },
-					--   fmt = trunc(80, 20, 60, 20),
-					--   padding = { left = 1, right = 0 },
-					-- },
-					-- 	{
-					-- 		"branch",
-					-- 		fmt = trunc(80, 20, 60, 30), -- Adjust these values as needed
-					-- 		padding = { left = 1, right = 1 },
-					-- 	},
-				},
-
-				lualine_c = {
 					{
 						function()
 							return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
@@ -116,13 +99,9 @@ return {
 						padding = { left = 1, right = 1 },
 						color = { fg = palette.rose },
 					},
-					{
-						function()
-							return "→"
-						end,
-						padding = { left = 0, right = 0 },
-						color = { fg = palette.muted },
-					},
+				},
+
+				lualine_c = {
 					{
 						function()
 							local filepath = vim.fn.expand("%:.:h")
@@ -147,6 +126,15 @@ return {
 				},
 				lualine_x = {
 					{
+						"branch",
+						icon = { "" },
+						fmt = trunc(80, 20, 60, 30), -- Adjust these values as needed
+						padding = { left = 1, right = 1 },
+						color = { fg = palette.rose },
+					},
+				},
+				lualine_y = {
+					{
 						"diff",
 						symbols = {
 							added = icons.git.added,
@@ -165,15 +153,7 @@ return {
 						end,
 						color = { fg = palette.muted },
 					},
-					{
-						"branch",
-						icon = { "" },
-						fmt = trunc(80, 20, 60, 30), -- Adjust these values as needed
-						padding = { left = 1, right = 1 },
-						color = { fg = palette.rose },
-					},
 				},
-				lualine_y = {},
 				lualine_z = {
 					{
 						function()
