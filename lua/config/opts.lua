@@ -32,6 +32,7 @@ opt.cursorline = true
 opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
+opt.fillchars = { eob = " " } -- Remove tildes on empty lines
 
 -- Backspace
 opt.backspace = "indent,eol,start"

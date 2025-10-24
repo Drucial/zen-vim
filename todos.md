@@ -100,6 +100,20 @@
 - [x] Add HTML language server (html)
 - [x] Add CSS language server (cssls)
 
+### Recent Session Improvements
+
+- [x] Configure custom lualine statusline with breadcrumb navigation
+- [x] Add rose-pine color palette integration to lualine
+- [x] Create git.lua plugin file (gitsigns + lazygit)
+- [x] Create trouble.lua for better diagnostics display
+- [x] Create telescope.lua (moved from ui.lua)
+- [x] Add project picker with eza tree preview (<leader>fp)
+- [x] Add config file picker (<leader>fc)
+- [x] Update which-key groups (git, diagnostics)
+- [x] Add snacks.nvim dashboard with custom keybindings
+- [x] Remove tilde characters on empty lines
+- [x] Add mini.nvim suite (pairs, surround, comment, bufremove, icons)
+
 ## In Progress 🚧
 
 None currently
@@ -109,9 +123,10 @@ None currently
 ### Required Enhancements
 
 - [x] Add status line (lualine)
-- [ ] Add git integration (gitsigns)
-- [ ] Add trouble plugin for diagnostics
-- [ ] Add lazygit integration
+- [x] Add git integration (gitsigns)
+- [x] Add trouble plugin for diagnostics
+- [x] Add lazygit integration
+- [x] Add snacks.nvim dashboard
 - [ ] Copilot or other AI assistance (we want ghost text explicitly for Ai)
 - [ ] Add completion engine (nvim-cmp or ???)
 
@@ -124,6 +139,8 @@ None currently
 ### Cleanup & Maintenance
 
 - [ ] Clean up visible shortcuts (which-key display options)
+- [ ] Fix dashboard ASCII art formatting
+- [ ] Replace telescope with snacks picker (including project picker with eza preview)
 
 ### Kitty Terminal Integration
 

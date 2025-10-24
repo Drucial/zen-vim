@@ -15,6 +15,8 @@ return {
 					{ "<leader>b", group = "buffer" },
 					{ "<leader>c", group = "code" },
 					{ "<leader>s", group = "split" },
+					{ "<leader>g", group = "git" },
+					{ "<leader>x", group = "diagnostics" },
 					-- Navigation groups
 					{ "g", group = "goto" },
 					{ "gr", desc = "References" },
