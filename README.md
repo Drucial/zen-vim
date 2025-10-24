@@ -44,6 +44,12 @@ ZenVim is built on three core principles:
 - 🔀 **Git Integration** - GitSigns + LazyGit
 - 📦 **Auto-install** - Mason handles all LSP servers, formatters, linters
 
+## Documentation
+
+- ⌨️ **[Keybindings Reference](docs/keybinds.md)** - Complete keybinding guide organized by functionality
+- 📖 **[Development Roadmap](docs/roadmap.md)** - Feature tracking, completed work, and future plans
+- 🤖 **[CLAUDE.md](CLAUDE.md)** - Detailed documentation for AI assistance and architecture
+
 ## Installation
 
 ### Prerequisites
@@ -347,7 +353,8 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 ├── lazy-lock.json             # Plugin version lock
 ├── CLAUDE.md                  # Detailed documentation
 ├── README.md                  # This file
-├── todos.md                   # Development tasks
+├── docs/
+│   └── roadmap.md            # Development roadmap
 ├── lua/
 │   ├── config/
 │   │   ├── lazy.lua          # Lazy.nvim bootstrap

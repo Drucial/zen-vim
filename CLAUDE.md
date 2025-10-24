@@ -15,7 +15,8 @@ This is a Neovim configuration using lazy.nvim as the plugin manager. The config
 ```
 .
 ├── init.lua                    # Entry point - sets leader keys, loads config
-├── todos.md                    # Development TODO list
+├── docs/
+│   └── roadmap.md             # Development roadmap and feature tracking
 ├── lua/
 │   ├── config/
 │   │   ├── lazy.lua           # lazy.nvim bootstrap and setup
@@ -206,6 +207,10 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - **Lazy.nvim settings**: Configured in `lua/config/lazy.lua`
 
 ## Important Keybindings
+
+> **Complete Reference**: See [docs/keybinds.md](docs/keybinds.md) for a comprehensive, organized guide to all keybindings.
+
+The following is a quick reference of the most commonly used keybindings. For full details, examples, and tips, refer to the complete keybindings documentation.
 
 ### Navigation
 - `<C-h/j/k/l>` - Navigate between Neovim splits and Kitty terminal windows (handled by vim-kitty-navigator)
