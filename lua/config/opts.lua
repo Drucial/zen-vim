@@ -72,3 +72,10 @@ opt.inccommand = "split"
 
 -- Confirm before closing unsaved files
 opt.confirm = true
+
+-- Folding (treesitter-based)
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldlevel = 99 -- Start with all folds open
+opt.foldlevelstart = 99 -- Start with all folds open
+opt.foldenable = true
