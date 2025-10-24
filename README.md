@@ -2,9 +2,9 @@
 
 > A modern, performant Neovim configuration focused on simplicity, speed, and an exceptional developer experience.
 
-![ZenVim Dashboard](dashboard.webp)
+![ZenVim Dashboard](dashboard.png)
 
-![ZenVim UI](code-sample.webp)
+![ZenVim UI](code-sample.png)
 
 ## Philosophy
 
