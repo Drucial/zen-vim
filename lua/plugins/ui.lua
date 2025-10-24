@@ -163,6 +163,18 @@ return {
 			},
 			scroll = { enabled = true },
 			image = { enabled = true },
+			terminal = {
+				enabled = true,
+				win = {
+					position = "right",
+					width = 0.3, -- 30% of editor width
+					height = 0, -- full height
+					wo = {
+						statusline = "", -- hide statusline
+						winbar = "", -- hide winbar
+					},
+				},
+			},
 			zen = {
 				enabled = true,
 				toggles = {

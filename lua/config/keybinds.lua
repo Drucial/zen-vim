@@ -8,6 +8,12 @@ keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight
 -- Terminal mode
 keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+-- Terminal navigation (works with vim-kitty-navigator)
+keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Go to left window" })
+keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Go to lower window" })
+keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Go to upper window" })
+keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Go to right window" })
+
 -- Navigation handled by vim-kitty-navigator plugin
 -- <C-h>, <C-j>, <C-k>, <C-l> are set by the plugin
 
@@ -46,3 +52,8 @@ keymap.set("n", "<leader>w=", "<C-W>=", { desc = "Balance Windows" })
 keymap.set("n", "<leader>z", function()
 	Snacks.zen()
 end, { desc = "Toggle Zen Mode" })
+
+-- Terminal (using <C-\> to avoid conflicts with typing space)
+keymap.set({ "n", "t" }, "<C-\\>", function()
+	Snacks.terminal()
+end, { desc = "Toggle Terminal" })
