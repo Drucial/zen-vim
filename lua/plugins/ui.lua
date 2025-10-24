@@ -58,6 +58,11 @@ return {
 					VertSplit = { fg = "muted", bg = "muted" },
 					SnacksIndent = { fg = "highlight_low" },
 					StatusLineTerm = { bg = "none" }, -- hide terminal statusline background
+					SnacksDashboardHeader = { fg = "muted" },
+					SnacksDashboardFooter = { fg = "muted" },
+					SnacksDashboardDesc = { fg = "muted" },
+					SnacksDashboardIcon = { fg = "muted" },
+					SnacksDashboardKey = { fg = "muted" },
 				},
 			})
 
