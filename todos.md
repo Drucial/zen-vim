@@ -113,6 +113,7 @@
 - [x] Add snacks.nvim dashboard with custom keybindings
 - [x] Remove tilde characters on empty lines
 - [x] Add mini.nvim suite (pairs, surround, comment, bufremove, icons)
+- [x] Add GitHub Copilot with ghost text and smart Tab acceptance
 
 ## In Progress 🚧
 
@@ -127,7 +128,7 @@ None currently
 - [x] Add trouble plugin for diagnostics
 - [x] Add lazygit integration
 - [x] Add snacks.nvim dashboard
-- [ ] Copilot or other AI assistance (we want ghost text explicitly for Ai)
+- [x] Copilot with ghost text and smart Tab completion
 - [ ] Add completion engine (nvim-cmp or ???)
 
 ### Possible Enhacments
