@@ -224,23 +224,27 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 ### LSP (when attached to buffer)
 - `gd` - Goto Definition (Telescope)
 - `gD` - Goto Declaration
-- `gr` - Goto References (Telescope)
+- `gr` - References (Telescope)
 - `gI` - Goto Implementation (Telescope)
-- `gy` - Goto Type Definition (Telescope)
-- `K` - Hover Documentation
+- `gy` - Goto T[y]pe Definition (Telescope)
+- `K` - Hover
 - `gK` - Signature Help
-- `<leader>q` - Quickfix Diagnostics
-- `[d` - Previous Diagnostic
+- `<c-k>` - Signature Help (insert mode)
+- `[d` - Prev Diagnostic
 - `]d` - Next Diagnostic
 
 ### Code Actions (always available)
 - `<leader>cf` - Code Format
+- `<leader>cl` - LSP Info
 
 ### Code Actions (when LSP attached)
-- `<leader>ca` - Code Action
+- `<leader>ca` - Code Action (n, x)
+- `<leader>cA` - Source Action
 - `<leader>ci` - Code Info (hover documentation)
-- `<leader>cr` - Code Rename
-- `<leader>cd` - Code Diagnostics
+- `<leader>cr` - Rename
+- `<leader>cR` - Rename File
+- `<leader>cc` - Run Codelens (n, x)
+- `<leader>cC` - Refresh & Display Codelens
 
 ### Formatting
 - Auto-format on save (enabled by default)

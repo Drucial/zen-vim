@@ -56,38 +56,61 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
         callback = function(event)
-          local map = function(keys, func, desc)
-            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+          local map = function(keys, func, desc, mode)
+            mode = mode or "n"
+            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
           -- Jump to definition/declaration
           map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
           map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-          map("gr", require("telescope.builtin").lsp_references, "Goto References")
           map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-          map("gy", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
+          map("gy", require("telescope.builtin").lsp_type_definitions, "Goto T[y]pe Definition")
+
+          -- References with nowait to prevent which-key submenu (grr, gra, etc.)
+          vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {
+            buffer = event.buf,
+            desc = "LSP: References",
+            nowait = true
+          })
 
           -- Documentation and signatures
-          map("K", vim.lsp.buf.hover, "Hover Documentation")
+          map("K", vim.lsp.buf.hover, "Hover")
           map("gK", vim.lsp.buf.signature_help, "Signature Help")
+          map("<c-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
 
           -- Code actions
-          map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+          map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
+          map("<leader>cA", function()
+            vim.lsp.buf.code_action({
+              context = {
+                only = { "source" },
+                diagnostics = {},
+              },
+            })
+          end, "Source Action")
           map("<leader>ci", vim.lsp.buf.hover, "Code Info")
-          map("<leader>cr", vim.lsp.buf.rename, "Code Rename")
-          map("<leader>cd", vim.diagnostic.open_float, "Code Diagnostics")
+          map("<leader>cr", vim.lsp.buf.rename, "Rename")
+          map("<leader>cR", function()
+            -- File rename functionality (requires workspace.fileOperations support)
+            local old_name = vim.api.nvim_buf_get_name(0)
+            vim.ui.input({ prompt = "New file name: ", default = old_name }, function(new_name)
+              if new_name and new_name ~= old_name then
+                vim.lsp.buf.rename(new_name)
+              end
+            end)
+          end, "Rename File")
+          map("<leader>cl", "<cmd>LspInfo<cr>", "LSP Info")
+
+          -- Codelens
+          if vim.lsp.codelens then
+            map("<leader>cc", vim.lsp.codelens.run, "Run Codelens", { "n", "x" })
+            map("<leader>cC", vim.lsp.codelens.refresh, "Refresh & Display Codelens")
+          end
 
           -- Diagnostics
-          map("<leader>q", vim.diagnostic.setloclist, "Quickfix Diagnostics")
-          map("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Previous Diagnostic")
+          map("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Prev Diagnostic")
           map("]d", function() vim.diagnostic.jump({ count = 1 }) end, "Next Diagnostic")
-
-          -- Workspace management
-          map("<leader>wa", vim.lsp.buf.add_workspace_folder, "Workspace Add Folder")
-          map("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Workspace Remove Folder")
-          map("<leader>wl", function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, "Workspace List Folders")
 
           -- Highlight references under cursor
           local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -101,6 +124,55 @@ return {
               buffer = event.buf,
               callback = vim.lsp.buf.clear_references,
             })
+          end
+        end,
+      })
+
+      -- Diagnostic configuration
+      vim.diagnostic.config({
+        underline = true,
+        update_in_insert = false,
+        virtual_text = false, -- Disable virtual text, use float on hover instead
+        severity_sort = true,
+        float = {
+          border = "rounded",
+          source = "if_many",
+        },
+      })
+
+      -- Show diagnostics in float on hover
+      vim.api.nvim_create_autocmd("CursorHold", {
+        callback = function()
+          local opts = {
+            focusable = false,
+            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+            border = "rounded",
+            source = "if_many",
+            prefix = " ",
+          }
+          vim.diagnostic.open_float(nil, opts)
+        end,
+      })
+
+      -- Set default capabilities
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.workspace = {
+        fileOperations = {
+          didRename = true,
+          willRename = true,
+        },
+      }
+
+      -- Apply capabilities globally to all LSP servers
+      vim.lsp.config("*", { capabilities = capabilities })
+
+      -- Enable inlay hints globally for all servers that support it
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("lsp-inlay-hints", { clear = true }),
+        callback = function(event)
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
           end
         end,
       })
@@ -131,32 +203,7 @@ return {
       })
 
       -- TypeScript/JavaScript
-      vim.lsp.config("ts_ls", {
-        settings = {
-          typescript = {
-            inlayHints = {
-              includeInlayParameterNameHints = "all",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-          javascript = {
-            inlayHints = {
-              includeInlayParameterNameHints = "all",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-        },
-      })
+      vim.lsp.config("ts_ls", {})
 
       -- ESLint
       vim.lsp.config("eslint", {})
