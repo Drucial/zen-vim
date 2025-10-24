@@ -2,6 +2,8 @@
 
 > A modern, performant Neovim configuration focused on simplicity, speed, and an exceptional developer experience.
 
+![ZenVim Dashboard](dashboard.png)
+
 ## Philosophy
 
 ZenVim is built on three core principles:
