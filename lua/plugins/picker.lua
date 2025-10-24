@@ -123,7 +123,13 @@ return {
 				end,
 				desc = "List Buffers",
 			},
-			{ "<leader>bd", "<cmd>bdelete<CR>", desc = "Delete Buffer" },
+			{
+				"<leader>bd",
+				function()
+					require("mini.bufremove").delete(0, false)
+				end,
+				desc = "Delete Buffer",
+			},
 			{ "<leader>bn", "<cmd>bnext<CR>", desc = "Next Buffer" },
 			{ "<leader>bp", "<cmd>bprevious<CR>", desc = "Previous Buffer" },
 			{ "<leader>bw", "<cmd>write<CR>", desc = "Write Buffer" },

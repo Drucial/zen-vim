@@ -141,6 +141,14 @@ All essential features are implemented and stable. The configuration is ready fo
   - Centers window (120 columns)
   - Auto-restores settings on exit
 
+- **Close buffers back to dashboard**: IDE-like buffer management (`lua/config/autocmds.lua:72-142`)
+  - Closing last buffer returns to snacks dashboard instead of empty buffer
+  - Uses mini.bufremove for clean buffer deletion (`lua/plugins/picker.lua:126-132`)
+  - Automatically detects when no "real" buffers remain
+  - Ignores special buffers (dashboard, oil, trouble, help, lazy, mason, etc.)
+  - Handles edge cases with Oil and dashboard integration
+  - Debug statements preserved as comments for future troubleshooting
+
 ---
 
 ## In Progress
@@ -165,16 +173,6 @@ Visual and functional improvements to editor panels:
 4. **Symbols picker** (`lua/plugins/trouble.lua:31-34`)
    - Current: Trouble symbols panel (`<leader>xs`)
    - Target: Replace with snacks picker or floating window
-
-### Stay in Neovim Longer
-IDE-like buffer management to keep you in the editor:
-
-- **Close buffers back to dashboard**
-  - Current: Closing last buffer leaves empty buffer or quits nvim
-  - Target: Closing all buffers returns to snacks dashboard (home screen)
-  - Behavior: Keep closing with `<leader>bd` until landing at dashboard
-  - Goal: Always have a "home" to return to, just like VSCode/Cursor
-  - Implementation: Hook into mini.bufremove or buffer close autocmd
 
 ---
 
