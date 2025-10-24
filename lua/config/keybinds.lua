@@ -41,3 +41,8 @@ keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right" })
 keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window" })
 keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Other Window" })
 keymap.set("n", "<leader>w=", "<C-W>=", { desc = "Balance Windows" })
+
+-- UI toggles
+keymap.set("n", "<leader>z", function()
+	Snacks.zen()
+end, { desc = "Toggle Zen Mode" })

@@ -35,6 +35,7 @@ ZenVim is built on three core principles:
 
 - 🚀 **Blazing Fast** - Optimized lazy loading, <50ms startup
 - 🎨 **Beautiful UI** - Rose Pine theme, lualine, scrollbar, noice.nvim
+- 🧘 **Zen Mode** - Distraction-free coding with centered window and hidden UI
 - 🤖 **AI-Powered** - GitHub Copilot integration via blink.cmp
 - 📝 **Smart Completion** - blink.cmp with LSP, snippets, and Copilot
 - 🔍 **Fuzzy Everything** - Snacks picker for files, grep, LSP symbols
@@ -118,7 +119,7 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 | [oil.nvim](https://github.com/stevearc/oil.nvim)                     | File explorer        | Edit your filesystem like a buffer                               |
 | [nvim-notify](https://github.com/rcarriga/nvim-notify)               | Notifications        | Beautiful notification manager                                   |
 | [noice.nvim](https://github.com/folke/noice.nvim)                    | UI overhaul          | Enhanced cmdline, messages, and popupmenu                        |
-| [snacks.nvim](https://github.com/folke/snacks.nvim)                  | Utilities            | Dashboard, picker (fuzzy finder), bigfile handling               |
+| [snacks.nvim](https://github.com/folke/snacks.nvim)                  | Utilities            | Dashboard, picker (fuzzy finder), zen mode, bigfile handling     |
 | [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)       | Scrollbar            | Visual scrollbar with diagnostic/search indicators               |
 | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)         | Statusline           | Beautiful statusline with breadcrumbs and git info               |
 
@@ -258,6 +259,10 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 - `<leader>w=` - Balance Windows
 - `<leader>wd` - Delete Window
 - `<leader>ww` - Switch to Other Window
+
+### UI Toggles
+
+- `<leader>z` - Toggle Zen Mode (distraction-free coding)
 
 ### Git Operations (g)
 

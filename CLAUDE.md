@@ -96,7 +96,7 @@ nvim --clean
 - **oil.nvim**: File explorer with hidden files enabled (shows dotfiles)
 - **nvim-notify**: Notification manager with custom styling
 - **noice.nvim**: Enhanced UI for messages, cmdline, and popupmenu with message filtering and LSP doc scrolling
-- **snacks.nvim**: Modern plugin collection with picker (fuzzy finder with hidden files), dashboard, and bigfile handling
+- **snacks.nvim**: Modern plugin collection with picker (fuzzy finder with hidden files), dashboard, zen mode (distraction-free coding), and bigfile handling
 - **nvim-scrollbar**: Scrollbar with diagnostic, search, and cursor position markers
 - **lualine.nvim**: Statusline with custom breadcrumb navigation, git branch, and diff info
 - **mini.nvim**: Collection of minimal plugins (pairs, surround, comment, bufremove, icons)
@@ -353,6 +353,7 @@ The following is a quick reference of the most commonly used keybindings. For fu
 - `:w` - Save file (standard vim)
 - `<leader>p` - Paste without yanking (visual mode)
 - `<leader>d` - Delete without yanking
+- `<leader>z` - Toggle Zen Mode (distraction-free coding with centered window, no line numbers, no statusline)
 - `-` - Open parent directory with oil.nvim
 
 ## Modifying Configuration

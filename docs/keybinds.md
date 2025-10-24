@@ -26,6 +26,7 @@
 - [Todo Comments](#todo-comments)
 - [Messages & Notifications (Noice)](#messages--notifications-noice)
 - [File Browser (Oil)](#file-browser-oil)
+- [UI Toggles](#ui-toggles)
 - [Tips & Tricks](#tips--tricks)
 
 ---
@@ -465,6 +466,32 @@ Oil.nvim allows you to edit your filesystem like a buffer.
 - `<CR>` to open file/directory
 - `q` to quit Oil
 - Hidden files (dotfiles) are shown by default
+
+---
+
+## UI Toggles
+
+### Zen Mode
+
+Distraction-free coding mode with centered window and hidden UI elements.
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>z` | Toggle Zen Mode | Enter/exit distraction-free mode |
+
+**Features:**
+- Hides line numbers (both absolute and relative)
+- Hides statusline (lualine)
+- Hides tabline
+- Hides git signs and diagnostics
+- Hides inlay hints
+- Centers code window (120 columns)
+- Automatically restores settings on exit
+
+**Tips:**
+- Use `<leader>z` again to toggle back to normal view
+- All UI elements are automatically restored when exiting zen mode
+- Perfect for focused writing or reading code
 
 ---
 
