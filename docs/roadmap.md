@@ -135,11 +135,81 @@ All essential features are implemented and stable. The configuration is ready fo
 - Rich git integration
 - Intuitive keybindings with discovery
 
+### Recently Completed
+- **Zen Mode**: Distraction-free coding with `<leader>z` (`lua/plugins/ui.lua:166-196`)
+  - Hides line numbers, statusline, diagnostics, git signs
+  - Centers window (120 columns)
+  - Auto-restores settings on exit
+
+---
+
+## In Progress
+
+### Panel & Layout Improvements
+Visual and functional improvements to editor panels:
+
+1. **Grug-far panel improvements** (`lua/plugins/code.lua:88-112`)
+   - Current issues: Basic styling, `topleft vsplit` positioning
+   - Target: Better panel layout, improved visual hierarchy
+
+2. **Trouble panel positioning** (`lua/plugins/trouble.lua`)
+   - Current issues: Inconsistent positioning (some right, some toggle)
+   - Target: Standardize bottom panel for all trouble modes
+
+3. **Terminal panel** (NEW)
+   - Status: Not yet implemented
+   - Target: Right panel with toggle, multiple buffers, persistent processes
+   - Keybindings: `<leader>t` prefix
+   - Goal: Eliminate need to switch to external terminal
+
+4. **Symbols picker** (`lua/plugins/trouble.lua:31-34`)
+   - Current: Trouble symbols panel (`<leader>xs`)
+   - Target: Replace with snacks picker or floating window
+
+### Stay in Neovim Longer
+IDE-like buffer management to keep you in the editor:
+
+- **Close buffers back to dashboard**
+  - Current: Closing last buffer leaves empty buffer or quits nvim
+  - Target: Closing all buffers returns to snacks dashboard (home screen)
+  - Behavior: Keep closing with `<leader>bd` until landing at dashboard
+  - Goal: Always have a "home" to return to, just like VSCode/Cursor
+  - Implementation: Hook into mini.bufremove or buffer close autocmd
+
 ---
 
 ## Future Enhancements
 
 ### Planned Features
+
+#### UI/UX Improvements (Stay in Neovim Longer)
+These improvements focus on enhancing the in-editor experience to reduce context switching:
+
+- **Improved grug-far panel**: Better styling and layout for global search/replace
+  - Current: `topleft vsplit` with basic styling
+  - Planned: Full-height right panel with better visual hierarchy
+  - Goal: Make search/replace more comfortable for extended use
+
+- **Trouble panel positioning**: Bottom panel layout for diagnostics
+  - Current: Some modes open on right, inconsistent positioning
+  - Planned: Configure all trouble modes to open on bottom
+  - Goal: Keep code visible while reviewing diagnostics
+
+- **Persistent terminal panel**: Right-side terminal with toggle support
+  - Current: No dedicated terminal management
+  - Planned: Right panel with easy toggle (`<leader>t?`)
+  - Features:
+    - Multiple terminal buffers (tabs within panel)
+    - Always maintain at least one terminal
+    - Doesn't terminate processes on hide
+    - Quick access for build/test/run commands
+  - Goal: Eliminate need to switch to external terminal
+
+- **Better symbols picker**: Replace current symbols panel
+  - Current: Trouble symbols as right panel (`<leader>xs`)
+  - Planned: Snacks picker or floating window for symbols
+  - Goal: Faster, less intrusive symbol navigation
+  - Consider: Document symbols vs workspace symbols
 
 #### Advanced Development Tools
 - **nvim-dap**: Debug Adapter Protocol for debugging support
