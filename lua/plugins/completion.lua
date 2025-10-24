@@ -49,6 +49,10 @@ return {
 					},
 				},
 
+				list = {
+					selection = { preselect = false },
+				},
+
 				-- Menu appearance
 				menu = {
 					draw = {

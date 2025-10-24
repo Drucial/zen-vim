@@ -166,8 +166,15 @@ return {
 			dashboard = {
 				enabled = true,
 				preset = {
-					-- TODO: Fix ASCII art formatting
-					header = "",
+					--styula: ignore start
+					header = [[
+┏┓┏┓┳┓┓┏┳┳┳┓
+┏┛┣ ┃┃┃┃┃┃┃┃
+┗┛┗┛┛┗┗┛┻┛ ┗
+
+01011010 01000101 01001110 01010110 01001001 01001101
+]],
+					-- styula: ignore end
 					keys = {
 						{
 							icon = " ",
