@@ -14,7 +14,7 @@ return {
 		-- require("mini.animate").setup()
 		-- mini.icons
 		require("mini.icons").setup()
-		-- mini.statusline
-		-- require("mini.statusline").setup()
+		-- mini.starter
+		require("mini.starter").setup()
 	end,
 }

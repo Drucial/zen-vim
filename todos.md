@@ -108,16 +108,22 @@ None currently
 
 ### Required Enhancements
 
+- [x] Add status line (lualine)
 - [ ] Add git integration (gitsigns)
-- [ ] Add status line (lualine)
-- [ ] Add debugging support (nvim-dap)
-- [ ] Add completion engine (nvim-cmp or ???)
+- [ ] Add trouble plugin for diagnostics
+- [ ] Add lazygit integration
 - [ ] Copilot or other AI assistance (we want ghost text explicitly for Ai)
+- [ ] Add completion engine (nvim-cmp or ???)
 
 ### Possible Enhacments
 
+- [ ] Add debugging support (nvim-dap)
 - [ ] Add snippets support
 - [ ] Add testing integration
+
+### Cleanup & Maintenance
+
+- [ ] Clean up visible shortcuts (which-key display options)
 
 ### Kitty Terminal Integration
 

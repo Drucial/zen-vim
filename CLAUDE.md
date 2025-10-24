@@ -85,7 +85,7 @@ nvim --clean
 
 ## Current Plugin Stack
 
-### Core & UI (lua/plugins/init.lua, ui.lua, editor.lua)
+### Core & UI (lua/plugins/init.lua, ui.lua, editor.lua, lualine.lua)
 - **rose-pine**: Color scheme (rose-pine-moon variant)
 - **nvim-web-devicons**: Icon support (lazy-loaded)
 - **plenary.nvim**: Utility library for other plugins (lazy-loaded)
@@ -95,6 +95,8 @@ nvim --clean
 - **telescope.nvim**: Fuzzy finder for files, grep, buffers, and more
 - **telescope-fzf-native**: Native FZF sorting for better telescope performance
 - **nvim-scrollbar**: Scrollbar with diagnostic, search, and cursor position markers
+- **lualine.nvim**: Statusline with custom breadcrumb navigation, git branch, and diff info
+- **mini.nvim**: Collection of minimal plugins (pairs, surround, comment, bufremove, icons)
 
 ### LSP & Language Support (lua/plugins/lsp.lua)
 - **mason.nvim**: Package manager for LSP servers, formatters, and linters
