@@ -52,10 +52,10 @@ return {
 					h6 = "foam",
 				},
 				highlight_groups = {
-					-- Comment = { fg = "foam" },
 					-- StatusLine = { fg = "love", bg = "love", blend = 15 },
-					-- VertSplit = { fg = "muted", bg = "muted" },
 					-- Visual = { fg = "base", bg = "text", inherit = false },
+					Comment = { fg = "muted" },
+					VertSplit = { fg = "muted", bg = "muted" },
 					SnacksIndent = { fg = "highlight_low" },
 				},
 			})
