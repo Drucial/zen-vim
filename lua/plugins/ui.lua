@@ -51,6 +51,13 @@ return {
 					h5 = "pine",
 					h6 = "foam",
 				},
+				highlight_groups = {
+					-- Comment = { fg = "foam" },
+					-- StatusLine = { fg = "love", bg = "love", blend = 15 },
+					-- VertSplit = { fg = "muted", bg = "muted" },
+					-- Visual = { fg = "base", bg = "text", inherit = false },
+					SnacksIndent = { fg = "highlight_low" },
+				},
 			})
 
 			vim.o.winborder = "rounded"
@@ -96,21 +103,52 @@ return {
 		},
 		opts = {
 			lsp = {
-				-- override markdown rendering so that cmp and other plugins use Treesitter
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true,
 				},
 			},
+			routes = {
+				{
+					filter = {
+						event = "msg_show",
+						any = {
+							{ find = "%d+L, %d+B" },
+							{ find = "; after #%d+" },
+							{ find = "; before #%d+" },
+						},
+					},
+					view = "mini",
+				},
+			},
 			presets = {
-				bottom_search = true, -- use classic bottom cmdline for search
-				command_palette = true, -- position cmdline and popupmenu together
-				long_message_to_split = true, -- long messages sent to split
-				inc_rename = false, -- enables input dialog for inc-rename.nvim
-				lsp_doc_border = true, -- add border to hover docs and signature help
+				bottom_search = true,
+				command_palette = true,
+				long_message_to_split = true,
 			},
 		},
+		-- stylua: ignore
+		keys = {
+			{ "<leader>sn", "", desc = "+noice"},
+			{ "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
+			{ "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
+			{ "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History" },
+			{ "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
+			{ "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
+			{ "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
+			{ "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
+			{ "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
+		},
+		config = function(_, opts)
+			-- HACK: noice shows messages from before it was enabled,
+			-- but this is not ideal when Lazy is installing plugins,
+			-- so clear the messages in this case.
+			if vim.o.filetype == "lazy" then
+				vim.cmd([[messages clear]])
+			end
+			require("noice").setup(opts)
+		end,
 	},
 
 	{
@@ -118,6 +156,13 @@ return {
 		event = "VeryLazy",
 		opts = {
 			bigfile = { enabled = true },
+			indent = {
+				enabled = true,
+				only_scope = true, -- only show indent guides of the scope
+				only_current = true, -- only show indent guides in the current window
+			},
+			scroll = { enabled = true },
+			image = { enabled = true },
 			dashboard = {
 				enabled = true,
 				preset = {

@@ -122,6 +122,10 @@
 - [x] Refactor gitsigns keybindings to LazyVim style (with <leader>gh prefix)
 - [x] Add window management keybindings under <leader>w
 - [x] Separate search (<leader>s) from window (<leader>w) commands
+- [x] Refactor treesitter config to use opts pattern
+- [x] Update treesitter parsers list (add c, diff, jsdoc, jsonc, luadoc, luap, printf, query, toml, xml)
+- [x] Fix nvim-ts-autotag event format
+- [x] Enhance noice.nvim with message filtering, keybindings, and LSP doc scrolling
 
 ## In Progress 🚧
 

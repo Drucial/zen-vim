@@ -93,6 +93,8 @@ nvim --clean
 - **dressing.nvim**: UI improvements (loaded on VeryLazy event)
 - **vim-kitty-navigator**: Seamless navigation between Kitty terminal and Neovim splits
 - **oil.nvim**: File explorer with hidden files enabled (shows dotfiles)
+- **nvim-notify**: Notification manager with custom styling
+- **noice.nvim**: Enhanced UI for messages, cmdline, and popupmenu with message filtering and LSP doc scrolling
 - **snacks.nvim**: Modern plugin collection with picker (fuzzy finder with hidden files), dashboard, and bigfile handling
 - **nvim-scrollbar**: Scrollbar with diagnostic, search, and cursor position markers
 - **lualine.nvim**: Statusline with custom breadcrumb navigation, git branch, and diff info
@@ -133,15 +135,23 @@ nvim --clean
 - **shfmt**: Shell script formatter
 
 ### Treesitter (lua/plugins/treesitter.lua)
-- **nvim-treesitter**: Advanced syntax highlighting and code understanding
+- **nvim-treesitter**: Advanced syntax highlighting and code understanding (configured using `opts` pattern)
 - **nvim-treesitter-textobjects**: Textobject selections based on treesitter
+- **nvim-ts-autotag**: Auto-close and auto-rename HTML/JSX/XML tags
+
+**Configured Parsers:**
+- Core: bash, c, diff, lua, luadoc, luap, printf, query, regex, vim, vimdoc
+- Web: html, javascript, typescript, tsx, jsdoc, json, jsonc, xml, yaml, toml
+- Documentation: markdown, markdown_inline
+- Python: python
 
 **Features:**
 - Auto-installs parsers for all configured languages
 - Incremental selection with `<C-space>` (expand) and `<bs>` (shrink)
-- Smart indentation for most languages
+- Smart indentation (disabled for Ruby and Python where LSP handles it better)
 - Textobjects: `af`/`if` (functions), `ac`/`ic` (classes), `aa`/`ia` (parameters)
 - Navigation: `]f`/`[f` (functions), `]c`/`[c` (classes)
+- Automatic tag closing/renaming for HTML, JSX, XML, etc.
 
 ### Which-Key (lua/plugins/which-key.lua)
 - **which-key.nvim**: Interactive keybinding discovery and help
@@ -238,6 +248,15 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - `s` - Flash jump (quick navigation)
 - `S` - Flash Treesitter (jump to treesitter nodes)
 - `]t` / `[t` - Next/Previous todo comment
+
+### Notifications & Messages (Noice)
+- `<leader>snl` - Show Last Message
+- `<leader>snh` - Show Message History
+- `<leader>sna` - Show All Messages
+- `<leader>snd` - Dismiss All Notifications
+- `<leader>snt` - Open Noice Picker
+- `<S-Enter>` - Redirect Cmdline (command mode)
+- `<C-f>` / `<C-b>` - Scroll Forward/Backward in LSP hover docs (insert, normal, select modes)
 
 ### Git Hunks
 - `]h` / `[h` - Next/Previous hunk
