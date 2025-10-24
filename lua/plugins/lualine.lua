@@ -66,8 +66,8 @@ return {
 						"alpha",
 						"ministarter",
 						"snacks_dashboard",
-						"terminal",
-						"snacks_terminal",
+						-- "terminal",
+						-- "snacks_terminal",
 						"lazy", -- if you're using lazy.nvim
 						"", -- this disables lualine for buffers with *no* filetype (like term:// sometimes)
 					},
@@ -104,6 +104,13 @@ return {
 				lualine_c = {
 					{
 						function()
+							-- Show terminal process in terminal mode
+							if vim.bo.buftype == "terminal" then
+								local term_name = vim.fn.expand("%:t")
+								-- Extract process name from terminal buffer name (e.g., "term://...//12345:/bin/zsh")
+								local process = term_name:match(":([^:]+)$") or term_name
+								return "~" .. process
+							end
 							local filepath = vim.fn.expand("%:.:h")
 							return filepath == "." and "" or filepath .. "/"
 						end,
@@ -112,6 +119,10 @@ return {
 					},
 					{
 						function()
+							-- Hide arrow in terminal mode
+							if vim.bo.buftype == "terminal" then
+								return ""
+							end
 							return "→"
 						end,
 						padding = { left = 0, right = 0 },
@@ -122,6 +133,10 @@ return {
 						path = 0, -- Just the filename, no path
 						padding = { left = 1, right = 1 },
 						color = { fg = palette.muted },
+						cond = function()
+							-- Hide filename in terminal mode
+							return vim.bo.buftype ~= "terminal"
+						end,
 					},
 				},
 				lualine_x = {

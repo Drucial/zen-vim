@@ -57,3 +57,8 @@ end, { desc = "Toggle Zen Mode" })
 keymap.set({ "n", "t" }, "<C-\\>", function()
 	Snacks.terminal()
 end, { desc = "Toggle Terminal" })
+
+-- Search highlight groups with Snacks picker
+keymap.set("n", "<leader>fH", function()
+	Snacks.picker.highlights()
+end, { desc = "Find Highlight Groups" })

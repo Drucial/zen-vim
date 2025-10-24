@@ -57,6 +57,7 @@ return {
 					Comment = { fg = "muted" },
 					VertSplit = { fg = "muted", bg = "muted" },
 					SnacksIndent = { fg = "highlight_low" },
+					StatusLineTerm = { bg = "none" }, -- hide terminal statusline background
 				},
 			})
 
