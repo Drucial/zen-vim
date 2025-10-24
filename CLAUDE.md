@@ -265,6 +265,9 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - `<S-Enter>` - Redirect Cmdline (command mode)
 - `<C-f>` / `<C-b>` - Scroll Forward/Backward in LSP hover docs (insert, normal, select modes)
 
+### Git
+- `<leader>gg` - LazyGit (full Git UI)
+
 ### Git Hunks
 - `]h` / `[h` - Next/Previous hunk
 - `]H` / `[H` - Last/First hunk
@@ -311,9 +314,9 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - `:FormatDisable!` - Disable format-on-save for current buffer
 - `:FormatEnable` - Re-enable format-on-save
 
-### Treesitter
-- `<C-space>` - Expand selection to next syntax node (incremental selection)
-- `<bs>` - Shrink selection to previous syntax node
+### Treesitter Selection
+- `<C-space>` - Start/expand selection to next syntax node (normal/visual mode)
+- `<bs>` - Shrink selection to previous syntax node (visual mode)
 - `af` / `if` - Select around/inside function (with operator: `daf`, `yif`, `vaf`)
 - `ac` / `ic` - Select around/inside class
 - `aa` / `ia` - Select around/inside parameter
@@ -324,12 +327,12 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - `<Space>` (wait 500ms) - Show all leader keybindings
 - Press any prefix key (like `g`, `[`, `]`) and wait to see available commands
 
-### Completion (Insert Mode - blink.cmp)
-- `<CR>` (Enter) - Accept selected completion
-- `<C-y>` - Force accept current item
-- `<C-n>` / `<C-p>` - Navigate down/up through completions
-- `<C-Space>` - Show/toggle completions and documentation
-- `<C-e>` - Hide completion menu
+### Completion (blink.cmp)
+- `<CR>` (Enter) - Accept selected completion (insert mode)
+- `<C-y>` - Force accept current item (insert mode)
+- `<C-n>` / `<C-p>` - Navigate down/up through completions (insert mode)
+- `<C-Space>` - Show/toggle completions (insert mode)
+- `<C-e>` - Hide completion menu (insert mode)
 
 **Completion Sources** (priority order):
 1. **Copilot** - AI-powered suggestions (highest priority)
@@ -342,7 +345,7 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - `jk` in insert mode - Exit to normal mode
 - `<Esc>` in normal mode - Clear search highlights
 - `<Esc><Esc>` in terminal mode - Exit terminal mode
-- `<leader>w` - Save file
+- `:w` - Save file (standard vim)
 - `<leader>p` - Paste without yanking (visual mode)
 - `<leader>d` - Delete without yanking
 - `-` - Open parent directory with oil.nvim

@@ -65,13 +65,14 @@ return {
 			},
 
 			-- Incremental selection based on treesitter
+			-- <C-space> in normal/visual mode (blink.cmp uses it only in insert mode)
 			incremental_selection = {
 				enable = true,
 				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
+					init_selection = "<C-space>", -- Start in normal mode
+					node_incremental = "<C-space>", -- Expand in visual mode
 					scope_incremental = false,
-					node_decremental = "<bs>",
+					node_decremental = "<bs>", -- Shrink selection
 				},
 			},
 

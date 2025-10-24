@@ -19,7 +19,8 @@ return {
 			-- This leaves <Tab> free for Copilot
 			keymap = {
 				preset = "enter",
-				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				-- <C-space> only in insert mode (to avoid conflict with treesitter in visual mode)
+				["<C-space>"] = { "show", "show_documentation", "hide_documentation", mode = { "i" } },
 				["<C-e>"] = { "hide" },
 				["<C-y>"] = { "select_and_accept" },
 			},
