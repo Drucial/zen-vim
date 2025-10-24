@@ -24,7 +24,8 @@ This is a Neovim configuration using lazy.nvim as the plugin manager. The config
 │   │   └── keybinds.lua       # Keybindings and mappings
 │   └── plugins/
 │       ├── init.lua           # Core plugins (colorscheme, icons, etc.)
-│       ├── ui.lua             # UI plugins (oil, telescope)
+│       ├── ui.lua             # UI plugins (oil, snacks dashboard)
+│       ├── picker.lua         # Snacks picker (fuzzy finder)
 │       ├── lsp.lua            # LSP configuration (mason, lspconfig)
 │       ├── code.lua           # Formatting & linting (conform)
 │       ├── editor.lua         # Editor enhancements (scrollbar)
@@ -85,15 +86,14 @@ nvim --clean
 
 ## Current Plugin Stack
 
-### Core & UI (lua/plugins/init.lua, ui.lua, editor.lua, lualine.lua)
+### Core & UI (lua/plugins/init.lua, ui.lua, picker.lua, editor.lua, lualine.lua)
 - **rose-pine**: Color scheme (rose-pine-moon variant)
 - **nvim-web-devicons**: Icon support (lazy-loaded)
 - **plenary.nvim**: Utility library for other plugins (lazy-loaded)
 - **dressing.nvim**: UI improvements (loaded on VeryLazy event)
 - **vim-kitty-navigator**: Seamless navigation between Kitty terminal and Neovim splits
 - **oil.nvim**: File explorer that lets you edit your filesystem like a buffer
-- **telescope.nvim**: Fuzzy finder for files, grep, buffers, and more
-- **telescope-fzf-native**: Native FZF sorting for better telescope performance
+- **snacks.nvim**: Modern plugin collection including picker (fuzzy finder), dashboard, and bigfile handling
 - **nvim-scrollbar**: Scrollbar with diagnostic, search, and cursor position markers
 - **lualine.nvim**: Statusline with custom breadcrumb navigation, git branch, and diff info
 - **mini.nvim**: Collection of minimal plugins (pairs, surround, comment, bufremove, icons)
@@ -175,6 +175,7 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - **Plugin specs**:
   - Core: `lua/plugins/init.lua`
   - UI: `lua/plugins/ui.lua`
+  - Picker: `lua/plugins/picker.lua`
   - LSP: `lua/plugins/lsp.lua`
   - Formatting: `lua/plugins/code.lua`
   - Editor: `lua/plugins/editor.lua`
@@ -212,23 +213,25 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - `<C-Down>` / `<C-Up>` - Alternative scroll down/up and center
 - `n` / `N` - Next/previous search result (centered)
 
-### Telescope (Fuzzy Finder)
+### Snacks Picker (Fuzzy Finder)
 - `<leader>ff` - Find Files
-- `<leader>fs` - Find String (search in files)
+- `<leader>fs` - Find String (live grep)
 - `<leader>fh` - Find Help tags
 - `<leader>fr` - Find Recent Files
 - `<leader>fw` - Find Word under cursor
 - `<leader>fd` - Find Diagnostics
-- `<leader>fc` - Find Commands
+- `<leader>fc` - Find Config Files
+- `<leader>fp` - Find Projects
+- `<leader>fC` - Find Commands
 - `<leader>fk` - Find Keymaps
 - `<leader>/` - Fuzzy search in current buffer
 
 ### LSP (when attached to buffer)
-- `gd` - Goto Definition (Telescope)
+- `gd` - Goto Definition (Snacks picker)
 - `gD` - Goto Declaration
-- `gr` - References (Telescope)
-- `gI` - Goto Implementation (Telescope)
-- `gy` - Goto T[y]pe Definition (Telescope)
+- `gr` - References (Snacks picker)
+- `gI` - Goto Implementation (Snacks picker)
+- `gy` - Goto T[y]pe Definition (Snacks picker)
 - `K` - Hover
 - `gK` - Signature Help
 - `<c-k>` - Signature Help (insert mode)

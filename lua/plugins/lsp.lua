@@ -62,13 +62,21 @@ return {
 					end
 
 					-- Jump to definition/declaration
-					map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
+					map("gd", function()
+						Snacks.picker.lsp_definitions()
+					end, "Goto Definition")
 					map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-					map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-					map("gy", require("telescope.builtin").lsp_type_definitions, "Goto T[y]pe Definition")
+					map("gI", function()
+						Snacks.picker.lsp_implementations()
+					end, "Goto Implementation")
+					map("gy", function()
+						Snacks.picker.lsp_type_definitions()
+					end, "Goto T[y]pe Definition")
 
 					-- References with nowait to prevent which-key submenu (grr, gra, etc.)
-					vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {
+					vim.keymap.set("n", "gr", function()
+						Snacks.picker.lsp_references()
+					end, {
 						buffer = event.buf,
 						desc = "Goto References",
 						nowait = true,

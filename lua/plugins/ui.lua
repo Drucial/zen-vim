@@ -62,7 +62,12 @@ return {
 		"stevearc/oil.nvim",
 		lazy = false,
 		opts = {
-			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
+			view_options = {
+				show_hidden = true, -- Show hidden files (dotfiles)
+			},
+		},
+		keys = {
+			{ "-", "<CMD>Oil<CR>", desc = "Open parent directory" },
 		},
 	},
 
@@ -113,9 +118,6 @@ return {
 		event = "VeryLazy",
 		opts = {
 			bigfile = { enabled = true },
-			picker = {
-				enabled = true,
-			},
 			dashboard = {
 				enabled = true,
 				preset = {
@@ -126,7 +128,7 @@ return {
 							icon = " ",
 							key = "f",
 							desc = "Find File",
-							action = ":lua Snacks.dashboard.pick('files')",
+							action = ":lua Snacks.picker.files()",
 						},
 						{ icon = "", key = "y", desc = "File Browser", action = "<CMD>Oil<CR>" },
 						{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
@@ -134,19 +136,19 @@ return {
 							icon = " ",
 							key = "g",
 							desc = "Find Text",
-							action = ":lua Snacks.dashboard.pick('live_grep')",
+							action = ":lua Snacks.picker.grep()",
 						},
 						{
 							icon = " ",
 							key = "r",
 							desc = "Recent Files",
-							action = ":lua Snacks.dashboard.pick('oldfiles')",
+							action = ":lua Snacks.picker.recent()",
 						},
 						{
 							icon = " ",
 							key = "c",
 							desc = "Config",
-							action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+							action = ":lua Snacks.picker.files({cwd = vim.fn.stdpath('config')})",
 						},
 						{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
 						-- { icon = ' ', key = 'x', desc = 'Lazy Extras', action = ':LazyExtras' },
