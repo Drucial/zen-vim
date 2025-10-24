@@ -166,7 +166,7 @@ return {
 				end,
 			})
 
-			-- Set default capabilities
+			-- Set default capabilities with file operations support
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.workspace = {
 				fileOperations = {
@@ -174,6 +174,12 @@ return {
 					willRename = true,
 				},
 			}
+
+			-- Get blink.cmp capabilities (merges with our custom capabilities)
+			local has_blink, blink = pcall(require, "blink.cmp")
+			if has_blink then
+				capabilities = blink.get_lsp_capabilities(capabilities)
+			end
 
 			-- Apply capabilities globally to all LSP servers
 			vim.lsp.config("*", { capabilities = capabilities })

@@ -103,6 +103,11 @@ nvim --clean
 - **grug-far.nvim**: Search and replace across files
 - **todo-comments.nvim**: Highlight and search TODO comments
 
+### Completion & AI (lua/plugins/completion.lua, copilot.lua)
+- **blink.cmp**: Modern, high-performance completion engine (Rust-based, <4ms updates)
+- **blink-cmp-copilot**: GitHub Copilot integration for blink.cmp
+- **copilot.lua**: GitHub Copilot backend (API connection and authentication)
+
 ### LSP & Language Support (lua/plugins/lsp.lua)
 - **mason.nvim**: Package manager for LSP servers, formatters, and linters
 - **mason-lspconfig.nvim**: Bridges mason with nvim-lspconfig
@@ -190,6 +195,8 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
   - UI: `lua/plugins/ui.lua`
   - Picker: `lua/plugins/picker.lua`
   - LSP: `lua/plugins/lsp.lua`
+  - Completion: `lua/plugins/completion.lua` (blink.cmp with Copilot integration)
+  - Copilot: `lua/plugins/copilot.lua` (GitHub Copilot backend)
   - Code: `lua/plugins/code.lua` (formatting, search/replace, flash, todo-comments)
   - Editor: `lua/plugins/editor.lua`
   - Git: `lua/plugins/git.lua`
@@ -316,6 +323,20 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 ### Which-Key
 - `<Space>` (wait 500ms) - Show all leader keybindings
 - Press any prefix key (like `g`, `[`, `]`) and wait to see available commands
+
+### Completion (Insert Mode - blink.cmp)
+- `<CR>` (Enter) - Accept selected completion
+- `<C-y>` - Force accept current item
+- `<C-n>` / `<C-p>` - Navigate down/up through completions
+- `<C-Space>` - Show/toggle completions and documentation
+- `<C-e>` - Hide completion menu
+
+**Completion Sources** (priority order):
+1. **Copilot** - AI-powered suggestions (highest priority)
+2. **LSP** - Language server completions
+3. **Path** - File path completions
+4. **Snippets** - Code snippets
+5. **Buffer** - Text from current buffer
 
 ### Utilities
 - `jk` in insert mode - Exit to normal mode

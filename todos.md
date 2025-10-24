@@ -126,6 +126,7 @@
 - [x] Update treesitter parsers list (add c, diff, jsdoc, jsonc, luadoc, luap, printf, query, toml, xml)
 - [x] Fix nvim-ts-autotag event format
 - [x] Enhance noice.nvim with message filtering, keybindings, and LSP doc scrolling
+- [x] Add blink.cmp with Copilot integration (modern, high-performance completion)
 
 ## In Progress 🚧
 
@@ -141,7 +142,7 @@ None currently
 - [x] Add lazygit integration
 - [x] Add snacks.nvim dashboard
 - [x] Copilot with ghost text and smart Tab completion
-- [ ] Add completion engine (nvim-cmp or ???)
+- [x] Add completion engine (blink.cmp with Copilot integration)
 
 ### Possible Enhacments
 
