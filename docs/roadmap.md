@@ -49,6 +49,11 @@ This roadmap tracks the development and evolution of this Neovim configuration. 
 - **flash.nvim**: Quick navigation with search labels
 - **grug-far.nvim**: Search and replace across files
 - **todo-comments.nvim**: Highlight and navigate TODO/FIXME/NOTE comments
+- **edgy.nvim**: Organized panel management
+  - Left panel: Search & Replace (grug-far)
+  - Right panel: Terminal and Claude Code
+  - Bottom panel: QuickFix, Diagnostics, Help
+  - Global statusline and smooth animations
 
 ### Language Support
 
@@ -156,21 +161,18 @@ All essential features are implemented and stable. The configuration is ready fo
 ### Panel & Layout Improvements
 Visual and functional improvements to editor panels:
 
-1. **Grug-far panel improvements** (`lua/plugins/code.lua:88-112`)
-   - Current issues: Basic styling, `topleft vsplit` positioning
-   - Target: Better panel layout, improved visual hierarchy
+1. **Edgy.nvim integration** ✅ COMPLETED
+   - Implemented organized panel management
+   - Left panel: grug-far search and replace
+   - Right panel: Terminal and Claude Code
+   - Bottom panel: QuickFix, Diagnostics, Help
+   - Smooth animations and keyboard controls (q to close, <C-q> to hide, Q to close edgebar)
 
-2. **Trouble panel positioning** (`lua/plugins/trouble.lua`)
-   - Current issues: Inconsistent positioning (some right, some toggle)
-   - Target: Standardize bottom panel for all trouble modes
+2. **Trouble panel positioning** (NEXT)
+   - Current issues: May need edgy integration
+   - Target: Ensure proper bottom panel positioning via edgy
 
-3. **Terminal panel** (NEW)
-   - Status: Not yet implemented
-   - Target: Right panel with toggle, multiple buffers, persistent processes
-   - Keybindings: `<leader>t` prefix
-   - Goal: Eliminate need to switch to external terminal
-
-4. **Symbols picker** (`lua/plugins/trouble.lua:31-34`)
+3. **Symbols picker** (`lua/plugins/trouble.lua:31-34`)
    - Current: Trouble symbols panel (`<leader>xs`)
    - Target: Replace with snacks picker or floating window
 
@@ -183,27 +185,22 @@ Visual and functional improvements to editor panels:
 #### UI/UX Improvements (Stay in Neovim Longer)
 These improvements focus on enhancing the in-editor experience to reduce context switching:
 
-- **Improved grug-far panel**: Better styling and layout for global search/replace
-  - Current: `topleft vsplit` with basic styling
-  - Planned: Full-height right panel with better visual hierarchy
-  - Goal: Make search/replace more comfortable for extended use
+- **Grug-far panel** ✅ COMPLETED
+  - Implemented: Left panel managed by edgy.nvim
+  - Full-height panel with organized layout
+  - Properly integrated with window management system
 
-- **Trouble panel positioning**: Bottom panel layout for diagnostics
-  - Current: Some modes open on right, inconsistent positioning
-  - Planned: Configure all trouble modes to open on bottom
+- **Terminal panel** ✅ COMPLETED
+  - Implemented: Right panel managed by edgy.nvim
+  - Dedicated terminal area with persistent layout
+  - Works with snacks terminal and Claude Code
+
+- **Trouble panel positioning**: Further refinement needed
+  - Implemented: Bottom panel configuration via edgy.nvim
+  - Next: Test and ensure all trouble modes use bottom panel correctly
   - Goal: Keep code visible while reviewing diagnostics
 
-- **Persistent terminal panel**: Right-side terminal with toggle support
-  - Current: No dedicated terminal management
-  - Planned: Right panel with easy toggle (`<leader>t?`)
-  - Features:
-    - Multiple terminal buffers (tabs within panel)
-    - Always maintain at least one terminal
-    - Doesn't terminate processes on hide
-    - Quick access for build/test/run commands
-  - Goal: Eliminate need to switch to external terminal
-
-- **Better symbols picker**: Replace current symbols panel
+- **Better symbols picker**: Under consideration
   - Current: Trouble symbols as right panel (`<leader>xs`)
   - Planned: Snacks picker or floating window for symbols
   - Goal: Faster, less intrusive symbol navigation
@@ -229,11 +226,7 @@ These improvements focus on enhancing the in-editor experience to reduce context
 
 ### Under Consideration
 
-#### Window Management
-- **edgy.nvim**: Advanced window and panel management
-  - Persistent sidebar layouts
-  - Better control over plugin windows
-  - Floating window positioning
+(No items currently under consideration)
 
 ### Maintenance Tasks
 

@@ -30,6 +30,7 @@ This is a Neovim configuration using lazy.nvim as the plugin manager. The config
 │       ├── lsp.lua            # LSP configuration (mason, lspconfig)
 │       ├── code.lua           # Formatting & linting (conform)
 │       ├── editor.lua         # Editor enhancements (scrollbar)
+│       ├── edgy.lua           # Panel & window management
 │       ├── treesitter.lua     # Treesitter for syntax highlighting
 │       ├── ai.lua             # AI tools (Claude Code)
 │       └── which-key.lua      # Keybinding discovery
@@ -104,6 +105,7 @@ nvim --clean
 - **flash.nvim**: Quick navigation with search labels and Treesitter integration
 - **grug-far.nvim**: Search and replace across files
 - **todo-comments.nvim**: Highlight and search TODO comments
+- **edgy.nvim**: Organized panel management for terminals, search/replace, and diagnostics
 
 ### Completion & AI (lua/plugins/completion.lua, copilot.lua, ai.lua)
 - **blink.cmp**: Modern, high-performance completion engine (Rust-based, <4ms updates)
@@ -203,6 +205,7 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
   - AI: `lua/plugins/ai.lua` (Claude Code integration)
   - Code: `lua/plugins/code.lua` (formatting, search/replace, flash, todo-comments)
   - Editor: `lua/plugins/editor.lua`
+  - Edgy: `lua/plugins/edgy.lua` (panel & window management)
   - Git: `lua/plugins/git.lua`
   - Treesitter: `lua/plugins/treesitter.lua`
   - Which-Key: `lua/plugins/which-key.lua`

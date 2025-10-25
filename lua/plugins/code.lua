@@ -89,7 +89,7 @@ return {
 		"MagicDuck/grug-far.nvim",
 		opts = {
 			headerMaxWidth = 80,
-			windowCreationCommand = "topleft vsplit",
+			-- windowCreationCommand removed - let edgy.nvim control positioning
 		},
 		cmd = { "GrugFar", "GrugFarWithin" },
 		keys = {
