@@ -31,6 +31,7 @@ This is a Neovim configuration using lazy.nvim as the plugin manager. The config
 │       ├── code.lua           # Formatting & linting (conform)
 │       ├── editor.lua         # Editor enhancements (scrollbar)
 │       ├── treesitter.lua     # Treesitter for syntax highlighting
+│       ├── ai.lua             # AI tools (Claude Code)
 │       └── which-key.lua      # Keybinding discovery
 └── lazy-lock.json             # Plugin version lockfile
 ```
@@ -104,10 +105,11 @@ nvim --clean
 - **grug-far.nvim**: Search and replace across files
 - **todo-comments.nvim**: Highlight and search TODO comments
 
-### Completion & AI (lua/plugins/completion.lua, copilot.lua)
+### Completion & AI (lua/plugins/completion.lua, copilot.lua, ai.lua)
 - **blink.cmp**: Modern, high-performance completion engine (Rust-based, <4ms updates)
 - **blink-cmp-copilot**: GitHub Copilot integration for blink.cmp
 - **copilot.lua**: GitHub Copilot backend (API connection and authentication)
+- **claudecode.nvim**: Claude Code integration for AI-powered coding assistance with diff management (`<A-l>` to toggle)
 
 ### LSP & Language Support (lua/plugins/lsp.lua)
 - **mason.nvim**: Package manager for LSP servers, formatters, and linters
@@ -198,6 +200,7 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
   - LSP: `lua/plugins/lsp.lua`
   - Completion: `lua/plugins/completion.lua` (blink.cmp with Copilot integration)
   - Copilot: `lua/plugins/copilot.lua` (GitHub Copilot backend)
+  - AI: `lua/plugins/ai.lua` (Claude Code integration)
   - Code: `lua/plugins/code.lua` (formatting, search/replace, flash, todo-comments)
   - Editor: `lua/plugins/editor.lua`
   - Git: `lua/plugins/git.lua`
@@ -222,6 +225,7 @@ The following is a quick reference of the most commonly used keybindings. For fu
 - `<leader>w=` - Balance windows
 - `<leader>wd` - Delete window
 - `<leader>ww` - Switch to other window
+- `<leader>wh/j/k/l` - Resize window (decrease width, decrease height, increase height, increase width)
 
 ### Buffer Management
 - `<leader><leader>` - List Buffers (quick access)
@@ -233,7 +237,9 @@ The following is a quick reference of the most commonly used keybindings. For fu
 
 ### Line Manipulation
 - `Option+Shift+Up/Down` - Move line(s) up/down (works in normal and visual mode)
+- `Ctrl+Shift+Up/Down` - Duplicate line(s) up/down (works in normal and visual mode)
 - `<` / `>` in visual mode - Indent left/right (maintains selection)
+- `c` / `C` - Change without yanking (doesn't copy to clipboard)
 
 ### Centered Scrolling
 - `<C-d>` / `<C-u>` - Scroll down/up and center cursor
@@ -244,6 +250,7 @@ The following is a quick reference of the most commonly used keybindings. For fu
 - `<leader>ff` - Find Files
 - `<leader>fs` - Find String (live grep)
 - `<leader>fh` - Find Help tags
+- `<leader>fH` - Find Highlight groups
 - `<leader>fr` - Find Recent Files
 - `<leader>fw` - Find Word under cursor
 - `<leader>fd` - Find Diagnostics
@@ -355,6 +362,20 @@ The following is a quick reference of the most commonly used keybindings. For fu
 - `<leader>d` - Delete without yanking
 - `<leader>z` - Toggle Zen Mode (distraction-free coding with centered window, no line numbers, no statusline)
 - `-` - Open parent directory with oil.nvim
+
+### AI Tools (Claude Code)
+- `<A-l>` - Toggle Claude Code (quick access)
+- `<leader>ac` - Toggle Claude Code
+- `<leader>af` - Focus Claude Code window
+- `<leader>ar` - Resume previous Claude session
+- `<leader>aC` - Continue last conversation
+- `<leader>ab` - Add current buffer to context
+- `<leader>as` - Send selection to Claude (visual mode) or add file from file explorer
+- `<leader>aa` - Accept diff changes
+- `<leader>ad` - Deny diff changes
+
+### Terminal
+- `<A-\>` - Toggle floating terminal (works in normal and terminal mode)
 
 ## Modifying Configuration
 

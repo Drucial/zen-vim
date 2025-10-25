@@ -54,7 +54,9 @@
 | `<C-Down>` / `<C-Up>` | Scroll & center | Alternative scroll down/up and center |
 | `n` / `N` | Search & center | Next/previous search result (centered) |
 | `<A-S-Down>` / `<A-S-Up>` | Move line | Move current line down/up |
+| `<C-S-Down>` / `<C-S-Up>` | Duplicate line | Duplicate current line down/up |
 | `<C-Space>` | Start selection | Start Treesitter incremental selection |
+| `c` / `C` | Change without yank | Change text without copying to clipboard |
 | `K` | Hover documentation | Show LSP hover information |
 | `gK` | Signature help | Show function signature |
 | `-` | Open parent directory | Launch oil.nvim file browser |
@@ -65,8 +67,10 @@
 |-----|--------|-------------|
 | `<` / `>` | Indent | Indent left/right (maintains selection) |
 | `<A-S-Down>` / `<A-S-Up>` | Move lines | Move selected lines down/up |
+| `<C-S-Down>` / `<C-S-Up>` | Duplicate lines | Duplicate selected lines down/up |
 | `<C-Space>` | Expand selection | Expand to next Treesitter node |
 | `<bs>` (Backspace) | Shrink selection | Shrink to previous Treesitter node |
+| `c` / `C` | Change without yank | Change text without copying to clipboard |
 | `<leader>p` | Paste without yank | Paste without overwriting clipboard |
 | `<leader>d` | Delete without yank | Delete without copying to clipboard |
 
@@ -75,6 +79,7 @@
 | Key | Action | Description |
 |-----|--------|-------------|
 | `<Esc><Esc>` | Exit terminal mode | Return to normal mode from terminal |
+| `<A-\>` | Toggle terminal | Open/close floating terminal (works in normal and terminal mode) |
 
 ---
 
@@ -132,6 +137,10 @@ All window commands use the `<leader>w` prefix.
 | `<leader>w=` | Balance windows | Equalize window sizes |
 | `<leader>wd` | Delete window | Close current window |
 | `<leader>ww` | Other window | Switch to other window |
+| `<leader>wh` | Decrease width | Decrease window width by 2 columns |
+| `<leader>wl` | Increase width | Increase window width by 2 columns |
+| `<leader>wk` | Increase height | Increase window height by 2 rows |
+| `<leader>wj` | Decrease height | Decrease window height by 2 rows |
 
 ---
 
@@ -176,6 +185,7 @@ All finder commands use the `<leader>f` prefix (powered by Snacks picker).
 | Key | Action | Description |
 |-----|--------|-------------|
 | `<leader>fh` | Find help | Search Neovim help tags |
+| `<leader>fH` | Find highlights | Search highlight groups |
 | `<leader>fC` | Find commands | Search available commands |
 | `<leader>fk` | Find keymaps | Search configured keybindings |
 | `<leader>fd` | Find diagnostics | Search all diagnostics |
@@ -493,6 +503,54 @@ Distraction-free coding mode with centered window and hidden UI elements.
 - All UI elements are automatically restored when exiting zen mode
 - Perfect for focused writing or reading code
 
+### Terminal
+
+Floating terminal for quick command execution.
+
+| Key | Action | Mode | Description |
+|-----|--------|------|-------------|
+| `<A-\>` | Toggle terminal | n, t | Open/close floating terminal |
+
+**Features:**
+- Floating window design for quick access
+- Automatically escapes terminal mode when closing
+- Works from both normal and terminal mode
+- Perfect for quick git commands, test runs, etc.
+
+---
+
+## AI Tools (Claude Code)
+
+AI-powered coding assistance with Claude Code integration.
+
+### Claude Code Commands
+
+All Claude Code commands use the `<leader>a` prefix.
+
+| Key | Action | Mode | Description |
+|-----|--------|------|-------------|
+| `<A-l>` | Toggle Claude | n, v | Quick toggle Claude Code (alternative to `<leader>ac`) |
+| `<leader>ac` | Toggle Claude | n, v | Open/close Claude Code interface |
+| `<leader>af` | Focus Claude | n | Focus Claude Code window |
+| `<leader>ar` | Resume Claude | n | Resume previous Claude session |
+| `<leader>aC` | Continue Claude | n | Continue last Claude conversation |
+| `<leader>ab` | Add buffer | n | Add current buffer to Claude context |
+| `<leader>as` | Send to Claude | v | Send selected text to Claude |
+| `<leader>as` | Add file | n | Add file from file explorer (Oil/NvimTree/neo-tree) |
+
+### Diff Management
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>aa` | Accept diff | Accept Claude's proposed changes |
+| `<leader>ad` | Deny diff | Reject Claude's proposed changes |
+
+**Usage Tips:**
+- Use `<A-l>` for fastest access to Claude Code
+- Select code in visual mode and use `<leader>as` to send specific context
+- Add multiple files with `<leader>ab` before asking questions
+- Review diffs carefully before accepting with `<leader>aa`
+
 ---
 
 ## Tips & Tricks
@@ -556,12 +614,13 @@ Some keys are intentionally not used to avoid conflicts:
 
 | Prefix | Category | Examples |
 |--------|----------|----------|
-| `<leader>f` | Find/Files | `ff`, `fs`, `fr` |
+| `<leader>a` | AI (Claude Code) | `ac`, `af`, `ab`, `aa` |
+| `<leader>f` | Find/Files | `ff`, `fs`, `fr`, `fH` |
 | `<leader>b` | Buffers | `bb`, `bd`, `bn` |
 | `<leader>c` | Code | `ca`, `cf`, `cr` |
 | `<leader>g` | Git | `gg`, `gh*` |
 | `<leader>gh` | Git Hunks | `ghs`, `ghr`, `ghp` |
-| `<leader>w` | Windows | `w-`, `w\|`, `wd` |
+| `<leader>w` | Windows | `w-`, `w\|`, `wd`, `wh/j/k/l` |
 | `<leader>x` | Diagnostics | `xx`, `xs`, `xt` |
 | `<leader>s` | Search | `sr`, `st`, `sn*` |
 | `<leader>sn` | Noice | `snl`, `snh`, `snd` |
