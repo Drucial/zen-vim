@@ -7,16 +7,16 @@ return {
 			signs = {
 				add = { text = "▎" },
 				change = { text = "▎" },
-				delete = { text = "" },
-				topdelete = { text = "" },
+				delete = { text = "" },
+				topdelete = { text = "" },
 				changedelete = { text = "▎" },
 				untracked = { text = "▎" },
 			},
 			signs_staged = {
 				add = { text = "▎" },
 				change = { text = "▎" },
-				delete = { text = "" },
-				topdelete = { text = "" },
+				delete = { text = "" },
+				topdelete = { text = "" },
 				changedelete = { text = "▎" },
 			},
 			on_attach = function(bufnr)
@@ -55,24 +55,6 @@ return {
       map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
 			end,
-		},
-	},
-
-	-- LazyGit integration
-	{
-		"kdheepak/lazygit.nvim",
-		cmd = {
-			"LazyGit",
-			"LazyGitConfig",
-			"LazyGitCurrentFile",
-			"LazyGitFilter",
-			"LazyGitFilterCurrentFile",
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		keys = {
-			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 		},
 	},
 }
