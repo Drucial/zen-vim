@@ -124,19 +124,23 @@ return {
 						vim.diagnostic.jump({ count = 1 })
 					end, "Next Diagnostic")
 
-					-- Highlight references under cursor
-					local client = vim.lsp.get_client_by_id(event.data.client_id)
-					if client and client.server_capabilities.documentHighlightProvider then
-						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-							buffer = event.buf,
-							callback = vim.lsp.buf.document_highlight,
-						})
-
-						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-							buffer = event.buf,
-							callback = vim.lsp.buf.clear_references,
-						})
-					end
+					-- Document highlight disabled for performance
+					-- This feature highlights all occurrences of the symbol under cursor
+					-- It fires on every CursorHold/CursorMoved event, causing performance issues
+					-- Uncomment below to re-enable if desired:
+					--
+					-- local client = vim.lsp.get_client_by_id(event.data.client_id)
+					-- if client and client.server_capabilities.documentHighlightProvider then
+					-- 	vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+					-- 		buffer = event.buf,
+					-- 		callback = vim.lsp.buf.document_highlight,
+					-- 	})
+					--
+					-- 	vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+					-- 		buffer = event.buf,
+					-- 		callback = vim.lsp.buf.clear_references,
+					-- 	})
+					-- end
 				end,
 			})
 
@@ -152,17 +156,25 @@ return {
 				},
 			})
 
-			-- Show diagnostics in float on hover
+			-- Show diagnostics in float on hover (only when diagnostics exist)
 			vim.api.nvim_create_autocmd("CursorHold", {
 				callback = function()
-					local opts = {
-						focusable = false,
-						close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-						border = "rounded",
-						source = "if_many",
-						prefix = " ",
-					}
-					vim.diagnostic.open_float(nil, opts)
+					-- Check if there are diagnostics at the current cursor position
+					local cursor_pos = vim.api.nvim_win_get_cursor(0)
+					local line = cursor_pos[1] - 1 -- 0-indexed
+					local diagnostics = vim.diagnostic.get(0, { lnum = line })
+
+					-- Only show float if diagnostics exist on this line
+					if #diagnostics > 0 then
+						local opts = {
+							focusable = false,
+							close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+							border = "rounded",
+							source = "if_many",
+							prefix = " ",
+						}
+						vim.diagnostic.open_float(nil, opts)
+					end
 				end,
 			})
 
