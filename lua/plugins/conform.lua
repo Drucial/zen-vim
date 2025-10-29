@@ -2,7 +2,7 @@ return {
 	-- Autoformatting
 	{
 		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
+		event = { "BufReadPre", "BufNewFile" }, -- Load earlier to avoid first-save delays
 		cmd = { "ConformInfo" },
 		keys = {
 			{
@@ -16,10 +16,10 @@ return {
 		},
 		opts = {
 			formatters_by_ft = {
-				javascript = { "eslint_d", "prettier" },
-				typescript = { "eslint_d", "prettier" },
-				javascriptreact = { "eslint_d", "prettier" },
-				typescriptreact = { "eslint_d", "prettier" },
+				javascript = { "prettier", "eslint_d" }, -- Run prettier first, then eslint_d for fixes
+				typescript = { "prettier", "eslint_d" },
+				javascriptreact = { "prettier", "eslint_d" },
+				typescriptreact = { "prettier", "eslint_d" },
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
@@ -36,12 +36,23 @@ return {
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 					return
 				end
-				return { timeout_ms = 500, lsp_fallback = true }
+				return { timeout_ms = 3000, lsp_fallback = true } -- Increased timeout for eslint_d
 			end,
 			-- Customize formatters
 			formatters = {
 				shfmt = {
 					prepend_args = { "-i", "2" }, -- 2 space indentation
+				},
+				eslint_d = {
+					-- Increase timeout and add better error handling
+					timeout_ms = 3000,
+					-- Only run if .eslintrc or similar exists
+					condition = function(self, ctx)
+						return vim.fs.find({ ".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js" }, {
+							path = ctx.filename,
+							upward = true,
+						})[1]
+					end,
 				},
 			},
 		},
