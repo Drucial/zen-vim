@@ -130,17 +130,60 @@
 
 All window commands use the `<leader>w` prefix.
 
+### Navigation
+
 | Key | Action | Description |
 |-----|--------|-------------|
-| `<leader>w-` | Split below | Create horizontal split below |
-| `<leader>w\|` | Split right | Create vertical split to the right |
-| `<leader>w=` | Balance windows | Equalize window sizes |
+| `<leader>wh` | Go to left window | Move focus to window on the left |
+| `<leader>wj` | Go to lower window | Move focus to window below |
+| `<leader>wk` | Go to upper window | Move focus to window above |
+| `<leader>wl` | Go to right window | Move focus to window on the right |
+| `<leader>ww` | Switch windows | Toggle between current and previous window |
+| `<leader>wH` | Move window far left | Move current window to far left |
+| `<leader>wJ` | Move window far down | Move current window to bottom |
+| `<leader>wK` | Move window far up | Move current window to top |
+| `<leader>wL` | Move window far right | Move current window to far right |
+
+### Splits
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>ws` | Split below | Create horizontal split below |
+| `<leader>wv` | Split right | Create vertical split to the right |
+| `<leader>w-` | Split below | Alternative horizontal split |
+| `<leader>w\|` | Split right | Alternative vertical split |
+
+### Close/Quit
+
+| Key | Action | Description |
+|-----|--------|-------------|
 | `<leader>wd` | Delete window | Close current window |
-| `<leader>ww` | Other window | Switch to other window |
-| `<leader>wh` | Decrease width | Decrease window width by 2 columns |
-| `<leader>wl` | Increase width | Increase window width by 2 columns |
-| `<leader>wk` | Increase height | Increase window height by 2 rows |
-| `<leader>wj` | Decrease height | Decrease window height by 2 rows |
+| `<leader>wq` | Quit window | Quit current window |
+| `<leader>wo` | Close others | Close all other windows |
+
+### Resize
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>w+` | Increase height | Increase window height by 2 rows |
+| `<leader>w-` | Decrease height | Decrease window height by 2 rows |
+| `<leader>w>` | Increase width | Increase window width by 2 columns |
+| `<leader>w<` | Decrease width | Decrease window width by 2 columns |
+| `<leader>w=` | Equalize windows | Make all windows equal size |
+
+### Maximize
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>w_` | Maximize height | Maximize current window height |
+| `<leader>w\|` | Maximize width | Maximize current window width |
+
+### Swap & Zoom
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>wx` | Swap with next | Swap current window with next |
+| `<leader>wm` | Zoom toggle | Toggle zoom mode (maximize/restore) |
 
 ---
 
@@ -189,6 +232,55 @@ All finder commands use the `<leader>f` prefix (powered by Snacks picker).
 | `<leader>fC` | Find commands | Search available commands |
 | `<leader>fk` | Find keymaps | Search configured keybindings |
 | `<leader>fd` | Find diagnostics | Search all diagnostics |
+
+---
+
+## Search Commands
+
+LazyVim-style comprehensive search commands using the `<leader>s` prefix (powered by Snacks picker).
+
+### Code & Symbols
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>ss` | Buffer symbols | Search LSP symbols in current buffer |
+| `<leader>sS` | Workspace symbols | Search LSP symbols across workspace |
+| `<leader>sd` | Diagnostics (buffer) | Search diagnostics in current buffer |
+| `<leader>sD` | Diagnostics (workspace) | Search diagnostics across workspace |
+
+### Content Search
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>sb` | Buffer lines | Search lines in current buffer |
+| `<leader>sB` | Grep buffers | Search across all open buffers |
+| `<leader>sg` | Grep | Live grep search across files |
+| `<leader>sw` | Search word | Search for word under cursor |
+| `<leader>sh` | Search help | Search Neovim help pages |
+
+### Editor Components
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>sa` | Autocmds | Search autocommands |
+| `<leader>sH` | Highlights | Search highlight groups |
+| `<leader>si` | Icons | Search available icons |
+| `<leader>sj` | Jumps | Search jump list |
+| `<leader>sk` | Keymaps | Search configured keymaps |
+| `<leader>sl` | Location list | Search location list |
+| `<leader>sm` | Marks | Search marks |
+| `<leader>sM` | Man pages | Search manual pages |
+| `<leader>sq` | Quickfix | Search quickfix list |
+| `<leader>s"` | Registers | Search registers |
+
+### History & Commands
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>sc` | Command history | Search command history |
+| `<leader>s/` | Search history | Search search history |
+| `<leader>sC` | Commands | Search available commands |
+| `<leader>sR` | Resume | Resume last picker search |
 
 ---
 

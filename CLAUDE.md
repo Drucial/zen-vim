@@ -14,27 +14,43 @@ This is a Neovim configuration using lazy.nvim as the plugin manager. The config
 ### Configuration Structure
 ```
 .
-├── init.lua                    # Entry point - sets leader keys, loads config
+├── init.lua                       # Entry point - sets leader keys, loads config
 ├── docs/
-│   └── roadmap.md             # Development roadmap and feature tracking
+│   ├── keybinds.md               # Complete keybinding guide
+│   ├── roadmap.md                # Development roadmap and feature tracking
+│   └── performance-optimization.md  # Performance improvements
 ├── lua/
 │   ├── config/
-│   │   ├── lazy.lua           # lazy.nvim bootstrap and setup
-│   │   ├── opts.lua           # Neovim options (line numbers, tabs, etc.)
-│   │   ├── autocmds.lua       # Autocommands and event handlers
-│   │   └── keybinds.lua       # Keybindings and mappings
+│   │   ├── lazy.lua              # lazy.nvim bootstrap and setup
+│   │   ├── opts.lua              # Neovim options (line numbers, tabs, etc.)
+│   │   ├── autocmds.lua          # Autocommands and event handlers
+│   │   └── keybinds.lua          # Keybindings and mappings
 │   └── plugins/
-│       ├── init.lua           # Core plugins (colorscheme, icons, etc.)
-│       ├── ui.lua             # UI plugins (oil, snacks dashboard)
-│       ├── picker.lua         # Snacks picker (fuzzy finder)
-│       ├── lsp.lua            # LSP configuration (mason, lspconfig)
-│       ├── code.lua           # Formatting & linting (conform)
-│       ├── editor.lua         # Editor enhancements (scrollbar)
-│       ├── edgy.lua           # Panel & window management
-│       ├── treesitter.lua     # Treesitter for syntax highlighting
-│       ├── ai.lua             # AI tools (Claude Code)
-│       └── which-key.lua      # Keybinding discovery
-└── lazy-lock.json             # Plugin version lockfile
+│       ├── init.lua              # Core plugins (plenary, icons, etc.)
+│       ├── rose-pine.lua         # Color scheme
+│       ├── oil.lua               # File explorer
+│       ├── nvim-notify.lua       # Notifications
+│       ├── noice.lua             # UI overhaul
+│       ├── snacks.lua            # Dashboard, picker, zen mode
+│       ├── nvim-scrollbar.lua    # Scrollbar
+│       ├── nvim-highlight-colors.lua  # Color highlighting
+│       ├── lsp.lua               # LSP + Mason configuration
+│       ├── blink-cmp.lua         # Completion engine
+│       ├── copilot.lua           # Copilot backend
+│       ├── claudecode.lua        # Claude Code integration
+│       ├── conform.lua           # Formatting
+│       ├── flash.lua             # Quick navigation
+│       ├── grug-far.lua          # Search and replace
+│       ├── todo-comments.lua     # Todo highlighting
+│       ├── edgy.lua              # Panel & window management
+│       ├── gitsigns.lua          # Git decorations
+│       ├── lazygit.lua           # Git UI
+│       ├── treesitter.lua        # Treesitter for syntax highlighting
+│       ├── which-key.lua         # Keybinding discovery
+│       ├── lualine.lua           # Statusline
+│       ├── mini.lua              # Mini.nvim modules
+│       └── trouble.lua           # Diagnostics UI
+└── lazy-lock.json                # Plugin version lockfile
 ```
 
 ### Configuration Load Order
@@ -89,25 +105,26 @@ nvim --clean
 
 ## Current Plugin Stack
 
-### Core & UI (lua/plugins/init.lua, ui.lua, picker.lua, editor.lua, lualine.lua)
+### Core & UI (lua/plugins/init.lua, rose-pine.lua, oil.lua, nvim-notify.lua, noice.lua, snacks.lua, nvim-scrollbar.lua, nvim-highlight-colors.lua, lualine.lua)
 - **rose-pine**: Color scheme (rose-pine-moon variant)
-- **nvim-web-devicons**: Icon support (lazy-loaded)
+- **mini.icons**: Fast, minimal icon provider (from mini.nvim)
 - **plenary.nvim**: Utility library for other plugins (lazy-loaded)
 - **dressing.nvim**: UI improvements (loaded on VeryLazy event)
 - **vim-kitty-navigator**: Seamless navigation between Kitty terminal and Neovim splits
 - **oil.nvim**: File explorer with hidden files enabled (shows dotfiles)
 - **nvim-notify**: Notification manager with custom styling
 - **noice.nvim**: Enhanced UI for messages, cmdline, and popupmenu with message filtering and LSP doc scrolling
-- **snacks.nvim**: Modern plugin collection with picker (fuzzy finder with hidden files), dashboard, zen mode (distraction-free coding), and bigfile handling
+- **snacks.nvim**: Modern plugin collection with picker (fuzzy finder with hidden files and 20+ search commands), dashboard, zen mode (distraction-free coding), and bigfile handling
 - **nvim-scrollbar**: Scrollbar with diagnostic, search, and cursor position markers
+- **nvim-highlight-colors**: Inline color highlighting for hex codes, rgb(), etc.
 - **lualine.nvim**: Statusline with custom breadcrumb navigation, git branch, and diff info
 - **mini.nvim**: Collection of minimal plugins (pairs, surround, comment, bufremove, icons)
-- **flash.nvim**: Quick navigation with search labels and Treesitter integration
-- **grug-far.nvim**: Search and replace across files
-- **todo-comments.nvim**: Highlight and search TODO comments
-- **edgy.nvim**: Organized panel management for terminals, search/replace, and diagnostics
+- **flash.nvim**: Quick navigation with search labels and Treesitter integration (lua/plugins/flash.lua)
+- **grug-far.nvim**: Search and replace across files (lua/plugins/grug-far.lua)
+- **todo-comments.nvim**: Highlight and search TODO comments (lua/plugins/todo-comments.lua)
+- **edgy.nvim**: Organized panel management for terminals, search/replace, and diagnostics (lua/plugins/edgy.lua)
 
-### Completion & AI (lua/plugins/completion.lua, copilot.lua, ai.lua)
+### Completion & AI (lua/plugins/blink-cmp.lua, copilot.lua, claudecode.lua)
 - **blink.cmp**: Modern, high-performance completion engine (Rust-based, <4ms updates)
 - **blink-cmp-copilot**: GitHub Copilot integration for blink.cmp
 - **copilot.lua**: GitHub Copilot backend (API connection and authentication)
@@ -116,7 +133,9 @@ nvim --clean
 ### LSP & Language Support (lua/plugins/lsp.lua)
 - **mason.nvim**: Package manager for LSP servers, formatters, and linters
 - **mason-lspconfig.nvim**: Bridges mason with nvim-lspconfig
+- **mason-tool-installer.nvim**: Auto-install formatters and linters
 - **nvim-lspconfig**: Configurations for LSP servers (using modern vim.lsp.config API)
+- **schemastore.nvim**: JSON schema validation for config files (provides intelligent completion for package.json, tsconfig.json, etc.)
 
 **Configured Language Servers:**
 - **lua_ls**: Lua (Neovim configuration)
@@ -128,13 +147,12 @@ nvim --clean
 - **tailwindcss**: Tailwind CSS (with custom class regex patterns)
 - **prismals**: Prisma schema files
 - **marksman**: Markdown
-- **jsonls**: JSON
+- **jsonls**: JSON (with schemastore for intelligent completion)
 - **html**: HTML
 - **cssls**: CSS
 
-### Formatting & Code Quality (lua/plugins/code.lua)
+### Formatting & Code Quality (lua/plugins/conform.lua)
 - **conform.nvim**: Fast, async formatter with format-on-save
-- **mason-tool-installer.nvim**: Auto-install formatters and linters
 
 **Configured Formatters:**
 - **prettier**: JavaScript, TypeScript, CSS, HTML, JSON, YAML, Markdown
@@ -195,20 +213,31 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
 - **Neovim options**: `lua/config/opts.lua` (line numbers, tabs, clipboard, etc.)
 - **Keybindings**: `lua/config/keybinds.lua` (custom keymaps, see below for details)
 - **Autocommands**: `lua/config/autocmds.lua` (highlight yank, trim whitespace, etc.)
-- **Plugin specs**:
-  - Core: `lua/plugins/init.lua`
-  - UI: `lua/plugins/ui.lua`
-  - Picker: `lua/plugins/picker.lua`
-  - LSP: `lua/plugins/lsp.lua`
-  - Completion: `lua/plugins/completion.lua` (blink.cmp with Copilot integration)
+- **Plugin specs** (one plugin per file for modularity):
+  - Core: `lua/plugins/init.lua` (plenary, icons, dressing, vim-kitty-navigator)
+  - Color scheme: `lua/plugins/rose-pine.lua`
+  - File explorer: `lua/plugins/oil.lua`
+  - Notifications: `lua/plugins/nvim-notify.lua`
+  - UI overhaul: `lua/plugins/noice.lua`
+  - Utilities: `lua/plugins/snacks.lua` (dashboard, picker, zen mode, bigfile)
+  - Scrollbar: `lua/plugins/nvim-scrollbar.lua`
+  - Color highlighting: `lua/plugins/nvim-highlight-colors.lua`
+  - LSP: `lua/plugins/lsp.lua` (mason, lspconfig, schemastore, tool-installer)
+  - Completion: `lua/plugins/blink-cmp.lua` (blink.cmp with Copilot integration)
   - Copilot: `lua/plugins/copilot.lua` (GitHub Copilot backend)
-  - AI: `lua/plugins/ai.lua` (Claude Code integration)
-  - Code: `lua/plugins/code.lua` (formatting, search/replace, flash, todo-comments)
-  - Editor: `lua/plugins/editor.lua`
-  - Edgy: `lua/plugins/edgy.lua` (panel & window management)
-  - Git: `lua/plugins/git.lua`
-  - Treesitter: `lua/plugins/treesitter.lua`
-  - Which-Key: `lua/plugins/which-key.lua`
+  - Claude Code: `lua/plugins/claudecode.lua` (AI-powered coding)
+  - Formatting: `lua/plugins/conform.lua`
+  - Quick navigation: `lua/plugins/flash.lua`
+  - Search/replace: `lua/plugins/grug-far.lua`
+  - Todo comments: `lua/plugins/todo-comments.lua`
+  - Panel management: `lua/plugins/edgy.lua`
+  - Git decorations: `lua/plugins/gitsigns.lua`
+  - Git UI: `lua/plugins/lazygit.lua`
+  - Syntax highlighting: `lua/plugins/treesitter.lua`
+  - Keybinding help: `lua/plugins/which-key.lua`
+  - Statusline: `lua/plugins/lualine.lua`
+  - Mini modules: `lua/plugins/mini.lua`
+  - Diagnostics UI: `lua/plugins/trouble.lua`
 - **Bootstrap logic**: Located in `lua/config/lazy.lua:1-16`
 - **Lazy.nvim settings**: Configured in `lua/config/lazy.lua`
 
@@ -222,13 +251,33 @@ The following is a quick reference of the most commonly used keybindings. For fu
 - `<C-h/j/k/l>` - Navigate between Neovim splits and Kitty terminal windows (handled by vim-kitty-navigator)
 - Note: Do NOT manually set `<C-h/j/k/l>` keybinds as they conflict with vim-kitty-navigator
 
-### Window Management
-- `<leader>w-` - Split window below (horizontal)
-- `<leader>w|` - Split window right (vertical)
-- `<leader>w=` - Balance windows
-- `<leader>wd` - Delete window
-- `<leader>ww` - Switch to other window
-- `<leader>wh/j/k/l` - Resize window (decrease width, decrease height, increase height, increase width)
+### Window Management (w)
+#### Navigation
+- `<leader>wh/j/k/l` - Go to Left/Lower/Upper/Right Window
+- `<leader>ww` - Switch Windows
+- `<leader>wH/J/K/L` - Move Window Far Left/Down/Up/Right
+
+#### Splits
+- `<leader>ws` / `<leader>w-` - Split Window Below
+- `<leader>wv` / `<leader>w|` - Split Window Right
+
+#### Close/Quit
+- `<leader>wd` - Delete Window
+- `<leader>wq` - Quit Window
+- `<leader>wo` - Close All Other Windows
+
+#### Resize
+- `<leader>w+` / `<leader>w-` - Increase/Decrease Height
+- `<leader>w>` / `<leader>w<` - Increase/Decrease Width
+- `<leader>w=` - Equalize Windows
+
+#### Maximize
+- `<leader>w_` - Maximize Height
+- `<leader>w|` - Maximize Width
+
+#### Swap & Zoom
+- `<leader>wx` - Swap with Next
+- `<leader>wm` - Maximize Toggle (Zoom)
 
 ### Buffer Management
 - `<leader><leader>` - List Buffers (quick access)
@@ -262,6 +311,31 @@ The following is a quick reference of the most commonly used keybindings. For fu
 - `<leader>fC` - Find Commands
 - `<leader>fk` - Find Keymaps
 - `<leader>/` - Fuzzy search in current buffer
+
+### Search Commands (LazyVim-style)
+- `<leader>sa` - Search Autocmds
+- `<leader>sb` - Search Buffer Lines
+- `<leader>sB` - Search Grep Buffers
+- `<leader>sc` - Search Command History
+- `<leader>sC` - Search Commands
+- `<leader>sd` - Search Diagnostics (Current Buffer)
+- `<leader>sD` - Search Diagnostics (Workspace)
+- `<leader>sg` - Search Grep
+- `<leader>sh` - Search Help
+- `<leader>sH` - Search Highlights
+- `<leader>si` - Search Icons
+- `<leader>sj` - Search Jumps
+- `<leader>sk` - Search Keymaps
+- `<leader>sl` - Search Location List
+- `<leader>sm` - Search Marks
+- `<leader>sM` - Search Man Pages
+- `<leader>sq` - Search Quickfix
+- `<leader>sR` - Search Resume
+- `<leader>s"` - Search Registers
+- `<leader>s/` - Search History
+- `<leader>ss` - Search Buffer Symbols (LSP)
+- `<leader>sS` - Search Workspace Symbols (LSP)
+- `<leader>sw` - Search Word
 
 ### Search & Navigation
 - `<leader>sr` - Search and Replace (grug-far)
@@ -319,7 +393,6 @@ The following is a quick reference of the most commonly used keybindings. For fu
 - `<leader>cA` - Source Action
 - `<leader>ci` - Code Info (hover documentation)
 - `<leader>cr` - Rename
-- `<leader>cR` - Rename File
 - `<leader>cc` - Run Codelens (n, x)
 - `<leader>cC` - Refresh & Display Codelens
 

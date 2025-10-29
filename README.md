@@ -113,7 +113,7 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 | Plugin                                                               | Purpose              | Why?                                                             |
 | -------------------------------------------------------------------- | -------------------- | ---------------------------------------------------------------- |
 | [rose-pine](https://github.com/rose-pine/neovim)                     | Color scheme         | Beautiful, low-contrast theme with excellent syntax highlighting |
-| [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)  | Icons                | File type icons throughout the UI                                |
+| [mini.icons](https://github.com/echasnovski/mini.nvim)               | Icons                | Fast, minimal icon provider                                       |
 | [dressing.nvim](https://github.com/stevearc/dressing.nvim)           | UI improvements      | Better vim.ui.select and vim.ui.input interfaces                 |
 | [vim-kitty-navigator](https://github.com/knubie/vim-kitty-navigator) | Terminal integration | Seamless navigation between Neovim and Kitty terminal            |
 | [oil.nvim](https://github.com/stevearc/oil.nvim)                     | File explorer        | Edit your filesystem like a buffer                               |
@@ -134,11 +134,13 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 
 ### LSP & Language Support
 
-| Plugin                                                                       | Purpose         | Why?                                                |
-| ---------------------------------------------------------------------------- | --------------- | --------------------------------------------------- |
-| [mason.nvim](https://github.com/williamboman/mason.nvim)                     | Package manager | Install and manage LSP servers, formatters, linters |
-| [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim) | LSP bridge      | Automatically configure installed LSP servers       |
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                   | LSP configs     | Pre-configured LSP setups for all languages         |
+| Plugin                                                                                    | Purpose         | Why?                                                |
+| ----------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------- |
+| [mason.nvim](https://github.com/williamboman/mason.nvim)                                  | Package manager | Install and manage LSP servers, formatters, linters |
+| [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)              | LSP bridge      | Automatically configure installed LSP servers       |
+| [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) | Tool installer  | Auto-install formatters and linters                 |
+| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                                | LSP configs     | Pre-configured LSP setups for all languages         |
+| [schemastore.nvim](https://github.com/b0o/schemastore.nvim)                               | JSON schemas    | JSON schema validation for config files             |
 
 **Pre-configured Language Servers:**
 
@@ -150,17 +152,16 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 - Tailwind CSS (tailwindcss)
 - Prisma (prismals)
 - Markdown (marksman)
-- JSON (jsonls)
+- JSON (jsonls with schemastore for intelligent completion)
 - HTML (html)
 - CSS (cssls)
 - Lua (lua_ls)
 
 ### Code Quality & Formatting
 
-| Plugin                                                                                    | Purpose        | Why?                                       |
-| ----------------------------------------------------------------------------------------- | -------------- | ------------------------------------------ |
-| [conform.nvim](https://github.com/stevearc/conform.nvim)                                  | Formatter      | Fast, async formatting with format-on-save |
-| [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) | Tool installer | Auto-install formatters and linters        |
+| Plugin                                                  | Purpose   | Why?                                       |
+| ------------------------------------------------------- | --------- | ------------------------------------------ |
+| [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatter | Fast, async formatting with format-on-save |
 
 **Pre-configured Formatters:**
 
@@ -234,15 +235,37 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 - `<leader>cA` - Source Action
 - `<leader>ci` - Code Info (hover)
 - `<leader>cr` - Rename
-- `<leader>cR` - Rename File
 - `<leader>cc` - Run Codelens
 - `<leader>cC` - Refresh Codelens
 
 ### Search Operations (s)
 
+- `<leader>sa` - Search Autocmds
+- `<leader>sb` - Search Buffer Lines
+- `<leader>sB` - Search Grep Buffers
+- `<leader>sc` - Search Command History
+- `<leader>sC` - Search Commands
+- `<leader>sd` - Search Diagnostics (Current Buffer)
+- `<leader>sD` - Search Diagnostics (Workspace)
+- `<leader>sg` - Search Grep
+- `<leader>sh` - Search Help
+- `<leader>sH` - Search Highlights
+- `<leader>si` - Search Icons
+- `<leader>sj` - Search Jumps
+- `<leader>sk` - Search Keymaps
+- `<leader>sl` - Search Location List
+- `<leader>sm` - Search Marks
+- `<leader>sM` - Search Man Pages
+- `<leader>sq` - Search Quickfix
+- `<leader>sR` - Search Resume
+- `<leader>s"` - Search Registers
+- `<leader>s/` - Search History
 - `<leader>sr` - Search and Replace (grug-far)
+- `<leader>ss` - Search Buffer Symbols (LSP)
+- `<leader>sS` - Search Workspace Symbols (LSP)
 - `<leader>st` - Search Todo Comments
 - `<leader>sT` - Search Todo/Fix/Fixme
+- `<leader>sw` - Search Word
 
 #### Noice (sn)
 
@@ -254,11 +277,32 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 
 ### Window Management (w)
 
-- `<leader>w-` - Split Window Below
-- `<leader>w|` - Split Window Right
-- `<leader>w=` - Balance Windows
+#### Navigation
+- `<leader>wh/j/k/l` - Go to Left/Lower/Upper/Right Window
+- `<leader>ww` - Switch Windows
+- `<leader>wH/J/K/L` - Move Window Far Left/Down/Up/Right
+
+#### Splits
+- `<leader>ws` / `<leader>w-` - Split Window Below
+- `<leader>wv` / `<leader>w|` - Split Window Right
+
+#### Close/Quit
 - `<leader>wd` - Delete Window
-- `<leader>ww` - Switch to Other Window
+- `<leader>wq` - Quit Window
+- `<leader>wo` - Close All Other Windows
+
+#### Resize
+- `<leader>w+` / `<leader>w-` - Increase/Decrease Height
+- `<leader>w>` / `<leader>w<` - Increase/Decrease Width
+- `<leader>w=` - Equalize Windows
+
+#### Maximize
+- `<leader>w_` - Maximize Height
+- `<leader>w|` - Maximize Width
+
+#### Swap & Zoom
+- `<leader>wx` - Swap with Next
+- `<leader>wm` - Maximize Toggle (Zoom)
 
 ### UI Toggles
 
@@ -354,33 +398,45 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 
 ```
 ~/.config/nvim/
-├── init.lua                    # Entry point
-├── lazy-lock.json             # Plugin version lock
-├── CLAUDE.md                  # Detailed documentation
-├── README.md                  # This file
+├── init.lua                       # Entry point
+├── lazy-lock.json                # Plugin version lock
+├── CLAUDE.md                     # Detailed documentation
+├── README.md                     # This file
 ├── docs/
-│   └── roadmap.md            # Development roadmap
+│   ├── keybinds.md              # Complete keybinding guide
+│   ├── roadmap.md               # Development roadmap
+│   └── performance-optimization.md  # Performance improvements
 ├── lua/
 │   ├── config/
-│   │   ├── lazy.lua          # Lazy.nvim bootstrap
-│   │   ├── opts.lua          # Neovim options
-│   │   ├── autocmds.lua      # Autocommands
-│   │   └── keybinds.lua      # Global keybindings
+│   │   ├── lazy.lua             # Lazy.nvim bootstrap
+│   │   ├── opts.lua             # Neovim options
+│   │   ├── autocmds.lua         # Autocommands
+│   │   └── keybinds.lua         # Global keybindings
 │   └── plugins/
-│       ├── init.lua          # Core plugins
-│       ├── ui.lua            # UI plugins
-│       ├── picker.lua        # Snacks picker
-│       ├── lsp.lua           # LSP configuration
-│       ├── completion.lua    # blink.cmp setup
-│       ├── copilot.lua       # Copilot backend
-│       ├── code.lua          # Formatting, search, flash
-│       ├── editor.lua        # Editor enhancements
-│       ├── git.lua           # Git integration
-│       ├── treesitter.lua    # Treesitter config
-│       ├── which-key.lua     # Keybinding discovery
-│       ├── lualine.lua       # Statusline
-│       ├── mini.lua          # Mini.nvim modules
-│       └── trouble.lua       # Diagnostics UI
+│       ├── init.lua             # Core plugins (plenary, icons, etc.)
+│       ├── rose-pine.lua        # Color scheme
+│       ├── oil.lua              # File explorer
+│       ├── nvim-notify.lua      # Notifications
+│       ├── noice.lua            # UI overhaul
+│       ├── snacks.lua           # Dashboard, picker, zen mode
+│       ├── nvim-scrollbar.lua   # Scrollbar
+│       ├── nvim-highlight-colors.lua  # Color highlighting
+│       ├── lsp.lua              # LSP + Mason configuration
+│       ├── blink-cmp.lua        # Completion engine
+│       ├── copilot.lua          # Copilot backend
+│       ├── claudecode.lua       # Claude Code integration
+│       ├── conform.lua          # Formatting
+│       ├── flash.lua            # Quick navigation
+│       ├── grug-far.lua         # Search and replace
+│       ├── todo-comments.lua    # Todo highlighting
+│       ├── edgy.lua             # Panel management
+│       ├── gitsigns.lua         # Git decorations
+│       ├── lazygit.lua          # Git UI
+│       ├── treesitter.lua       # Syntax highlighting
+│       ├── which-key.lua        # Keybinding discovery
+│       ├── lualine.lua          # Statusline
+│       ├── mini.lua             # Mini.nvim modules
+│       └── trouble.lua          # Diagnostics UI
 ```
 
 ## Customization
@@ -410,7 +466,7 @@ vim.lsp.config("your_lsp_here", {
 
 ### Adding a Formatter
 
-Edit `lua/plugins/code.lua`:
+Edit `lua/plugins/conform.lua`:
 
 ```lua
 formatters_by_ft = {
@@ -418,7 +474,7 @@ formatters_by_ft = {
 }
 ```
 
-Add to mason-tool-installer:
+Add to mason-tool-installer in `lua/plugins/lsp.lua`:
 
 ```lua
 ensure_installed = {
@@ -428,7 +484,7 @@ ensure_installed = {
 
 ### Changing Theme
 
-Edit `lua/plugins/ui.lua`:
+Edit `lua/plugins/rose-pine.lua`:
 
 ```lua
 require("rose-pine").setup({
