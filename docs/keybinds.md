@@ -14,6 +14,8 @@
 - [Navigation](#navigation)
 - [Window Management](#window-management)
 - [Buffer Management](#buffer-management)
+- [Quick Actions](#quick-actions)
+- [Quit](#quit)
 - [Finding & Searching](#finding--searching)
 - [LSP (Language Server Protocol)](#lsp-language-server-protocol)
 - [Code Actions](#code-actions)
@@ -80,7 +82,7 @@
 | Key | Action | Description |
 |-----|--------|-------------|
 | `<Esc><Esc>` | Exit terminal mode | Return to normal mode from terminal |
-| `<A-\>` | Toggle terminal | Open/close floating terminal (works in normal and terminal mode) |
+| `<leader>\` | Toggle terminal | Open/close floating terminal (works in normal and terminal mode) |
 
 ---
 
@@ -200,6 +202,32 @@ Buffer commands use the `<leader>b` prefix.
 | `<leader>bn` | Next buffer | Switch to next buffer |
 | `<leader>bp` | Previous buffer | Switch to previous buffer |
 | `<leader>bw` | Write buffer | Save current buffer |
+
+---
+
+## Quick Actions
+
+Single-letter shortcuts for common operations (LazyVim-style).
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>W` | Write/save buffer | Save current buffer to disk |
+| `<leader>X` | Delete buffer | Close current buffer (smart close) |
+| `<leader>l` | Lazy plugin manager | Open Lazy plugin manager UI |
+| `<leader>n` | Notification history | Show all notifications (Noice) |
+| `<leader>\` | Toggle terminal | Open/close floating terminal |
+
+---
+
+## Quit
+
+Quit commands use the `<leader>q` prefix.
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>qq` | Quit window | Close current window |
+| `<leader>qa` | Quit all | Close all windows and exit Neovim |
+| `<leader>qQ` | Quit without saving | Force quit without saving changes |
 
 ---
 

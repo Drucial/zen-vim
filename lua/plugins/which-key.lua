@@ -17,6 +17,7 @@ return {
 					{ "<leader>s", group = "search" },
 					{ "<leader>sn", group = "noice" },
 					{ "<leader>w", group = "window" },
+					{ "<leader>q", group = "quit" },
 					{ "<leader>e", group = "surround" },
 					-- Surround normal mode
 					{ "<leader>ea", desc = "Surround motion" },

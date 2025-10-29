@@ -228,6 +228,20 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 - `<leader>bp` - Previous Buffer
 - `<leader>bw` - Write/Save Buffer
 
+### Quick Actions (Single-Letter)
+
+- `<leader>W` - Write/Save Buffer
+- `<leader>X` - Delete Buffer
+- `<leader>l` - Lazy Plugin Manager
+- `<leader>n` - Notification History
+- `<leader>\` - Toggle Terminal
+
+### Quit (q)
+
+- `<leader>qq` - Quit Window
+- `<leader>qa` - Quit All
+- `<leader>qQ` - Quit Without Saving
+
 ### Code Actions (c)
 
 - `<leader>cf` - Code Format

@@ -468,8 +468,17 @@ Enclose/surround text with quotes, brackets, tags, etc. using `<leader>e`.
 - `<leader>aa` - Accept diff changes
 - `<leader>ad` - Deny diff changes
 
-### Terminal
-- `<A-\>` - Toggle floating terminal (works in normal and terminal mode)
+### Quick Actions (Single-Letter Shortcuts)
+- `<leader>W` - Write/Save buffer
+- `<leader>X` - Delete buffer
+- `<leader>l` - Lazy plugin manager
+- `<leader>n` - Notification history
+- `<leader>\` - Toggle terminal
+
+### Quit
+- `<leader>qq` - Quit window
+- `<leader>qa` - Quit all
+- `<leader>qQ` - Quit without saving
 
 ## Modifying Configuration
 

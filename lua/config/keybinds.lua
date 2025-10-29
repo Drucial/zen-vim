@@ -100,10 +100,25 @@ keymap.set("n", "<leader>z", function()
 	Snacks.zen()
 end, { desc = "Toggle Zen Mode" })
 
--- Terminal (using <A-\> for quick access)
-keymap.set({ "n", "t" }, "<A-\\>", function()
+-- Quick single-letter shortcuts (LazyVim-style)
+keymap.set("n", "<leader>W", "<cmd>w<CR>", { desc = "Write/Save Buffer" })
+keymap.set("n", "<leader>X", function()
+	require("mini.bufremove").delete(0, false)
+end, { desc = "Delete Buffer" })
+keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Lazy Plugin Manager" })
+keymap.set("n", "<leader>n", function()
+	Snacks.notifier.show_history()
+end, { desc = "Notification History" })
+
+-- Terminal
+keymap.set({ "n", "t" }, "<leader>\\", function()
 	Snacks.terminal()
 end, { desc = "Toggle Terminal" })
+
+-- Quit group
+keymap.set("n", "<leader>qq", "<cmd>q<CR>", { desc = "Quit Window" })
+keymap.set("n", "<leader>qa", "<cmd>qa<CR>", { desc = "Quit All" })
+keymap.set("n", "<leader>qQ", "<cmd>q!<CR>", { desc = "Quit Without Saving" })
 
 -- Search highlight groups with Snacks picker
 keymap.set("n", "<leader>fH", function()
