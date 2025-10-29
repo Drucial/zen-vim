@@ -116,15 +116,6 @@ return {
 					end, "Source Action")
 					map("<leader>ci", vim.lsp.buf.hover, "Code Info")
 					map("<leader>cr", vim.lsp.buf.rename, "Rename")
-					map("<leader>cR", function()
-						-- File rename functionality (requires workspace.fileOperations support)
-						local old_name = vim.api.nvim_buf_get_name(0)
-						vim.ui.input({ prompt = "New file name: ", default = old_name }, function(new_name)
-							if new_name and new_name ~= old_name then
-								vim.lsp.buf.rename(new_name)
-							end
-						end)
-					end, "Rename File")
 					map("<leader>cl", "<cmd>LspInfo<cr>", "LSP Info")
 
 					-- Codelens
@@ -175,6 +166,7 @@ return {
 
 			-- Show diagnostics in float on hover (only when diagnostics exist)
 			vim.api.nvim_create_autocmd("CursorHold", {
+				group = vim.api.nvim_create_augroup("diagnostic_float", { clear = true }),
 				callback = function()
 					-- Check if there are diagnostics at the current cursor position
 					local cursor_pos = vim.api.nvim_win_get_cursor(0)
@@ -297,8 +289,15 @@ return {
 			-- Markdown
 			vim.lsp.config("marksman", {})
 
-			-- JSON
-			vim.lsp.config("jsonls", {})
+			-- JSON (with schema store for better completion)
+			vim.lsp.config("jsonls", {
+				settings = {
+					json = {
+						schemas = require("schemastore").json.schemas(),
+						validate = { enable = true },
+					},
+				},
+			})
 
 			-- HTML
 			vim.lsp.config("html", {})
