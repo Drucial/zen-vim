@@ -478,6 +478,8 @@ Enclose/surround text with quotes, brackets, tags, etc. using `<leader>e`.
 - `<A-a>` - Toggle Claude Code (closes terminal if open)
 - `<A-g>` - Toggle LazyGit (floating window, works in all modes)
 - `<A-f>` - Toggle Find and Replace (Grug-far)
+- `<A-s>` - Write/Save current buffer (works in all modes)
+- `<A-w>` - Close current buffer (works in all modes)
 
 **Note:** Terminal and Claude Code are mutually exclusive - opening one automatically closes the other. LazyGit is independent.
 

@@ -110,6 +110,12 @@ keymap.set("n", "<leader>n", function()
 	Snacks.notifier.show_history()
 end, { desc = "Notification History" })
 
+-- Quick buffer actions (Alt key)
+keymap.set({ "n", "i", "v" }, "<A-s>", "<cmd>w<CR>", { desc = "Write/Save Buffer" })
+keymap.set({ "n", "i", "v" }, "<A-w>", function()
+	require("mini.bufremove").delete(0, false)
+end, { desc = "Close Buffer" })
+
 -- Terminal
 keymap.set({ "n", "t" }, "<leader>\\", function()
 	Snacks.terminal()
