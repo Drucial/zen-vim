@@ -142,6 +142,20 @@ keymap.set({ "n", "i", "v", "t" }, "<A-\\>", function()
 	Snacks.terminal()
 end, { desc = "Toggle Terminal" })
 
+-- Float terminal (scratch terminal for quick commands)
+keymap.set({ "n", "i", "v", "t" }, "<A-S-\\>", function()
+	Snacks.terminal.toggle(vim.o.shell, {
+		cwd = vim.fn.getcwd(),
+		env = { TERM_ID = "float" }, -- Different env to create unique terminal ID
+		win = {
+			position = "float",
+			width = 0.8, -- 80% of screen width
+			height = 0.8, -- 80% of screen height
+			border = "rounded",
+		},
+	})
+end, { desc = "Toggle Float Terminal" })
+
 keymap.set({ "n", "i", "v", "t" }, "<A-z>", function()
 	Snacks.zen()
 end, { desc = "Toggle Zen Mode" })

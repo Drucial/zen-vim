@@ -474,6 +474,7 @@ Enclose/surround text with quotes, brackets, tags, etc. using `<leader>e`.
 
 ### UI Toggles (Alt key for quick access)
 - `<A-\>` - Toggle terminal (closes Claude Code if open)
+- `<A-S-\>` - Toggle float terminal (scratch terminal for quick commands)
 - `<A-z>` - Toggle Zen Mode (distraction-free coding)
 - `<A-a>` - Toggle Claude Code (closes terminal if open)
 - `<A-g>` - Toggle LazyGit (floating window, works in all modes)
