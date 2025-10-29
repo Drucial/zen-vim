@@ -454,11 +454,16 @@ Enclose/surround text with quotes, brackets, tags, etc. using `<leader>e`.
 - `:w` - Save file (standard vim)
 - `<leader>p` - Paste without yanking (visual mode)
 - `<leader>d` - Delete without yanking
-- `<leader>z` - Toggle Zen Mode (distraction-free coding with centered window, no line numbers, no statusline)
 - `-` - Open parent directory with oil.nvim
 
+### UI Toggles (Alt key for quick access)
+- `<A-\>` - Toggle terminal
+- `<A-z>` - Toggle Zen Mode (distraction-free coding)
+- `<A-a>` - Toggle Claude Code
+- `<A-f>` - Toggle Find and Replace (Grug-far)
+
 ### AI Tools (Claude Code)
-- `<A-l>` - Toggle Claude Code (quick access)
+- `<A-a>` - Toggle Claude Code (quick access)
 - `<leader>ac` - Toggle Claude Code
 - `<leader>af` - Focus Claude Code window
 - `<leader>ar` - Resume previous Claude session

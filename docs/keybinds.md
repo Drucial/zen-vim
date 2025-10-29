@@ -654,13 +654,29 @@ Oil.nvim allows you to edit your filesystem like a buffer.
 
 ## UI Toggles
 
-### Zen Mode
+Quick access toggles for UI elements using Alt key combinations.
+
+| Key | Action | Mode | Description |
+|-----|--------|------|-------------|
+| `<A-\>` | Toggle Terminal | n, t | Open/close floating terminal |
+| `<A-z>` | Toggle Zen Mode | n | Enter/exit distraction-free mode |
+| `<A-a>` | Toggle Claude Code | n | Open/close Claude Code assistant |
+| `<A-f>` | Toggle Find & Replace | n | Open/close Grug-far search interface |
+
+### Terminal (`<A-\>`)
+
+Floating terminal for quick command execution.
+
+**Features:**
+- Floating window design for quick access
+- Automatically escapes terminal mode when closing
+- Works from both normal and terminal mode
+- Perfect for quick git commands, test runs, etc.
+- Also accessible via `<leader>\`
+
+### Zen Mode (`<A-z>`)
 
 Distraction-free coding mode with centered window and hidden UI elements.
-
-| Key | Action | Description |
-|-----|--------|-------------|
-| `<leader>z` | Toggle Zen Mode | Enter/exit distraction-free mode |
 
 **Features:**
 - Hides line numbers (both absolute and relative)
@@ -672,23 +688,31 @@ Distraction-free coding mode with centered window and hidden UI elements.
 - Automatically restores settings on exit
 
 **Tips:**
-- Use `<leader>z` again to toggle back to normal view
+- Use `<A-z>` again to toggle back to normal view
 - All UI elements are automatically restored when exiting zen mode
 - Perfect for focused writing or reading code
+- Also accessible via `<leader>z`
 
-### Terminal
+### Claude Code (`<A-a>`)
 
-Floating terminal for quick command execution.
-
-| Key | Action | Mode | Description |
-|-----|--------|------|-------------|
-| `<A-\>` | Toggle terminal | n, t | Open/close floating terminal |
+Quick toggle for Claude Code AI assistant.
 
 **Features:**
-- Floating window design for quick access
-- Automatically escapes terminal mode when closing
-- Works from both normal and terminal mode
-- Perfect for quick git commands, test runs, etc.
+- Opens/closes the Claude Code panel
+- Maintains conversation context
+- Works seamlessly with diff management
+- See [AI Tools](#ai-tools-claude-code) section for full feature list
+
+### Find & Replace (`<A-f>`)
+
+Quick access to Grug-far search and replace interface.
+
+**Features:**
+- Visual search and replace across multiple files
+- File type filtering
+- Preview changes before applying
+- Regex support
+- Also accessible via `<leader>sr`
 
 ---
 
@@ -702,7 +726,7 @@ All Claude Code commands use the `<leader>a` prefix.
 
 | Key | Action | Mode | Description |
 |-----|--------|------|-------------|
-| `<A-l>` | Toggle Claude | n, v | Quick toggle Claude Code (alternative to `<leader>ac`) |
+| `<A-a>` | Toggle Claude | n | Quick toggle Claude Code (see [UI Toggles](#ui-toggles)) |
 | `<leader>ac` | Toggle Claude | n, v | Open/close Claude Code interface |
 | `<leader>af` | Focus Claude | n | Focus Claude Code window |
 | `<leader>ar` | Resume Claude | n | Resume previous Claude session |

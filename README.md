@@ -338,7 +338,12 @@ Enclose/surround text with quotes, brackets, tags, etc.
 
 ### UI Toggles
 
-- `<leader>z` - Toggle Zen Mode (distraction-free coding)
+Quick access toggles using Alt key:
+
+- `<A-\>` - Toggle Terminal
+- `<A-z>` - Toggle Zen Mode (distraction-free coding)
+- `<A-a>` - Toggle Claude Code
+- `<A-f>` - Toggle Find and Replace (Grug-far)
 
 ### Git Operations (g)
 

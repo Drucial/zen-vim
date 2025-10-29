@@ -120,6 +120,18 @@ keymap.set("n", "<leader>qq", "<cmd>q<CR>", { desc = "Quit Window" })
 keymap.set("n", "<leader>qa", "<cmd>qa<CR>", { desc = "Quit All" })
 keymap.set("n", "<leader>qQ", "<cmd>q!<CR>", { desc = "Quit Without Saving" })
 
+-- UI Toggles (Alt key for quick access)
+keymap.set({ "n", "t" }, "<A-\\>", function()
+	Snacks.terminal()
+end, { desc = "Toggle Terminal" })
+keymap.set("n", "<A-z>", function()
+	Snacks.zen()
+end, { desc = "Toggle Zen Mode" })
+keymap.set("n", "<A-a>", "<cmd>ClaudeCodeToggle<CR>", { desc = "Toggle Claude Code" })
+keymap.set("n", "<A-f>", function()
+	require("grug-far").open()
+end, { desc = "Toggle Find and Replace" })
+
 -- Search highlight groups with Snacks picker
 keymap.set("n", "<leader>fH", function()
 	Snacks.picker.highlights()
