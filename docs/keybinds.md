@@ -381,11 +381,24 @@ Code action commands use the `<leader>c` prefix.
 
 ## Git Operations
 
-### LazyGit
+All git commands use the `<leader>g` prefix.
+
+### Main Git Commands
 
 | Key | Action | Description |
 |-----|--------|-------------|
-| `<leader>gg` | LazyGit | Open LazyGit full UI |
+| `<leader>gg` | LazyGit (Root) | Open LazyGit at git root directory |
+| `<leader>gc` | LazyGit (cwd) | Open LazyGit at current working directory |
+| `<leader>gl` | Git Log | Open git log in LazyGit |
+| `<leader>gf` | Git File History | Open current file's git history in LazyGit |
+| `<leader>gb` | Git Browse (open) | Open current file/repo in browser (GitHub/GitLab) |
+| `<leader>gB` | Git Browse (copy) | Copy browser URL to clipboard |
+
+**Git Browse Features:**
+- Opens repository, branch, file, commit, or permalink in your default browser
+- Supports GitHub, GitLab, Bitbucket, Sourcehut, and Azure DevOps
+- Automatically detects git service from remote URL
+- Copy mode (`<leader>gB`) copies URL to clipboard with notification
 
 ### Git Hunks
 

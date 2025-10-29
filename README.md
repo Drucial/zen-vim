@@ -347,7 +347,12 @@ Quick access toggles using Alt key:
 
 ### Git Operations (g)
 
-- `<leader>gg` - LazyGit (full Git UI)
+- `<leader>gg` - LazyGit (Root Dir)
+- `<leader>gc` - LazyGit (cwd)
+- `<leader>gl` - Git Log
+- `<leader>gf` - Git File History
+- `<leader>gb` - Git Browse (open in browser)
+- `<leader>gB` - Git Browse (copy URL)
 
 #### Git Hunks (gh)
 

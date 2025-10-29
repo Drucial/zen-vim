@@ -6,10 +6,6 @@ return {
 		require("mini.pairs").setup()
 		-- mini.comment -
 		require("mini.comment").setup()
-		-- mini.bufremove
-		require("mini.bufremove").setup()
-		-- mini.animate
-		-- require("mini.animate").setup()
 		-- mini.icons
 		require("mini.icons").setup()
 	end,

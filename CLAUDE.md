@@ -114,7 +114,7 @@ nvim --clean
 - **oil.nvim**: File explorer with hidden files enabled (shows dotfiles)
 - **nvim-notify**: Notification manager with custom styling
 - **noice.nvim**: Enhanced UI for messages, cmdline, and popupmenu with message filtering and LSP doc scrolling
-- **snacks.nvim**: Modern plugin collection with picker (fuzzy finder with hidden files and 20+ search commands), dashboard, zen mode (distraction-free coding), and bigfile handling
+- **snacks.nvim**: Modern plugin collection with picker (fuzzy finder with hidden files and 20+ search commands), dashboard, zen mode (distraction-free coding), bigfile handling, lazygit integration (with colorscheme theming), and git browse (open repo in browser)
 - **nvim-scrollbar**: Scrollbar with diagnostic, search, and cursor position markers
 - **nvim-highlight-colors**: Inline color highlighting for hex codes, rgb(), etc.
 - **lualine.nvim**: Statusline with custom breadcrumb navigation, git branch, and diff info
@@ -357,7 +357,12 @@ The following is a quick reference of the most commonly used keybindings. For fu
 - `<C-f>` / `<C-b>` - Scroll Forward/Backward in LSP hover docs (insert, normal, select modes)
 
 ### Git
-- `<leader>gg` - LazyGit (full Git UI)
+- `<leader>gg` - LazyGit (Root Dir) - Opens lazygit at git root
+- `<leader>gc` - LazyGit (cwd) - Opens lazygit at current working directory
+- `<leader>gl` - Git Log - Opens git log in lazygit
+- `<leader>gf` - Git File History - Opens current file's git history
+- `<leader>gb` - Git Browse (open) - Opens current file/repo in browser (GitHub/GitLab)
+- `<leader>gB` - Git Browse (copy) - Copies browser URL to clipboard
 
 ### Git Hunks
 - `]h` / `[h` - Next/Previous hunk

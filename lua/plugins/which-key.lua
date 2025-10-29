@@ -40,6 +40,12 @@ return {
 					{ "<leader>eSt", desc = "Surround with tag (new lines)", mode = "v" },
 					{ "<leader>eSf", desc = "Surround with function (new lines)", mode = "v" },
 					{ "<leader>g", group = "git" },
+					{ "<leader>gg", desc = "LazyGit (Root)" },
+					{ "<leader>gc", desc = "LazyGit (cwd)" },
+					{ "<leader>gl", desc = "Git Log" },
+					{ "<leader>gf", desc = "Git File History" },
+					{ "<leader>gb", desc = "Git Browse (open)" },
+					{ "<leader>gB", desc = "Git Browse (copy)" },
 					{ "<leader>gh", group = "hunk" },
 					{ "<leader>x", group = "diagnostics" },
 					-- Navigation groups

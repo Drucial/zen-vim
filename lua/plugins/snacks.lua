@@ -5,6 +5,8 @@ return {
 		lazy = false,
 		opts = {
 			bigfile = { enabled = true },
+			gitbrowse = { enabled = true },
+			lazygit = { enabled = true },
 			indent = {
 				enabled = true,
 				only_scope = true, -- only show indent guides of the scope
@@ -392,6 +394,53 @@ return {
 				end,
 				desc = "Search Word under Cursor",
 				mode = { "n", "x" },
+			},
+
+			-- Git commands
+			{
+				"<leader>gg",
+				function()
+					Snacks.lazygit()
+				end,
+				desc = "LazyGit (Root)",
+			},
+			{
+				"<leader>gb",
+				function()
+					Snacks.gitbrowse()
+				end,
+				desc = "Git Browse (open)",
+			},
+			{
+				"<leader>gB",
+				function()
+					Snacks.gitbrowse({ open = function(url)
+						vim.fn.setreg("+", url)
+						Snacks.notify.info("URL copied to clipboard:\n" .. url)
+					end })
+				end,
+				desc = "Git Browse (copy)",
+			},
+			{
+				"<leader>gf",
+				function()
+					Snacks.lazygit.log_file()
+				end,
+				desc = "Git Current File History",
+			},
+			{
+				"<leader>gl",
+				function()
+					Snacks.lazygit.log()
+				end,
+				desc = "Git Log",
+			},
+			{
+				"<leader>gc",
+				function()
+					Snacks.lazygit({ cwd = vim.fn.getcwd() })
+				end,
+				desc = "Lazygit (cwd)",
 			},
 		},
 	},
