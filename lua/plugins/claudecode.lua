@@ -4,7 +4,7 @@ return {
 	keys = {
 		{ "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
 		{ "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-		{ "<A-l>", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude", mode = { "n", "v" } },
+		{ "<A-a>", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude", mode = { "n", "i", "v", "t" } },
 		{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
 		{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
 		{ "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },

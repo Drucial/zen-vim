@@ -658,10 +658,10 @@ Quick access toggles for UI elements using Alt key combinations.
 
 | Key | Action | Mode | Description |
 |-----|--------|------|-------------|
-| `<A-\>` | Toggle Terminal | n, t | Open/close floating terminal |
-| `<A-z>` | Toggle Zen Mode | n | Enter/exit distraction-free mode |
-| `<A-a>` | Toggle Claude Code | n | Open/close Claude Code assistant |
-| `<A-f>` | Toggle Find & Replace | n | Open/close Grug-far search interface |
+| `<A-\>` | Toggle Terminal | n, i, v, t | Open/close floating terminal |
+| `<A-z>` | Toggle Zen Mode | n, i, v, t | Enter/exit distraction-free mode |
+| `<A-a>` | Toggle Claude Code | n, i, v, t | Open/close Claude Code assistant |
+| `<A-f>` | Toggle Find & Replace | n, i, v, t | Open/close Grug-far search interface |
 
 ### Terminal (`<A-\>`)
 
@@ -726,8 +726,8 @@ All Claude Code commands use the `<leader>a` prefix.
 
 | Key | Action | Mode | Description |
 |-----|--------|------|-------------|
-| `<A-a>` | Toggle Claude | n | Quick toggle Claude Code (see [UI Toggles](#ui-toggles)) |
-| `<leader>ac` | Toggle Claude | n, v | Open/close Claude Code interface |
+| `<A-a>` | Toggle Claude | n, i, v, t | Quick toggle Claude Code (see [UI Toggles](#ui-toggles)) |
+| `<leader>ac` | Toggle Claude | n | Open/close Claude Code interface |
 | `<leader>af` | Focus Claude | n | Focus Claude Code window |
 | `<leader>ar` | Resume Claude | n | Resume previous Claude session |
 | `<leader>aC` | Continue Claude | n | Continue last Claude conversation |

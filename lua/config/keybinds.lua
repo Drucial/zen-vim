@@ -120,16 +120,38 @@ keymap.set("n", "<leader>qq", "<cmd>q<CR>", { desc = "Quit Window" })
 keymap.set("n", "<leader>qa", "<cmd>qa<CR>", { desc = "Quit All" })
 keymap.set("n", "<leader>qQ", "<cmd>q!<CR>", { desc = "Quit Without Saving" })
 
--- UI Toggles (Alt key for quick access)
-keymap.set({ "n", "t" }, "<A-\\>", function()
+-- UI Toggles (Alt key for quick access, work in any mode)
+keymap.set({ "n", "i", "v", "t" }, "<A-\\>", function()
 	Snacks.terminal()
 end, { desc = "Toggle Terminal" })
-keymap.set("n", "<A-z>", function()
+
+keymap.set({ "n", "i", "v", "t" }, "<A-z>", function()
 	Snacks.zen()
 end, { desc = "Toggle Zen Mode" })
-keymap.set("n", "<A-a>", "<cmd>ClaudeCodeToggle<CR>", { desc = "Toggle Claude Code" })
-keymap.set("n", "<A-f>", function()
-	require("grug-far").open()
+
+keymap.set({ "n", "i", "v", "t" }, "<A-f>", function()
+	-- Check if grug-far buffer exists
+	local grug_buf_exists = false
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.bo[buf].filetype == "grug-far" then
+			grug_buf_exists = true
+			break
+		end
+	end
+
+	-- If no grug-far buffer exists, open it first
+	if not grug_buf_exists then
+		local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+		require("grug-far").open({
+			transient = true,
+			prefills = {
+				filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+			},
+		})
+	else
+		-- Toggle the left panel (where grug-far lives)
+		require("edgy").toggle("left")
+	end
 end, { desc = "Toggle Find and Replace" })
 
 -- Search highlight groups with Snacks picker
