@@ -114,7 +114,7 @@ nvim --clean
 - **oil.nvim**: File explorer with hidden files enabled (shows dotfiles)
 - **nvim-notify**: Notification manager with custom styling
 - **noice.nvim**: Enhanced UI for messages, cmdline, and popupmenu with message filtering and LSP doc scrolling
-- **snacks.nvim**: Modern plugin collection with picker (fuzzy finder with hidden files and 20+ search commands), dashboard, zen mode (distraction-free coding), bigfile handling, lazygit integration (with colorscheme theming), and git browse (open repo in browser)
+- **snacks.nvim**: Modern plugin collection with picker (fuzzy finder with hidden files and 20+ search commands), dashboard, zen mode (distraction-free coding), bigfile handling, and git browse (open repo in browser)
 - **nvim-scrollbar**: Scrollbar with diagnostic, search, and cursor position markers
 - **nvim-highlight-colors**: Inline color highlighting for hex codes, rgb(), etc.
 - **lualine.nvim**: Statusline with custom breadcrumb navigation, git branch, and diff info
@@ -129,7 +129,7 @@ nvim --clean
 - **blink.cmp**: Modern, high-performance completion engine (Rust-based, <4ms updates)
 - **blink-cmp-copilot**: GitHub Copilot integration for blink.cmp
 - **copilot.lua**: GitHub Copilot backend (API connection and authentication)
-- **claude-code.nvim**: Claude Code integration (30% right split, mutually exclusive with terminal, `<A-a>` to toggle)
+- **claude-code.nvim**: Claude Code integration (30% right split, mutually exclusive with terminal only, `<A-a>` to toggle)
 
 ### LSP & Language Support (lua/plugins/lsp.lua)
 - **mason.nvim**: Package manager for LSP servers, formatters, and linters
@@ -190,6 +190,16 @@ nvim --clean
 - Auto-discovers all keybindings with descriptions
 - Organized groups: find, buffer, code, split, goto, prev, next
 - `<leader>?` - Show buffer-local keymaps
+
+### Git (lua/plugins/gitsigns.lua, lazygit.lua)
+- **gitsigns.nvim**: Git decorations and hunk operations in the gutter
+- **lazygit.nvim**: LazyGit integration (floating window)
+
+**Features:**
+- Inline git blame, diff hunks, and stage/reset operations
+- LazyGit accessible via `<leader>gg` or `<A-g>` (works in all modes)
+- Git browse opens current file/repo in browser (GitHub/GitLab)
+- Git log and file history via Snacks.lazygit integration
 
 ## Adding New Plugins
 
@@ -357,7 +367,8 @@ The following is a quick reference of the most commonly used keybindings. For fu
 - `<C-f>` / `<C-b>` - Scroll Forward/Backward in LSP hover docs (insert, normal, select modes)
 
 ### Git
-- `<leader>gg` - LazyGit (Root Dir) - Opens lazygit at git root
+- `<leader>gg` - LazyGit - Opens lazygit (floating window)
+- `<A-g>` - Toggle LazyGit - Quick access to lazygit (works in all modes)
 - `<leader>gc` - LazyGit (cwd) - Opens lazygit at current working directory
 - `<leader>gl` - Git Log - Opens git log in lazygit
 - `<leader>gf` - Git File History - Opens current file's git history
@@ -465,9 +476,10 @@ Enclose/surround text with quotes, brackets, tags, etc. using `<leader>e`.
 - `<A-\>` - Toggle terminal (closes Claude Code if open)
 - `<A-z>` - Toggle Zen Mode (distraction-free coding)
 - `<A-a>` - Toggle Claude Code (closes terminal if open)
+- `<A-g>` - Toggle LazyGit (floating window, works in all modes)
 - `<A-f>` - Toggle Find and Replace (Grug-far)
 
-**Note:** Terminal and Claude Code are mutually exclusive - opening one automatically closes the other.
+**Note:** Terminal and Claude Code are mutually exclusive - opening one automatically closes the other. LazyGit is independent.
 
 ### AI Tools (Claude Code)
 - `<A-a>` - Toggle Claude Code (quick access)

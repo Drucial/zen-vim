@@ -6,7 +6,6 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			gitbrowse = { enabled = true },
-			lazygit = { enabled = true },
 			indent = {
 				enabled = true,
 				only_scope = true, -- only show indent guides of the scope
@@ -381,7 +380,7 @@ return {
 				desc = "Search History",
 			},
 			{
-				"<leader>s\"",
+				'<leader>s"',
 				function()
 					Snacks.picker.registers()
 				end,
@@ -396,14 +395,7 @@ return {
 				mode = { "n", "x" },
 			},
 
-			-- Git commands
-			{
-				"<leader>gg",
-				function()
-					Snacks.lazygit()
-				end,
-				desc = "LazyGit (Root)",
-			},
+			-- Git commands (LazyGit is now in lua/plugins/lazygit.lua)
 			{
 				"<leader>gb",
 				function()
@@ -414,10 +406,12 @@ return {
 			{
 				"<leader>gB",
 				function()
-					Snacks.gitbrowse({ open = function(url)
-						vim.fn.setreg("+", url)
-						Snacks.notify.info("URL copied to clipboard:\n" .. url)
-					end })
+					Snacks.gitbrowse({
+						open = function(url)
+							vim.fn.setreg("+", url)
+							Snacks.notify.info("URL copied to clipboard:\n" .. url)
+						end,
+					})
 				end,
 				desc = "Git Browse (copy)",
 			},

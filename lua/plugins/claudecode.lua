@@ -13,13 +13,11 @@ return {
 		{
 			"<A-a>",
 			function()
-				-- Check if terminal window exists and close it
+				-- Close terminal if open
 				for _, win in ipairs(vim.api.nvim_list_wins()) do
 					local buf = vim.api.nvim_win_get_buf(win)
 					local ft = vim.bo[buf].filetype
-					-- Check for snacks terminal or regular terminal
 					if ft == "snacks_terminal" or ft == "terminal" then
-						-- Close terminal window
 						vim.api.nvim_win_close(win, false)
 						break
 					end
