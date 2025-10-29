@@ -340,14 +340,21 @@ Enclose/surround text with quotes, brackets, tags, etc.
 
 Quick access toggles using Alt key:
 
-- `<A-\>` - Toggle Terminal
+- `<A-\>` - Toggle Terminal (closes Claude Code if open)
+- `<A-S-\>` - Toggle Float Terminal (scratch terminal for quick commands)
 - `<A-z>` - Toggle Zen Mode (distraction-free coding)
-- `<A-a>` - Toggle Claude Code
+- `<A-a>` - Toggle Claude Code (closes terminal if open)
+- `<A-g>` - Toggle LazyGit (floating window, works in all modes)
 - `<A-f>` - Toggle Find and Replace (Grug-far)
+- `<A-s>` - Write/Save current buffer (works in all modes)
+- `<A-w>` - Close current buffer (works in all modes)
+
+**Note:** Terminal and Claude Code are mutually exclusive - opening one automatically closes the other. LazyGit and Float Terminal are independent.
 
 ### Git Operations (g)
 
-- `<leader>gg` - LazyGit (Root Dir)
+- `<leader>gg` - LazyGit (floating window)
+- `<A-g>` - Toggle LazyGit (quick access, works in all modes)
 - `<leader>gc` - LazyGit (cwd)
 - `<leader>gl` - Git Log
 - `<leader>gf` - Git File History
