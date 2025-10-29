@@ -51,18 +51,49 @@ keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yanking"
 keymap.set({ "n", "v" }, "c", [["_c]], { desc = "Change without yanking" })
 keymap.set({ "n", "v" }, "C", [["_C]], { desc = "Change to end of line without yanking" })
 
--- Window management
+-- Window management (LazyVim-style)
+keymap.set("n", "<leader>w", "", { desc = "+windows" })
+
+-- Navigation
+keymap.set("n", "<leader>wh", "<C-W>h", { desc = "Go to Left Window" })
+keymap.set("n", "<leader>wj", "<C-W>j", { desc = "Go to Lower Window" })
+keymap.set("n", "<leader>wk", "<C-W>k", { desc = "Go to Upper Window" })
+keymap.set("n", "<leader>wl", "<C-W>l", { desc = "Go to Right Window" })
+keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Switch Windows" })
+
+-- Move windows to edges
+keymap.set("n", "<leader>wH", "<C-W>H", { desc = "Move Window Far Left" })
+keymap.set("n", "<leader>wJ", "<C-W>J", { desc = "Move Window Far Down" })
+keymap.set("n", "<leader>wK", "<C-W>K", { desc = "Move Window Far Up" })
+keymap.set("n", "<leader>wL", "<C-W>L", { desc = "Move Window Far Right" })
+
+-- Splits
+keymap.set("n", "<leader>ws", "<C-W>s", { desc = "Split Window Below" })
+keymap.set("n", "<leader>wv", "<C-W>v", { desc = "Split Window Right" })
 keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below" })
 keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right" })
-keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window" })
-keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Other Window" })
-keymap.set("n", "<leader>w=", "<C-W>=", { desc = "Balance Windows" })
 
--- Window resize
-keymap.set("n", "<leader>wh", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
-keymap.set("n", "<leader>wl", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
-keymap.set("n", "<leader>wk", "<cmd>resize +2<CR>", { desc = "Increase window height" })
-keymap.set("n", "<leader>wj", "<cmd>resize -2<CR>", { desc = "Decrease window height" })
+-- Close/Quit
+keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window" })
+keymap.set("n", "<leader>wq", "<C-W>q", { desc = "Quit Window" })
+keymap.set("n", "<leader>wo", "<C-W>o", { desc = "Close All Other Windows" })
+
+-- Resize
+keymap.set("n", "<leader>w+", "<cmd>resize +2<CR>", { desc = "Increase Height" })
+keymap.set("n", "<leader>w-", "<cmd>resize -2<CR>", { desc = "Decrease Height" })
+keymap.set("n", "<leader>w>", "<cmd>vertical resize +2<CR>", { desc = "Increase Width" })
+keymap.set("n", "<leader>w<", "<cmd>vertical resize -2<CR>", { desc = "Decrease Width" })
+keymap.set("n", "<leader>w=", "<C-W>=", { desc = "Equalize Windows" })
+
+-- Maximize
+keymap.set("n", "<leader>w_", "<C-W>_", { desc = "Maximize Height" })
+keymap.set("n", "<leader>w|", "<C-W>|", { desc = "Maximize Width" })
+
+-- Swap & Zoom
+keymap.set("n", "<leader>wx", "<C-W>x", { desc = "Swap with Next" })
+keymap.set("n", "<leader>wm", function()
+	Snacks.zen.zoom()
+end, { desc = "Maximize Toggle (Zoom)" })
 
 -- UI toggles
 keymap.set("n", "<leader>z", function()
