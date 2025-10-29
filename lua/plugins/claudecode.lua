@@ -1,10 +1,35 @@
 return {
-	"coder/claudecode.nvim",
-	opts = {},
+	"greggh/claude-code.nvim",
+	dependencies = { "nvim-lua/plenary.nvim" },
+	opts = {
+		window = {
+			position = "vertical",  -- Force vertical split on the right
+			split_ratio = 0.30,     -- 30% of screen width
+		},
+	},
 	keys = {
 		{ "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
 		{ "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-		{ "<A-a>", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude", mode = { "n", "i", "v", "t" } },
+		{
+			"<A-a>",
+			function()
+				-- Check if terminal window exists and close it
+				for _, win in ipairs(vim.api.nvim_list_wins()) do
+					local buf = vim.api.nvim_win_get_buf(win)
+					local ft = vim.bo[buf].filetype
+					-- Check for snacks terminal or regular terminal
+					if ft == "snacks_terminal" or ft == "terminal" then
+						-- Close terminal window
+						vim.api.nvim_win_close(win, false)
+						break
+					end
+				end
+				-- Toggle Claude Code
+				vim.cmd("ClaudeCode")
+			end,
+			desc = "Toggle Claude",
+			mode = { "n", "i", "v", "t" },
+		},
 		{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
 		{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
 		{ "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },

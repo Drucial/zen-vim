@@ -36,7 +36,7 @@ ZenVim is built on three core principles:
 - 🚀 **Blazing Fast** - Optimized lazy loading, <50ms startup
 - 🎨 **Beautiful UI** - Rose Pine theme, lualine, scrollbar, noice.nvim
 - 🧘 **Zen Mode** - Distraction-free coding with centered window and hidden UI
-- 🤖 **AI-Powered** - GitHub Copilot integration via blink.cmp
+- 🤖 **AI-Powered** - GitHub Copilot + Claude Code (30% right split, mutually exclusive with terminal)
 - 📝 **Smart Completion** - blink.cmp with LSP, snippets, and Copilot
 - 🔍 **Fuzzy Everything** - Snacks picker for files, grep, LSP symbols
 - 🌳 **Treesitter** - Advanced syntax highlighting and text objects

@@ -121,7 +121,20 @@ keymap.set("n", "<leader>qa", "<cmd>qa<CR>", { desc = "Quit All" })
 keymap.set("n", "<leader>qQ", "<cmd>q!<CR>", { desc = "Quit Without Saving" })
 
 -- UI Toggles (Alt key for quick access, work in any mode)
+-- Terminal and Claude Code are mutually exclusive
 keymap.set({ "n", "i", "v", "t" }, "<A-\\>", function()
+	-- Check if Claude Code window exists
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local buf = vim.api.nvim_win_get_buf(win)
+		local bufname = vim.api.nvim_buf_get_name(buf)
+		-- Check if this is a Claude Code buffer
+		if bufname:match("claude%-code") or vim.bo[buf].filetype == "claude-code" then
+			-- Close Claude Code window
+			vim.api.nvim_win_close(win, false)
+			break
+		end
+	end
+	-- Toggle terminal
 	Snacks.terminal()
 end, { desc = "Toggle Terminal" })
 

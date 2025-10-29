@@ -129,7 +129,7 @@ nvim --clean
 - **blink.cmp**: Modern, high-performance completion engine (Rust-based, <4ms updates)
 - **blink-cmp-copilot**: GitHub Copilot integration for blink.cmp
 - **copilot.lua**: GitHub Copilot backend (API connection and authentication)
-- **claudecode.nvim**: Claude Code integration for AI-powered coding assistance with diff management (`<A-l>` to toggle)
+- **claude-code.nvim**: Claude Code integration (30% right split, mutually exclusive with terminal, `<A-a>` to toggle)
 
 ### LSP & Language Support (lua/plugins/lsp.lua)
 - **mason.nvim**: Package manager for LSP servers, formatters, and linters
@@ -462,10 +462,12 @@ Enclose/surround text with quotes, brackets, tags, etc. using `<leader>e`.
 - `-` - Open parent directory with oil.nvim
 
 ### UI Toggles (Alt key for quick access)
-- `<A-\>` - Toggle terminal
+- `<A-\>` - Toggle terminal (closes Claude Code if open)
 - `<A-z>` - Toggle Zen Mode (distraction-free coding)
-- `<A-a>` - Toggle Claude Code
+- `<A-a>` - Toggle Claude Code (closes terminal if open)
 - `<A-f>` - Toggle Find and Replace (Grug-far)
+
+**Note:** Terminal and Claude Code are mutually exclusive - opening one automatically closes the other.
 
 ### AI Tools (Claude Code)
 - `<A-a>` - Toggle Claude Code (quick access)
