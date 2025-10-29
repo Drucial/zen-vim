@@ -1,5 +1,103 @@
 # Release Notes
 
+## 2025-10-29 - Major Completion & Performance Update
+
+### 🚀 New Features
+
+**Supermaven Integration**
+- Replaced GitHub Copilot with Supermaven for significantly faster AI-powered inline completions
+- **Benefits:**
+  - Much faster response times (no noticeable lag)
+  - Cleaner integration without extra dependencies
+  - Same keybindings: `<Tab>` to accept, `<C-]>` to dismiss
+  - Bonus: `<C-j>` to accept just the next word
+- Configuration: `lua/plugins/supermaven.lua`
+
+### ⚡ Performance Improvements
+
+**Treesitter Highlighting Fix**
+- Fixed TypeScript/TSX syntax highlighting initialization issues
+- **Changes:**
+  - Treesitter now loads immediately (`lazy = false`) with high priority
+  - Added explicit `vim.treesitter.start()` call on FileType (LazyVim approach)
+  - Highlighting now works correctly from the moment you open a file
+- **Result:** No more need to manually toggle highlighting for TS/TSX files
+
+### 🔧 Configuration Improvements
+
+**blink.cmp Optimization**
+- Removed Copilot integration from completion menu
+- Disabled ghost text to prevent conflicts with Supermaven
+- Disabled auto-preselection and auto-insert for less intrusive behavior
+- Added arrow key navigation (`<Up>`/`<Down>`)
+- **Result:** Clean separation between AI suggestions (Supermaven) and LSP completions (blink.cmp)
+
+**ESLint Flat Config Support**
+- Added support for new ESLint flat config format in conform.nvim
+- Now detects `eslint.config.mjs`, `eslint.config.cjs`, and `eslint.config.js`
+- Still supports legacy `.eslintrc*` formats
+- **Result:** ESLint auto-fix now works with modern project configurations
+
+### 📝 Completion Workflow
+
+**New Workflow:**
+1. **AI Suggestions (Supermaven):** Inline gray text appears as you type
+   - `<Tab>` - Accept full suggestion
+   - `<C-j>` - Accept next word
+   - `<C-]>` - Dismiss
+
+2. **LSP Completions (blink.cmp):** Menu appears automatically while typing
+   - `<Up>`/`<Down>` or `<C-n>`/`<C-p>` - Navigate
+   - `<CR>` - Accept (only if you've selected something)
+   - `<C-e>` - Close menu
+   - `<C-Space>` - Manually trigger
+
+**Sources priority:** LSP → Path → Snippets → Buffer
+
+### 🗑️ Removed
+
+- `copilot.lua` - Replaced by Supermaven
+- `blink-cmp-copilot` - No longer needed
+- Copilot-related dependencies and configuration
+
+### 📚 Documentation Updates
+
+- Updated `CLAUDE.md` with Supermaven information
+- Updated `README.md` plugin list and keybindings
+- Removed Copilot authentication steps
+- Added Supermaven keybinding documentation
+
+### 🔄 Migration Notes
+
+**If you're updating from a previous version:**
+
+1. Run `:Lazy sync` to install Supermaven and remove old plugins
+2. Restart Neovim
+3. Treesitter highlighting should work immediately (no manual toggling needed)
+4. ESLint auto-fix should work with flat config projects
+
+**No action needed for:**
+- Existing keybindings (Tab still accepts AI suggestions)
+- LSP configurations (unchanged)
+- Other formatters (unchanged)
+
+### 🎯 Technical Details
+
+**Files Modified:**
+- `lua/plugins/blink-cmp.lua` - Removed Copilot, optimized for Supermaven coexistence
+- `lua/plugins/supermaven.lua` - **New file** with Supermaven configuration
+- `lua/plugins/conform.lua` - Added flat config detection for eslint_d
+- `lua/plugins/treesitter.lua` - Changed loading strategy and added explicit highlighting initialization
+- `lua/plugins/copilot.lua` - **Deleted**
+
+**Configuration Philosophy:**
+- **Separation of Concerns:** AI suggestions (Supermaven) vs LSP completions (blink.cmp)
+- **No Interference:** Ghost text disabled, no auto-preselection
+- **Performance First:** Treesitter loads immediately but efficiently
+- **Modern Standards:** Support for latest ESLint flat config format
+
+---
+
 ## v0.1.0 - Initial Release (2024-10-24)
 
 > **ZenVim's first public release** - A modern, performant Neovim configuration focused on simplicity, speed, and an exceptional developer experience.

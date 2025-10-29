@@ -125,10 +125,9 @@ nvim --clean
 - **todo-comments.nvim**: Highlight and search TODO comments (lua/plugins/todo-comments.lua)
 - **edgy.nvim**: Organized panel management for terminals, search/replace, and diagnostics (lua/plugins/edgy.lua)
 
-### Completion & AI (lua/plugins/blink-cmp.lua, copilot.lua, claudecode.lua)
+### Completion & AI (lua/plugins/blink-cmp.lua, supermaven.lua, claudecode.lua)
 - **blink.cmp**: Modern, high-performance completion engine (Rust-based, <4ms updates)
-- **blink-cmp-copilot**: GitHub Copilot integration for blink.cmp
-- **copilot.lua**: GitHub Copilot backend (API connection and authentication)
+- **supermaven-nvim**: Fast AI-powered inline completions (significantly faster than Copilot/Tabnine)
 - **claude-code.nvim**: Claude Code integration (30% right split, mutually exclusive with terminal only, `<A-a>` to toggle)
 
 ### LSP & Language Support (lua/plugins/lsp.lua)
@@ -164,7 +163,7 @@ nvim --clean
 - **shfmt**: Shell script formatter
 
 ### Treesitter (lua/plugins/treesitter.lua)
-- **nvim-treesitter**: Advanced syntax highlighting and code understanding (configured using `opts` pattern)
+- **nvim-treesitter**: Advanced syntax highlighting and code understanding (loads immediately with high priority for reliable highlighting)
 - **nvim-treesitter-textobjects**: Textobject selections based on treesitter
 - **nvim-ts-autotag**: Auto-close and auto-rename HTML/JSX/XML tags
 
@@ -234,8 +233,8 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
   - Scrollbar: `lua/plugins/nvim-scrollbar.lua`
   - Color highlighting: `lua/plugins/nvim-highlight-colors.lua`
   - LSP: `lua/plugins/lsp.lua` (mason, lspconfig, schemastore, tool-installer)
-  - Completion: `lua/plugins/blink-cmp.lua` (blink.cmp with Copilot integration)
-  - Copilot: `lua/plugins/copilot.lua` (GitHub Copilot backend)
+  - Completion: `lua/plugins/blink-cmp.lua` (blink.cmp with LSP, snippets, and smart triggers)
+  - AI Completions: `lua/plugins/supermaven.lua` (Supermaven for fast inline AI suggestions)
   - Claude Code: `lua/plugins/claudecode.lua` (AI-powered coding)
   - Formatting: `lua/plugins/conform.lua`
   - Quick navigation: `lua/plugins/flash.lua`
@@ -450,18 +449,23 @@ Enclose/surround text with quotes, brackets, tags, etc. using `<leader>e`.
 - Press any prefix key (like `g`, `[`, `]`) and wait to see available commands
 
 ### Completion (blink.cmp)
-- `<CR>` (Enter) - Accept selected completion (insert mode)
+- `<CR>` (Enter) - Accept selected completion (only if explicitly selected)
 - `<C-y>` - Force accept current item (insert mode)
-- `<C-n>` / `<C-p>` - Navigate down/up through completions (insert mode)
+- `<Up>` / `<Down>` - Navigate through completions (insert mode)
+- `<C-n>` / `<C-p>` - Alternative navigation (insert mode)
 - `<C-Space>` - Show/toggle completions (insert mode)
 - `<C-e>` - Hide completion menu (insert mode)
 
 **Completion Sources** (priority order):
-1. **Copilot** - AI-powered suggestions (highest priority)
-2. **LSP** - Language server completions
-3. **Path** - File path completions
-4. **Snippets** - Code snippets
-5. **Buffer** - Text from current buffer
+1. **LSP** - Language server completions (highest priority)
+2. **Path** - File path completions
+3. **Snippets** - Code snippets
+4. **Buffer** - Text from current buffer (fallback)
+
+### AI Completions (Supermaven)
+- `<Tab>` - Accept AI suggestion (insert mode)
+- `<C-]>` - Dismiss AI suggestion (insert mode)
+- `<C-j>` - Accept next word only (insert mode)
 
 ### Utilities
 - `jk` in insert mode - Exit to normal mode

@@ -3,59 +3,61 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		event = { "BufReadPost", "BufNewFile" },
+		lazy = false, -- Load immediately to fix highlighting initialization
+		priority = 1000, -- Load before other plugins
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
-		opts = {
-			-- Automatically install parsers for these languages
-			ensure_installed = {
-				"bash",
-				"c",
-				"diff",
-				"html",
-				"javascript",
-				"jsdoc",
-				"json",
-				"jsonc",
-				"lua",
-				"luadoc",
-				"luap",
-				"markdown",
-				"markdown_inline",
-				"printf",
-				"python",
-				"query",
-				"regex",
-				"toml",
-				"tsx",
-				"typescript",
-				"vim",
-				"vimdoc",
-				"xml",
-				"yaml",
-			},
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				-- Automatically install parsers for these languages
+				ensure_installed = {
+					"bash",
+					"c",
+					"diff",
+					"html",
+					"javascript",
+					"jsdoc",
+					"json",
+					"jsonc",
+					"lua",
+					"luadoc",
+					"luap",
+					"markdown",
+					"markdown_inline",
+					"printf",
+					"python",
+					"query",
+					"regex",
+					"toml",
+					"tsx",
+					"typescript",
+					"vim",
+					"vimdoc",
+					"xml",
+					"yaml",
+				},
 
-			-- Install parsers synchronously (only applied to `ensure_installed`)
-			sync_install = false,
+				-- Install parsers synchronously (only applied to `ensure_installed`)
+				sync_install = false,
 
-			-- Automatically install missing parsers when entering buffer
-			auto_install = true,
+				-- Automatically install missing parsers when entering buffer
+				auto_install = true,
 
-			-- Highlight configuration
-			highlight = {
-				enable = true,
-				-- Disable for large files
-				disable = function(lang, buf)
-					local max_filesize = 100 * 1024 -- 100 KB
-					local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-					if ok and stats and stats.size > max_filesize then
-						return true
-					end
-				end,
-				-- Additional highlighting features
-				additional_vim_regex_highlighting = false,
-			},
+				-- Highlight configuration
+				highlight = {
+					enable = true,
+					-- Disable for large files
+					disable = function(lang, buf)
+						local max_filesize = 100 * 1024 -- 100 KB
+						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+						if ok and stats and stats.size > max_filesize then
+							return true
+						end
+					end,
+					-- Additional highlighting features
+					additional_vim_regex_highlighting = false,
+				},
 
 			-- Indentation based on treesitter
 			indent = {
@@ -112,7 +114,16 @@ return {
 					},
 				},
 			},
-		},
+			})
+
+			-- Explicitly start treesitter highlighting on FileType (LazyVim approach)
+			vim.api.nvim_create_autocmd("FileType", {
+				group = vim.api.nvim_create_augroup("treesitter_start", { clear = true }),
+				callback = function(ev)
+					pcall(vim.treesitter.start, ev.buf)
+				end,
+			})
+		end,
 	},
 	-- Auto tag for HTML, XML, JSX, etc
 	{

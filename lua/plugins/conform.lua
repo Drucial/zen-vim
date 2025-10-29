@@ -46,9 +46,17 @@ return {
 				eslint_d = {
 					-- Increase timeout and add better error handling
 					timeout_ms = 3000,
-					-- Only run if .eslintrc or similar exists
+					-- Only run if eslint config exists (supports both old and new flat config)
 					condition = function(self, ctx)
-						return vim.fs.find({ ".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js" }, {
+						return vim.fs.find({
+							".eslintrc",
+							".eslintrc.js",
+							".eslintrc.cjs",
+							".eslintrc.json",
+							"eslint.config.js",
+							"eslint.config.mjs",
+							"eslint.config.cjs",
+						}, {
 							path = ctx.filename,
 							upward = true,
 						})[1]

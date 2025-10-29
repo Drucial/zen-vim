@@ -4,25 +4,25 @@ return {
 		version = "*",
 		dependencies = {
 			"rafamadriz/friendly-snippets",
-			-- Copilot source for blink.cmp (requires copilot.lua)
-			{
-				"giuxtaposition/blink-cmp-copilot",
-				dependencies = { "zbirenbaum/copilot.lua" },
-			},
 		},
 		event = "InsertEnter",
 
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
-			-- 'enter' preset: <CR> accepts, <C-n>/<C-p> navigate
-			-- This leaves <Tab> free for Copilot
+			-- 'default' preset: Ctrl+Y accepts, manual trigger
+			-- This leaves <Tab> free for Supermaven
 			keymap = {
-				preset = "enter",
-				-- <C-space> only in insert mode (to avoid conflict with treesitter in visual mode)
-				["<C-space>"] = { "show", "show_documentation", "hide_documentation", mode = { "i" } },
+				preset = "default",
+				-- Manual trigger only
+				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide" },
 				["<C-y>"] = { "select_and_accept" },
+				-- Arrow keys for navigation
+				["<Up>"] = { "select_prev" },
+				["<Down>"] = { "select_next" },
+				-- Enter only accepts if explicitly selected
+				["<CR>"] = { "accept", "fallback" },
 			},
 
 			appearance = {
@@ -31,19 +31,28 @@ return {
 			},
 
 			completion = {
-				-- Documentation
+				-- Trigger: Auto-show while typing
+				trigger = {
+					show_on_insert = true,
+					show_on_keyword = true,
+					show_on_backspace = true,
+					show_on_trigger_character = true,
+				},
+
+				-- Documentation: Auto-show with slight delay
 				documentation = {
 					auto_show = true,
 					auto_show_delay_ms = 200,
 					window = {
 						max_width = 80,
 						max_height = 20,
+						border = "rounded",
 					},
 				},
 
-				-- Ghost text disabled (conflicts with Copilot)
+				-- Ghost text DISABLED (conflicts with Supermaven)
 				ghost_text = {
-					enabled = true,
+					enabled = false,
 				},
 
 				-- Auto-brackets
@@ -53,29 +62,26 @@ return {
 					},
 				},
 
+				-- List: No preselection, no auto-insert
 				list = {
-					selection = { preselect = false },
+					selection = {
+						preselect = false,
+						auto_insert = false,
+					},
 				},
 
-				-- Menu appearance
+				-- Menu: Auto-show enabled
 				menu = {
+					auto_show = true,
 					draw = {
 						treesitter = { "lsp" },
 					},
 				},
 			},
 
-			-- Sources: Copilot first, then LSP, path, snippets, buffer
+			-- Sources: LSP, path, snippets, buffer (no Copilot - using Supermaven)
 			sources = {
-				default = { "copilot", "lsp", "path", "snippets", "buffer" },
-				providers = {
-					copilot = {
-						name = "copilot",
-						module = "blink-cmp-copilot",
-						score_offset = 100, -- Boost copilot score to always be first
-						async = true,
-					},
-				},
+				default = { "lsp", "path", "snippets", "buffer" },
 			},
 		},
 	},

@@ -36,8 +36,8 @@ ZenVim is built on three core principles:
 - 🚀 **Blazing Fast** - Optimized lazy loading, <50ms startup
 - 🎨 **Beautiful UI** - Rose Pine theme, lualine, scrollbar, noice.nvim
 - 🧘 **Zen Mode** - Distraction-free coding with centered window and hidden UI
-- 🤖 **AI-Powered** - GitHub Copilot + Claude Code (30% right split, mutually exclusive with terminal)
-- 📝 **Smart Completion** - blink.cmp with LSP, snippets, and Copilot
+- 🤖 **AI-Powered** - Supermaven (fast inline completions) + Claude Code (30% right split, mutually exclusive with terminal)
+- 📝 **Smart Completion** - blink.cmp with LSP, snippets, path, and buffer sources
 - 🔍 **Fuzzy Everything** - Snacks picker for files, grep, LSP symbols
 - 🌳 **Treesitter** - Advanced syntax highlighting and text objects
 - 🔧 **Auto-formatting** - Format on save with conform.nvim
@@ -88,12 +88,6 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 
 ### Post-Installation
 
-**Setup GitHub Copilot:**
-
-```vim
-:Copilot auth
-```
-
 **Verify health:**
 
 ```vim
@@ -125,12 +119,11 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 
 ### Completion & AI
 
-| Plugin                                                                   | Purpose            | Why?                                              |
-| ------------------------------------------------------------------------ | ------------------ | ------------------------------------------------- |
-| [blink.cmp](https://github.com/Saghen/blink.cmp)                         | Completion engine  | Modern, Rust-based completion with <4ms updates   |
-| [blink-cmp-copilot](https://github.com/giuxtaposition/blink-cmp-copilot) | Copilot bridge     | Integrates Copilot with blink.cmp                 |
-| [copilot.lua](https://github.com/zbirenbaum/copilot.lua)                 | AI suggestions     | GitHub Copilot backend for AI-powered completions |
-| [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)     | Snippet collection | Pre-configured snippets for dozens of languages   |
+| Plugin                                                               | Purpose            | Why?                                                     |
+| -------------------------------------------------------------------- | ------------------ | -------------------------------------------------------- |
+| [blink.cmp](https://github.com/Saghen/blink.cmp)                     | Completion engine  | Modern, Rust-based completion with <4ms updates          |
+| [supermaven-nvim](https://github.com/supermaven-inc/supermaven-nvim) | AI completions     | Fast inline AI suggestions (faster than Copilot/Tabnine) |
+| [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Snippet collection | Pre-configured snippets for dozens of languages          |
 
 ### LSP & Language Support
 
@@ -166,7 +159,7 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 **Pre-configured Formatters:**
 
 - Prettier (TS/JS/CSS/HTML/JSON/YAML/MD)
-- eslint_d (TS/JS auto-fix)
+- eslint_d (TS/JS auto-fix with support for flat config format)
 - stylua (Lua)
 - black + isort (Python)
 - rubocop (Ruby)
@@ -393,10 +386,14 @@ Quick access toggles using Alt key:
 ### Insert Mode
 
 - `jk` - Exit to normal mode
+- `<Tab>` - Accept AI suggestion (Supermaven)
+- `<C-]>` - Dismiss AI suggestion
+- `<C-j>` - Accept next word of AI suggestion
 - `<C-space>` - Show/toggle completions (blink.cmp)
-- `<CR>` - Accept selected completion
+- `<CR>` - Accept selected completion (if explicitly selected)
 - `<C-y>` - Force accept current item
-- `<C-n>` / `<C-p>` - Navigate completions
+- `<Up>` / `<Down>` - Navigate completions
+- `<C-n>` / `<C-p>` - Alternative navigation
 - `<C-e>` - Hide completion menu
 
 ### Normal Mode
@@ -472,7 +469,7 @@ Quick access toggles using Alt key:
 │       ├── nvim-highlight-colors.lua  # Color highlighting
 │       ├── lsp.lua              # LSP + Mason configuration
 │       ├── blink-cmp.lua        # Completion engine
-│       ├── copilot.lua          # Copilot backend
+│       ├── supermaven.lua       # AI inline completions
 │       ├── claudecode.lua       # Claude Code integration
 │       ├── conform.lua          # Formatting
 │       ├── flash.lua            # Quick navigation
@@ -563,13 +560,6 @@ require("rose-pine").setup({
 :LspInfo              " Check LSP status
 :Mason                " Check installed servers
 :checkhealth          " Full health check
-```
-
-### Copilot not working
-
-```vim
-:Copilot auth         " Re-authenticate
-:Copilot status       " Check status
 ```
 
 ### Slow startup
