@@ -4,8 +4,6 @@ return {
 	config = function()
 		-- mini.pairs - Auto-pair brackets, quotes, etc.
 		require("mini.pairs").setup()
-		-- mini.surround - Add/delete/replace surroundings (brackets, quotes, etc.)
-		require("mini.surround").setup()
 		-- mini.comment -
 		require("mini.comment").setup()
 		-- mini.bufremove

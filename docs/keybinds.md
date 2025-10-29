@@ -22,6 +22,7 @@
 - [Completion](#completion)
 - [Diagnostics (Trouble)](#diagnostics-trouble)
 - [Search & Replace](#search--replace)
+- [Surround](#surround)
 - [Flash Navigation](#flash-navigation)
 - [Todo Comments](#todo-comments)
 - [Messages & Notifications (Noice)](#messages--notifications-noice)
@@ -476,6 +477,58 @@ Diagnostic commands use the `<leader>x` prefix.
 - File type filtering (automatically filters by current file extension)
 - Preview changes before applying
 - Regex support
+
+---
+
+## Surround
+
+Enclose/surround text with quotes, brackets, tags, and more using the `<leader>e` prefix.
+
+### Normal Mode
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>ea{motion}{char}` | Surround motion | Add surround to motion (e.g., `<leader>eaw"` wraps word in quotes) |
+| `<leader>ea{motion}<tag>` | Surround with tag | Wrap motion with HTML tag (e.g., `<leader>eaw<div>` wraps word in div) |
+| `<leader>eA` | Surround line | Add surround to current line |
+| `<leader>el{motion}{char}` | Surround on new lines | Add surround to motion with new lines |
+| `<leader>eL` | Surround line on new lines | Add surround to current line with new lines |
+| `<leader>ed{char}` | Delete surround | Remove surrounding character (e.g., `<leader>ed"` removes quotes) |
+| `<leader>edt` | Delete tag | Remove surrounding HTML tag |
+| `<leader>edf` | Delete function call | Remove surrounding function call |
+| `<leader>ec{old}{new}` | Change surround | Change surround character (e.g., `<leader>ec"'` changes quotes) |
+| `<leader>ect<tag>` | Change tag | Change surrounding HTML tag (e.g., `<leader>ect<span>`) |
+| `<leader>ecT<tag>` | Change entire tag | Change entire HTML tag including attributes |
+| `<leader>ecf` | Change function | Change surrounding function call |
+| `<leader>eC{old}{new}` | Change with new lines | Change surround with new lines |
+
+### Visual Mode
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<leader>es{char}` | Surround selection | Wrap selection with character or tag |
+| `<leader>est` | Surround with tag | Wrap selection with HTML tag (prompted) |
+| `<leader>esf` | Surround with function | Wrap selection with function call (prompted) |
+| `<leader>eS{char}` | Surround with new lines | Wrap selection with character on new lines |
+| `<leader>eSt` | Surround tag (new lines) | Wrap selection with HTML tag on new lines |
+| `<leader>eSf` | Surround function (new lines) | Wrap selection with function call on new lines |
+
+### Insert Mode
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<C-g>s` | Insert surround | Add surround in insert mode |
+| `<C-g>S` | Insert surround (line) | Add surround on new lines in insert mode |
+
+**Common Examples:**
+- `<leader>eaw"` - Wrap word in double quotes
+- `<leader>eaw'` - Wrap word in single quotes
+- `<leader>eaw<div>` - Wrap word in `<div></div>` tags
+- `<leader>ed"` - Delete surrounding double quotes
+- `<leader>edt` - Delete surrounding HTML tag
+- `<leader>ec"'` - Change double quotes to single quotes
+- `<leader>ect<span>` - Change surrounding tag to `<span>`
+- Visual select text, then `<leader>es<div>` - Wrap selection in div tags
 
 ---
 

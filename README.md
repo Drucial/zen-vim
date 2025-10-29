@@ -179,7 +179,8 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                         | Syntax parsing    | Advanced syntax highlighting and code understanding |
 | [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) | Text objects      | Select/navigate functions, classes, parameters      |
 | [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)                                  | Auto-close tags   | Auto-close/rename HTML/JSX/XML tags                 |
-| [mini.nvim](https://github.com/echasnovski/mini.nvim)                                         | Micro-plugins     | Pairs, surround, comment, bufremove, icons          |
+| [mini.nvim](https://github.com/echasnovski/mini.nvim)                                         | Micro-plugins     | Pairs, comment, bufremove, icons                    |
+| [nvim-surround](https://github.com/kylechui/nvim-surround)                                    | Surround text     | Add/delete/change surrounding chars and HTML tags   |
 | [flash.nvim](https://github.com/folke/flash.nvim)                                             | Navigation        | Quick jump navigation with search labels            |
 | [grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim)                                   | Search/Replace    | Visual search and replace across files              |
 | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)                             | Todo highlighting | Highlight and search TODO/FIXME/NOTE comments       |
@@ -303,6 +304,23 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 #### Swap & Zoom
 - `<leader>wx` - Swap with Next
 - `<leader>wm` - Maximize Toggle (Zoom)
+
+### Surround (e)
+
+Enclose/surround text with quotes, brackets, tags, etc.
+
+#### Normal Mode
+- `<leader>ea{motion}{char}` - Surround motion (e.g., `<leader>eaw"` wraps word in quotes, `<leader>eaw<div>` wraps in div tag)
+- `<leader>eA` - Surround current line
+- `<leader>el{motion}{char}` - Surround motion on new lines
+- `<leader>eL` - Surround current line on new lines
+- `<leader>ed{char}` - Delete surround (e.g., `<leader>ed"` deletes quotes, `<leader>edt` deletes tag)
+- `<leader>ec{old}{new}` - Change surround (e.g., `<leader>ec"'` changes quotes, `<leader>ect<span>` changes tag)
+- `<leader>eC{old}{new}` - Change surround with new lines
+
+#### Visual Mode
+- `<leader>es{char}` - Surround selection (e.g., `<leader>es<div>` wraps in div tag)
+- `<leader>eS{char}` - Surround selection with new lines
 
 ### UI Toggles
 

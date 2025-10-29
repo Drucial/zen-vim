@@ -118,7 +118,8 @@ nvim --clean
 - **nvim-scrollbar**: Scrollbar with diagnostic, search, and cursor position markers
 - **nvim-highlight-colors**: Inline color highlighting for hex codes, rgb(), etc.
 - **lualine.nvim**: Statusline with custom breadcrumb navigation, git branch, and diff info
-- **mini.nvim**: Collection of minimal plugins (pairs, surround, comment, bufremove, icons)
+- **mini.nvim**: Collection of minimal plugins (pairs, comment, bufremove, icons)
+- **nvim-surround**: Add/delete/change surrounding characters and HTML tags (lua/plugins/nvim-surround.lua)
 - **flash.nvim**: Quick navigation with search labels and Treesitter integration (lua/plugins/flash.lua)
 - **grug-far.nvim**: Search and replace across files (lua/plugins/grug-far.lua)
 - **todo-comments.nvim**: Highlight and search TODO comments (lua/plugins/todo-comments.lua)
@@ -237,6 +238,7 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
   - Keybinding help: `lua/plugins/which-key.lua`
   - Statusline: `lua/plugins/lualine.lua`
   - Mini modules: `lua/plugins/mini.lua`
+  - Surround text: `lua/plugins/nvim-surround.lua`
   - Diagnostics UI: `lua/plugins/trouble.lua`
 - **Bootstrap logic**: Located in `lua/config/lazy.lua:1-16`
 - **Lazy.nvim settings**: Configured in `lua/config/lazy.lua`
@@ -410,6 +412,22 @@ The following is a quick reference of the most commonly used keybindings. For fu
 - `aa` / `ia` - Select around/inside parameter
 - `]f` / `[f` - Jump to next/previous function
 - `]c` / `[c` - Jump to next/previous class
+
+### Surround (nvim-surround)
+Enclose/surround text with quotes, brackets, tags, etc. using `<leader>e`.
+
+**Normal mode:**
+- `<leader>ea{motion}{char}` - Surround motion (e.g., `<leader>eaw"` wraps word in quotes, `<leader>eaw<div>` wraps in div)
+- `<leader>eA` - Surround current line
+- `<leader>el{motion}{char}` - Surround motion on new lines
+- `<leader>eL` - Surround current line on new lines
+- `<leader>ed{char}` - Delete surround (e.g., `<leader>ed"` deletes quotes, `<leader>edt` deletes tag)
+- `<leader>ec{old}{new}` - Change surround (e.g., `<leader>ec"'` changes quotes, `<leader>ect<span>` changes tag)
+- `<leader>eC{old}{new}` - Change surround with new lines
+
+**Visual mode:**
+- `<leader>es{char}` - Surround selection (e.g., `<leader>es<div>` wraps in div tag)
+- `<leader>eS{char}` - Surround selection with new lines
 
 ### Which-Key
 - `<Space>` (wait 500ms) - Show all leader keybindings
