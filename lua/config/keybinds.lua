@@ -52,7 +52,7 @@ keymap.set({ "n", "v" }, "c", [["_c]], { desc = "Change without yanking" })
 keymap.set({ "n", "v" }, "C", [["_C]], { desc = "Change to end of line without yanking" })
 
 -- Window management (LazyVim-style)
-keymap.set("n", "<leader>w", "", { desc = "+windows" })
+-- Note: <leader>w group is defined in which-key.lua
 
 -- Navigation
 keymap.set("n", "<leader>wh", "<C-W>h", { desc = "Go to Left Window" })

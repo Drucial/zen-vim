@@ -3,6 +3,12 @@ return {
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
+		init = function()
+			-- Set vim.ui.select to use Snacks picker
+			vim.ui.select = function(...)
+				require("snacks").picker.pick(...)
+			end
+		end,
 		opts = {
 			bigfile = { enabled = true },
 			gitbrowse = { enabled = true },
@@ -231,7 +237,7 @@ return {
 			{ "<leader>bw", "<cmd>write<CR>", desc = "Write Buffer" },
 
 			-- Search commands (like LazyVim)
-			{ "<leader>s", "", desc = "+search" },
+			-- Note: <leader>s group is defined in which-key.lua
 			{
 				"<leader>sa",
 				function()

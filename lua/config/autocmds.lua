@@ -2,6 +2,17 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
+-- Open dashboard on startup (only if no files opened)
+autocmd("VimEnter", {
+  group = augroup("snacks_dashboard", { clear = true }),
+  callback = function()
+    -- Only show dashboard if no files were opened
+    if vim.fn.argc() == 0 and vim.fn.line2byte(vim.fn.line("$")) == -1 then
+      require("snacks").dashboard()
+    end
+  end,
+})
+
 -- Highlight on yank
 autocmd("TextYankPost", {
   group = augroup("highlight_yank", { clear = true }),
