@@ -46,7 +46,6 @@ return {
 				toggles = {
 					dim = false, -- don't dim inactive windows
 					git_signs = true, -- hide git signs
-					mini_diff = true, -- hide mini.diff
 					diagnostics = true, -- hide diagnostics
 					inlay_hints = true, -- hide inlay hints
 				},

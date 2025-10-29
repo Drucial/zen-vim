@@ -1,5 +1,4 @@
 return {
-  { "nvim-tree/nvim-web-devicons", lazy = true },
   { "nvim-lua/plenary.nvim", lazy = true },
 
   -- you can use the VeryLazy event for things that can
