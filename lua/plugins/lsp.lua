@@ -181,6 +181,7 @@ return {
 							border = "rounded",
 							source = "if_many",
 							prefix = " ",
+							max_width = 80, -- Reasonable max width for diagnostic hover
 						}
 						vim.diagnostic.open_float(nil, opts)
 					end

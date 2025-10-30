@@ -20,6 +20,7 @@ opt.autoindent = true
 -- Line wrapping
 opt.wrap = false
 opt.breakindent = true
+opt.linebreak = true -- Wrap at word boundaries, never split words in the middle
 
 -- Search settings
 opt.ignorecase = true

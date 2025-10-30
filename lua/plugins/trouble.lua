@@ -11,6 +11,11 @@ return {
 					relative = "win",
 					position = "right",
 					size = 0.3,
+					win = {
+						wo = {
+							wrap = true, -- Enable line wrapping
+						},
+					},
 				},
 			},
 		},
