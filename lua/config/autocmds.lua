@@ -68,6 +68,23 @@ autocmd("VimResized", {
   end,
 })
 
+-- Prevent terminal buffers from being duplicated in multiple windows
+autocmd("BufEnter", {
+	group = augroup("prevent_terminal_duplicate", { clear = true }),
+	callback = function(event)
+		local buftype = vim.bo[event.buf].buftype
+		-- Only check terminal buffers
+		if buftype == "terminal" then
+			local current_win = vim.api.nvim_get_current_win()
+			local wins = vim.fn.win_findbuf(event.buf)
+			-- If terminal is shown in multiple windows, create new buffer in current window
+			if #wins > 1 then
+				vim.cmd("enew")
+			end
+		end
+	end,
+})
+
 -- BufDelete autocommand REMOVED for performance
 -- Previously auto-opened dashboard when closing last buffer, but caused significant lag
 -- with many open buffers due to iterating through all buffers on every deletion.

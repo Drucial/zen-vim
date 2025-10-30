@@ -228,7 +228,7 @@ return {
 			{
 				"<leader>bd",
 				function()
-					require("mini.bufremove").delete(0, false)
+					require("utils.buffers").delete()
 				end,
 				desc = "Delete Buffer",
 			},

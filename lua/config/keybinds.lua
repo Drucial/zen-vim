@@ -103,7 +103,7 @@ end, { desc = "Toggle Zen Mode" })
 -- Quick single-letter shortcuts (LazyVim-style)
 keymap.set("n", "<leader>W", "<cmd>w<CR>", { desc = "Write/Save Buffer" })
 keymap.set("n", "<leader>X", function()
-	require("mini.bufremove").delete(0, false)
+	require("utils.buffers").delete()
 end, { desc = "Delete Buffer" })
 keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Lazy Plugin Manager" })
 keymap.set("n", "<leader>n", "<cmd>Noice history<cr>", { desc = "Notification History" })
@@ -111,7 +111,7 @@ keymap.set("n", "<leader>n", "<cmd>Noice history<cr>", { desc = "Notification Hi
 -- Quick buffer actions (Alt key)
 keymap.set({ "n", "i", "v" }, "<A-s>", "<cmd>w<CR>", { desc = "Write/Save Buffer" })
 keymap.set({ "n", "i", "v" }, "<A-w>", function()
-	require("mini.bufremove").delete(0, false)
+	require("utils.buffers").delete()
 end, { desc = "Close Buffer" })
 
 -- Terminal
