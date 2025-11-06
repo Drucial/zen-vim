@@ -114,202 +114,39 @@ keymap.set({ "n", "i", "v" }, "<A-w>", function()
 	require("mini.bufremove").delete()
 end, { desc = "Close Buffer" })
 
--- Terminal Management with Stacking (VSCode-style)
--- Store terminals in order and track current index
-_G.terminal_stack = _G.terminal_stack or {}
-_G.terminal_current_index = _G.terminal_current_index or 1
+-- Terminal Management (VSCode-style)
+local term_utils = require("utils.terminal")
 
--- Helper: Get valid terminals in order
-local function get_valid_terminals()
-	local valid = {}
-	for i, term in ipairs(_G.terminal_stack) do
-		if term and term.buf and vim.api.nvim_buf_is_valid(term.buf) then
-			table.insert(valid, { index = i, term = term })
-		end
-	end
-	return valid
-end
-
--- Helper: Show specific terminal by index
-local function show_terminal(index)
-	-- Hide all visible terminals
-	local all_terminals = Snacks.terminal.list()
-	for _, term in ipairs(all_terminals) do
-		if term:valid() and vim.api.nvim_win_is_valid(term.win) then
-			term:hide()
-		end
-	end
-
-	-- Get valid terminals
-	local valid = get_valid_terminals()
-	if #valid == 0 then
-		return false
-	end
-
-	-- Clamp index to valid range
-	if index < 1 then
-		index = #valid
-	elseif index > #valid then
-		index = 1
-	end
-
-	_G.terminal_current_index = index
-	local term = valid[index].term
-	term:show()
-	return true
-end
-
--- Helper: Toggle terminal panel visibility
-local function toggle_terminal_panel()
-	-- Check if any terminal is visible
-	local any_visible = false
-	local all_terminals = Snacks.terminal.list()
-	for _, term in ipairs(all_terminals) do
-		if term:valid() and vim.api.nvim_win_is_valid(term.win) then
-			any_visible = true
-			break
-		end
-	end
-
-	if any_visible then
-		-- Hide all terminals
-		for _, term in ipairs(all_terminals) do
-			if term:valid() and vim.api.nvim_win_is_valid(term.win) then
-				term:hide()
-			end
-		end
-	else
-		-- Show last active terminal (or create first one)
-		local valid = get_valid_terminals()
-		if #valid == 0 then
-			-- Create first terminal with count = 1
-			local term = Snacks.terminal.get(nil, {
-				count = 1,
-				win = {
-					position = "right",
-					width = 0.30,
-					stack = true
-				}
-			})
-			table.insert(_G.terminal_stack, term)
-			_G.terminal_current_index = 1
-			-- Make sure it shows up
-			if not term.win or not vim.api.nvim_win_is_valid(term.win) then
-				term:show()
-			end
-		else
-			-- Show the last active terminal
-			show_terminal(_G.terminal_current_index)
-		end
-	end
-end
-
--- Helper: Create new terminal
-local function create_new_terminal()
-	-- Hide all visible terminals first
-	local all_terminals = Snacks.terminal.list()
-	for _, term in ipairs(all_terminals) do
-		if term:valid() and vim.api.nvim_win_is_valid(term.win) then
-			term:hide()
-		end
-	end
-
-	-- Create new terminal with unique count to ensure proper stacking
-	local new_index = #_G.terminal_stack + 1
-	local term = Snacks.terminal.get(nil, {
-		count = new_index,
-		win = {
-			position = "right",
-			width = 0.30,
-			stack = true
-		}
-	})
-	table.insert(_G.terminal_stack, term)
-	_G.terminal_current_index = new_index
-
-	-- Make sure it shows up
-	if not term.win or not vim.api.nvim_win_is_valid(term.win) then
-		term:show()
-	end
-end
-
--- VSCode-style terminal keybindings
 -- <A-\> - Toggle terminal panel (show/hide)
 keymap.set({ "n", "i", "v", "t" }, "<A-\\>", function()
-	toggle_terminal_panel()
+	term_utils.toggle_terminal_panel()
 end, { desc = "Toggle Terminal Panel" })
 
 -- <A-t> - Create new terminal
 keymap.set({ "n", "i", "v", "t" }, "<A-t>", function()
-	create_new_terminal()
+	term_utils.create_new_terminal()
 end, { desc = "New Terminal" })
 
--- Leader-based terminal commands
-keymap.set("n", "<leader>\\", function()
-	toggle_terminal_panel()
-end, { desc = "Toggle Terminal" })
-
--- <A-]> / <A-[> - Cycle through terminals (works in all modes)
+-- <A-]> / <A-[> - Cycle through terminals
 keymap.set({ "n", "i", "v", "t" }, "<A-]>", function()
-	local valid = get_valid_terminals()
-	if #valid <= 1 then
-		return
-	end
-	show_terminal(_G.terminal_current_index + 1)
+	term_utils.next_terminal()
 end, { desc = "Next Terminal" })
 
 keymap.set({ "n", "i", "v", "t" }, "<A-[>", function()
-	local valid = get_valid_terminals()
-	if #valid <= 1 then
-		return
-	end
-	show_terminal(_G.terminal_current_index - 1)
+	term_utils.prev_terminal()
 end, { desc = "Previous Terminal" })
 
--- Terminal picker - fuzzy find through all terminals
+-- Leader-based terminal commands
+keymap.set("n", "<leader>\\", function()
+	term_utils.toggle_terminal_panel()
+end, { desc = "Toggle Terminal" })
+
 keymap.set("n", "<leader>tt", function()
-	local valid = get_valid_terminals()
-	if #valid == 0 then
-		vim.notify("No terminals open", vim.log.levels.INFO)
-		return
-	end
-
-	local items = {}
-	for _, entry in ipairs(valid) do
-		local term = entry.term
-		local buf = term.buf
-		local term_info = vim.b[buf].snacks_terminal or {}
-		local cwd = term_info.cwd or vim.fn.getcwd()
-		-- Get just the directory name (last component of path)
-		local dir_name = vim.fn.fnamemodify(cwd, ":t")
-
-		table.insert(items, {
-			text = dir_name,
-			index = entry.index,
-		})
-	end
-
-	vim.ui.select(items, {
-		prompt = "Select Terminal:",
-		format_item = function(item)
-			return item.text
-		end,
-	}, function(choice)
-		if choice then
-			-- Find the position of this terminal in valid list
-			for i, entry in ipairs(valid) do
-				if entry.index == choice.index then
-					show_terminal(i)
-					break
-				end
-			end
-		end
-	end)
+	term_utils.pick_terminal()
 end, { desc = "Pick Terminal" })
 
--- Create new terminal (also accessible via <A-t>)
 keymap.set("n", "<leader>tn", function()
-	create_new_terminal()
+	term_utils.create_new_terminal()
 end, { desc = "New Terminal" })
 
 -- Quit group

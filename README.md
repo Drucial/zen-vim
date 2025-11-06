@@ -227,7 +227,7 @@ This may take 2-3 minutes. Once complete, restart Neovim.
 - `<leader>X` - Delete Buffer
 - `<leader>l` - Lazy Plugin Manager
 - `<leader>n` - Notification History
-- `<leader>\` - Toggle Terminal
+- `<leader>\\` - Toggle Terminal Panel
 
 ### Quit (q)
 
@@ -333,7 +333,9 @@ Enclose/surround text with quotes, brackets, tags, etc.
 
 Quick access toggles using Alt key:
 
-- `<A-\>` - Toggle Terminal (floating window)
+- `<A-\>` - Toggle Terminal Panel (VSCode-style stacking)
+- `<A-t>` - New Terminal (create in stack)
+- `<A-]>` / `<A-[>` - Next/Previous Terminal
 - `<A-z>` - Toggle Zen Mode (distraction-free coding)
 - `<A-g>` - Toggle LazyGit (floating window, works in all modes)
 - `<A-f>` - Toggle Find and Replace (Grug-far)

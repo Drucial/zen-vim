@@ -474,19 +474,25 @@ Enclose/surround text with quotes, brackets, tags, etc. using `<leader>e`.
 - `-` - Open parent directory with oil.nvim
 
 ### UI Toggles (Alt key for quick access)
-- `<A-\>` - Toggle terminal (floating window)
+- `<A-\>` - Toggle terminal panel (VSCode-style stacking)
+- `<A-t>` - Create new terminal in stack
+- `<A-]>` / `<A-[>` - Next/Previous terminal in stack
 - `<A-z>` - Toggle Zen Mode (distraction-free coding)
 - `<A-g>` - Toggle LazyGit (floating window, works in all modes)
 - `<A-f>` - Toggle Find and Replace (Grug-far)
 - `<A-s>` - Write/Save current buffer (works in all modes)
 - `<A-w>` - Close current buffer (works in all modes)
 
+### Terminal Management (VSCode-style)
+- `<leader>\\` - Toggle terminal panel (shows last active terminal)
+- `<leader>tt` - Terminal picker (select from all terminals by directory)
+- `<leader>tn` - Create new terminal
+
 ### Quick Actions (Single-Letter Shortcuts)
 - `<leader>W` - Write/Save buffer
 - `<leader>X` - Delete buffer
 - `<leader>l` - Lazy plugin manager
 - `<leader>n` - Notification history
-- `<leader>\` - Toggle terminal
 
 ### Quit
 - `<leader>qq` - Quit window

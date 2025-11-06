@@ -82,7 +82,10 @@
 | Key | Action | Description |
 |-----|--------|-------------|
 | `<Esc><Esc>` | Exit terminal mode | Return to normal mode from terminal |
-| `<leader>\` | Toggle terminal | Open/close floating terminal (works in normal and terminal mode) |
+| `<A-\>` | Toggle terminal panel | Open/close terminal panel (VSCode-style) |
+| `<A-t>` | New terminal | Create new terminal in stack |
+| `<A-]>` | Next terminal | Switch to next terminal in stack |
+| `<A-[>` | Previous terminal | Switch to previous terminal in stack |
 
 ---
 
@@ -215,7 +218,7 @@ Single-letter shortcuts for common operations (LazyVim-style).
 | `<leader>X` | Delete buffer | Close current buffer (smart close) |
 | `<leader>l` | Lazy plugin manager | Open Lazy plugin manager UI |
 | `<leader>n` | Notification history | Show all notifications (Noice) |
-| `<leader>\` | Toggle terminal | Open/close floating terminal |
+| `<leader>\\` | Toggle terminal | Toggle terminal panel (VSCode-style) |
 
 ---
 
@@ -671,31 +674,47 @@ Quick access toggles for UI elements using Alt key combinations.
 
 | Key | Action | Mode | Description |
 |-----|--------|------|-------------|
-| `<A-\>` | Toggle Terminal | n, i, v, t | Open/close terminal |
+| `<A-\>` | Toggle Terminal Panel | n, i, v, t | Open/close terminal panel |
+| `<A-t>` | New Terminal | n, i, v, t | Create new terminal in stack |
+| `<A-]>` | Next Terminal | n, i, v, t | Switch to next terminal |
+| `<A-[>` | Previous Terminal | n, i, v, t | Switch to previous terminal |
 | `<A-z>` | Toggle Zen Mode | n, i, v, t | Enter/exit distraction-free mode |
 | `<A-f>` | Toggle Find & Replace | n, i, v, t | Open/close Grug-far search interface |
+| `<A-s>` | Save Buffer | n, i, v, t | Write/save current buffer |
+| `<A-w>` | Close Buffer | n, i, v, t | Delete current buffer |
 
-### Terminal (`<A-\>`)
+### Terminal (VSCode-style Stacking)
 
-Stacked terminal management with support for multiple terminals.
+VSCode-style terminal management with true stacking - only one terminal visible at a time.
 
-**Features:**
+**Core Features:**
 - Right-side terminal panel (30% width)
-- Support for up to 5 numbered terminals (`<A-1>` through `<A-5>`)
-- Only one terminal visible at a time (true stacking)
+- Multiple terminals in a single stack
+- Only one terminal visible at a time (true stacking, no splits)
 - Terminal state persists when switching between terminals
-- Terminal picker (`<leader>tt`) to see and select from all terminals
-- Automatically escapes terminal mode when closing
+- Terminal picker shows directory name for each terminal
+- Automatically manages terminal visibility
 - Perfect for running multiple long-running processes (servers, logs, etc.)
-- Also accessible via `<leader>\`
 
-**Additional keybindings:**
-- `<A-1>` through `<A-5>` - Quick access to specific terminals
-- `<leader>t1` through `<leader>t5` - Toggle specific terminals
-- `<leader>tt` - Terminal picker (fuzzy find)
-- `<leader>tn` - Create new terminal
-- `<leader>ta` - Toggle all terminals (show/hide)
-- `<A-]>` / `<A-[>` - Next/Previous terminal (when in terminal mode)
+**Terminal Keybindings:**
+- `<A-\>` or `<leader>\\` - Toggle terminal panel (shows last active terminal)
+- `<A-t>` or `<leader>tn` - Create new terminal
+- `<A-]>` - Next terminal in stack (cycles forward)
+- `<A-[>` - Previous terminal in stack (cycles backward)
+- `<leader>tt` - Terminal picker (select from all terminals by directory)
+
+**Workflow:**
+1. Press `<A-\>` to open terminal panel (creates first terminal if none exist)
+2. Press `<A-t>` to create additional terminals as needed
+3. Use `<A-]>` and `<A-[>` to cycle through terminals
+4. Press `<A-\>` again to hide terminal panel
+5. Use `<leader>tt` to pick a specific terminal by directory name
+
+**Tips:**
+- All terminals persist in the background when not visible
+- Each terminal maintains its own shell state and working directory
+- Terminal picker shows directory name (e.g., "nvim", "project-name")
+- Press `<Esc><Esc>` in terminal mode to return to normal mode
 
 ### Zen Mode (`<A-z>`)
 
@@ -793,7 +812,7 @@ Some keys are intentionally not used to avoid conflicts:
 | `<leader>f` | Find/Files | `ff`, `fs`, `fr`, `fH` |
 | `<leader>b` | Buffers | `bb`, `bd`, `bn` |
 | `<leader>c` | Code | `ca`, `cf`, `cr` |
-| `<leader>t` | Terminal | `t1-5`, `tt`, `tn`, `ta` |
+| `<leader>t` | Terminal | `tt`, `tn` |
 | `<leader>g` | Git | `gg`, `gh*` |
 | `<leader>gh` | Git Hunks | `ghs`, `ghr`, `ghp` |
 | `<leader>w` | Windows | `w-`, `w\|`, `wd`, `wh/j/k/l` |
