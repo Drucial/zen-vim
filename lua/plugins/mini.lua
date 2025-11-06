@@ -8,5 +8,7 @@ return {
 		require("mini.comment").setup()
 		-- mini.icons
 		require("mini.icons").setup()
+		-- mini.bufremove - Delete buffers without messing up window layout
+		require("mini.bufremove").setup()
 	end,
 }

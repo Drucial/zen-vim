@@ -36,7 +36,7 @@ return {
 			},
 		},
 
-		-- Right panel: Terminal, Claude Code
+		-- Right panel: Terminal
 		right = {
 			-- Snacks terminal
 			{
@@ -57,20 +57,6 @@ return {
 				filter = function(buf, win)
 					return vim.api.nvim_win_get_config(win).relative == ""
 						and vim.bo[buf].filetype == "terminal"
-						-- Exclude Claude Code terminal if it has a different marker
-						and not vim.b[buf].claude_code_terminal
-				end,
-			},
-
-			-- Claude Code terminal
-			{
-				ft = "terminal",
-				size = { width = 0.3 }, -- 30% of screen width
-				title = "Claude Code",
-				filter = function(buf, win)
-					-- Only capture Claude Code terminals
-					return vim.api.nvim_win_get_config(win).relative == ""
-						and vim.b[buf].claude_code_terminal == true
 				end,
 			},
 		},

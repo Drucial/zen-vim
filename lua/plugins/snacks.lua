@@ -40,8 +40,9 @@ return {
 				enabled = true,
 				win = {
 					position = "right",
-					width = 0.3, -- 30% of editor width
-					height = 0, -- full height
+					width = 0.30, -- 30% of screen width
+					border = "rounded",
+					stack = true, -- stack multiple terminals in the same position
 					wo = {
 						statusline = "", -- hide statusline
 						winbar = "", -- hide winbar
@@ -228,7 +229,7 @@ return {
 			{
 				"<leader>bd",
 				function()
-					require("utils.buffers").delete()
+					require("mini.bufremove").delete()
 				end,
 				desc = "Delete Buffer",
 			},

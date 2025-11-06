@@ -36,7 +36,7 @@ ZenVim is built on three core principles:
 - 🚀 **Blazing Fast** - Optimized lazy loading, <50ms startup
 - 🎨 **Beautiful UI** - Rose Pine theme, lualine, scrollbar, noice.nvim
 - 🧘 **Zen Mode** - Distraction-free coding with centered window and hidden UI
-- 🤖 **AI-Powered** - Supermaven (fast inline completions) + Claude Code (30% right split, mutually exclusive with terminal)
+- 🤖 **AI-Powered** - Supermaven for fast inline AI completions
 - 📝 **Smart Completion** - blink.cmp with LSP, snippets, path, and buffer sources
 - 🔍 **Fuzzy Everything** - Snacks picker for files, grep, LSP symbols
 - 🌳 **Treesitter** - Advanced syntax highlighting and text objects
@@ -333,16 +333,12 @@ Enclose/surround text with quotes, brackets, tags, etc.
 
 Quick access toggles using Alt key:
 
-- `<A-\>` - Toggle Terminal (closes Claude Code if open)
-- `<A-S-\>` - Toggle Float Terminal (scratch terminal for quick commands)
+- `<A-\>` - Toggle Terminal (floating window)
 - `<A-z>` - Toggle Zen Mode (distraction-free coding)
-- `<A-a>` - Toggle Claude Code (closes terminal if open)
 - `<A-g>` - Toggle LazyGit (floating window, works in all modes)
 - `<A-f>` - Toggle Find and Replace (Grug-far)
 - `<A-s>` - Write/Save current buffer (works in all modes)
 - `<A-w>` - Close current buffer (works in all modes)
-
-**Note:** Terminal and Claude Code are mutually exclusive - opening one automatically closes the other. LazyGit and Float Terminal are independent.
 
 ### Git Operations (g)
 
@@ -470,7 +466,6 @@ Quick access toggles using Alt key:
 │       ├── lsp.lua              # LSP + Mason configuration
 │       ├── blink-cmp.lua        # Completion engine
 │       ├── supermaven.lua       # AI inline completions
-│       ├── claudecode.lua       # Claude Code integration
 │       ├── conform.lua          # Formatting
 │       ├── flash.lua            # Quick navigation
 │       ├── grug-far.lua         # Search and replace

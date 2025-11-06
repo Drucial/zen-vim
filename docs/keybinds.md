@@ -671,21 +671,31 @@ Quick access toggles for UI elements using Alt key combinations.
 
 | Key | Action | Mode | Description |
 |-----|--------|------|-------------|
-| `<A-\>` | Toggle Terminal | n, i, v, t | Open/close floating terminal |
+| `<A-\>` | Toggle Terminal | n, i, v, t | Open/close terminal |
 | `<A-z>` | Toggle Zen Mode | n, i, v, t | Enter/exit distraction-free mode |
-| `<A-a>` | Toggle Claude Code | n, i, v, t | Open/close Claude Code assistant |
 | `<A-f>` | Toggle Find & Replace | n, i, v, t | Open/close Grug-far search interface |
 
 ### Terminal (`<A-\>`)
 
-Floating terminal for quick command execution.
+Stacked terminal management with support for multiple terminals.
 
 **Features:**
-- Floating window design for quick access
+- Right-side terminal panel (30% width)
+- Support for up to 5 numbered terminals (`<A-1>` through `<A-5>`)
+- Only one terminal visible at a time (true stacking)
+- Terminal state persists when switching between terminals
+- Terminal picker (`<leader>tt`) to see and select from all terminals
 - Automatically escapes terminal mode when closing
-- Works from both normal and terminal mode
-- Perfect for quick git commands, test runs, etc.
+- Perfect for running multiple long-running processes (servers, logs, etc.)
 - Also accessible via `<leader>\`
+
+**Additional keybindings:**
+- `<A-1>` through `<A-5>` - Quick access to specific terminals
+- `<leader>t1` through `<leader>t5` - Toggle specific terminals
+- `<leader>tt` - Terminal picker (fuzzy find)
+- `<leader>tn` - Create new terminal
+- `<leader>ta` - Toggle all terminals (show/hide)
+- `<A-]>` / `<A-[>` - Next/Previous terminal (when in terminal mode)
 
 ### Zen Mode (`<A-z>`)
 
@@ -706,16 +716,6 @@ Distraction-free coding mode with centered window and hidden UI elements.
 - Perfect for focused writing or reading code
 - Also accessible via `<leader>z`
 
-### Claude Code (`<A-a>`)
-
-Quick toggle for Claude Code AI assistant.
-
-**Features:**
-- Opens/closes the Claude Code panel
-- Maintains conversation context
-- Works seamlessly with diff management
-- See [AI Tools](#ai-tools-claude-code) section for full feature list
-
 ### Find & Replace (`<A-f>`)
 
 Quick access to Grug-far search and replace interface.
@@ -726,40 +726,6 @@ Quick access to Grug-far search and replace interface.
 - Preview changes before applying
 - Regex support
 - Also accessible via `<leader>sr`
-
----
-
-## AI Tools (Claude Code)
-
-AI-powered coding assistance with Claude Code integration.
-
-### Claude Code Commands
-
-All Claude Code commands use the `<leader>a` prefix.
-
-| Key | Action | Mode | Description |
-|-----|--------|------|-------------|
-| `<A-a>` | Toggle Claude | n, i, v, t | Quick toggle Claude Code (see [UI Toggles](#ui-toggles)) |
-| `<leader>ac` | Toggle Claude | n | Open/close Claude Code interface |
-| `<leader>af` | Focus Claude | n | Focus Claude Code window |
-| `<leader>ar` | Resume Claude | n | Resume previous Claude session |
-| `<leader>aC` | Continue Claude | n | Continue last Claude conversation |
-| `<leader>ab` | Add buffer | n | Add current buffer to Claude context |
-| `<leader>as` | Send to Claude | v | Send selected text to Claude |
-| `<leader>as` | Add file | n | Add file from file explorer (Oil/NvimTree/neo-tree) |
-
-### Diff Management
-
-| Key | Action | Description |
-|-----|--------|-------------|
-| `<leader>aa` | Accept diff | Accept Claude's proposed changes |
-| `<leader>ad` | Deny diff | Reject Claude's proposed changes |
-
-**Usage Tips:**
-- Use `<A-l>` for fastest access to Claude Code
-- Select code in visual mode and use `<leader>as` to send specific context
-- Add multiple files with `<leader>ab` before asking questions
-- Review diffs carefully before accepting with `<leader>aa`
 
 ---
 
@@ -824,10 +790,10 @@ Some keys are intentionally not used to avoid conflicts:
 
 | Prefix | Category | Examples |
 |--------|----------|----------|
-| `<leader>a` | AI (Claude Code) | `ac`, `af`, `ab`, `aa` |
 | `<leader>f` | Find/Files | `ff`, `fs`, `fr`, `fH` |
 | `<leader>b` | Buffers | `bb`, `bd`, `bn` |
 | `<leader>c` | Code | `ca`, `cf`, `cr` |
+| `<leader>t` | Terminal | `t1-5`, `tt`, `tn`, `ta` |
 | `<leader>g` | Git | `gg`, `gh*` |
 | `<leader>gh` | Git Hunks | `ghs`, `ghr`, `ghp` |
 | `<leader>w` | Windows | `w-`, `w\|`, `wd`, `wh/j/k/l` |

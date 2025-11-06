@@ -51,7 +51,7 @@ This roadmap tracks the development and evolution of this Neovim configuration. 
 - **todo-comments.nvim**: Highlight and navigate TODO/FIXME/NOTE comments
 - **edgy.nvim**: Organized panel management
   - Left panel: Search & Replace (grug-far)
-  - Right panel: Terminal and Claude Code
+  - Right panel: Terminal (stacked management)
   - Bottom panel: QuickFix, Diagnostics, Help
   - Global statusline and smooth animations
 
@@ -164,7 +164,7 @@ Visual and functional improvements to editor panels:
 1. **Edgy.nvim integration** ✅ COMPLETED
    - Implemented organized panel management
    - Left panel: grug-far search and replace
-   - Right panel: Terminal and Claude Code
+   - Right panel: Terminal (stacked management)
    - Bottom panel: QuickFix, Diagnostics, Help
    - Smooth animations and keyboard controls (q to close, <C-q> to hide, Q to close edgebar)
 
@@ -192,8 +192,8 @@ These improvements focus on enhancing the in-editor experience to reduce context
 
 - **Terminal panel** ✅ COMPLETED
   - Implemented: Right panel managed by edgy.nvim
-  - Dedicated terminal area with persistent layout
-  - Works with snacks terminal and Claude Code
+  - Dedicated terminal area with stacked management
+  - Works with snacks terminal (supports multiple numbered terminals)
 
 - **Trouble panel positioning**: Further refinement needed
   - Implemented: Bottom panel configuration via edgy.nvim

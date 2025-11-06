@@ -37,7 +37,6 @@ This is a Neovim configuration using lazy.nvim as the plugin manager. The config
 │       ├── lsp.lua               # LSP + Mason configuration
 │       ├── blink-cmp.lua         # Completion engine
 │       ├── copilot.lua           # Copilot backend
-│       ├── claudecode.lua        # Claude Code integration
 │       ├── conform.lua           # Formatting
 │       ├── flash.lua             # Quick navigation
 │       ├── grug-far.lua          # Search and replace
@@ -125,10 +124,9 @@ nvim --clean
 - **todo-comments.nvim**: Highlight and search TODO comments (lua/plugins/todo-comments.lua)
 - **edgy.nvim**: Organized panel management for terminals, search/replace, and diagnostics (lua/plugins/edgy.lua)
 
-### Completion & AI (lua/plugins/blink-cmp.lua, supermaven.lua, claudecode.lua)
+### Completion & AI (lua/plugins/blink-cmp.lua, supermaven.lua)
 - **blink.cmp**: Modern, high-performance completion engine (Rust-based, <4ms updates)
 - **supermaven-nvim**: Fast AI-powered inline completions (significantly faster than Copilot/Tabnine)
-- **claude-code.nvim**: Claude Code integration (30% right split, mutually exclusive with terminal only, `<A-a>` to toggle)
 
 ### LSP & Language Support (lua/plugins/lsp.lua)
 - **mason.nvim**: Package manager for LSP servers, formatters, and linters
@@ -235,7 +233,6 @@ For larger configurations, create separate files in `lua/plugins/` (e.g., `lua/p
   - LSP: `lua/plugins/lsp.lua` (mason, lspconfig, schemastore, tool-installer)
   - Completion: `lua/plugins/blink-cmp.lua` (blink.cmp with LSP, snippets, and smart triggers)
   - AI Completions: `lua/plugins/supermaven.lua` (Supermaven for fast inline AI suggestions)
-  - Claude Code: `lua/plugins/claudecode.lua` (AI-powered coding)
   - Formatting: `lua/plugins/conform.lua`
   - Quick navigation: `lua/plugins/flash.lua`
   - Search/replace: `lua/plugins/grug-far.lua`
@@ -477,27 +474,12 @@ Enclose/surround text with quotes, brackets, tags, etc. using `<leader>e`.
 - `-` - Open parent directory with oil.nvim
 
 ### UI Toggles (Alt key for quick access)
-- `<A-\>` - Toggle terminal (closes Claude Code if open)
-- `<A-S-\>` - Toggle float terminal (scratch terminal for quick commands)
+- `<A-\>` - Toggle terminal (floating window)
 - `<A-z>` - Toggle Zen Mode (distraction-free coding)
-- `<A-a>` - Toggle Claude Code (closes terminal if open)
 - `<A-g>` - Toggle LazyGit (floating window, works in all modes)
 - `<A-f>` - Toggle Find and Replace (Grug-far)
 - `<A-s>` - Write/Save current buffer (works in all modes)
 - `<A-w>` - Close current buffer (works in all modes)
-
-**Note:** Terminal and Claude Code are mutually exclusive - opening one automatically closes the other. LazyGit is independent.
-
-### AI Tools (Claude Code)
-- `<A-a>` - Toggle Claude Code (quick access)
-- `<leader>ac` - Toggle Claude Code
-- `<leader>af` - Focus Claude Code window
-- `<leader>ar` - Resume previous Claude session
-- `<leader>aC` - Continue last conversation
-- `<leader>ab` - Add current buffer to context
-- `<leader>as` - Send selection to Claude (visual mode) or add file from file explorer
-- `<leader>aa` - Accept diff changes
-- `<leader>ad` - Deny diff changes
 
 ### Quick Actions (Single-Letter Shortcuts)
 - `<leader>W` - Write/Save buffer
