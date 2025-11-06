@@ -279,13 +279,12 @@ keymap.set("n", "<leader>tt", function()
 		local term = entry.term
 		local buf = term.buf
 		local term_info = vim.b[buf].snacks_terminal or {}
-		local cmd = term_info.cmd or "shell"
 		local cwd = term_info.cwd or vim.fn.getcwd()
-		local short_cwd = vim.fn.fnamemodify(cwd, ":~")
-		local label = string.format("Terminal #%d: %s (%s)", entry.index, short_cwd, cmd)
+		-- Get just the directory name (last component of path)
+		local dir_name = vim.fn.fnamemodify(cwd, ":t")
 
 		table.insert(items, {
-			text = label,
+			text = dir_name,
 			index = entry.index,
 		})
 	end
