@@ -10,11 +10,22 @@ autocmd("TextYankPost", {
   end,
 })
 
--- Remove whitespace on save
+-- Remove whitespace on save (with filetype exclusions)
 autocmd("BufWritePre", {
   group = augroup("trim_whitespace", { clear = true }),
   pattern = "*",
-  command = [[%s/\s\+$//e]],
+  callback = function()
+    -- Skip for certain filetypes where whitespace is significant
+    local exclude_ft = { "markdown", "diff" }
+    if vim.tbl_contains(exclude_ft, vim.bo.filetype) then
+      return
+    end
+    -- Save cursor position
+    local save_cursor = vim.fn.getpos(".")
+    vim.cmd([[%s/\s\+$//e]])
+    -- Restore cursor position
+    vim.fn.setpos(".", save_cursor)
+  end,
 })
 
 -- Close certain filetypes with q
@@ -69,18 +80,16 @@ autocmd("VimResized", {
 })
 
 -- Prevent terminal buffers from being duplicated in multiple windows
+-- FIXED: Only triggers for terminal buffers now (much better performance)
 autocmd("BufEnter", {
 	group = augroup("prevent_terminal_duplicate", { clear = true }),
+	pattern = "term://*", -- Only trigger for terminal buffers
 	callback = function(event)
-		local buftype = vim.bo[event.buf].buftype
-		-- Only check terminal buffers
-		if buftype == "terminal" then
-			local current_win = vim.api.nvim_get_current_win()
-			local wins = vim.fn.win_findbuf(event.buf)
-			-- If terminal is shown in multiple windows, create new buffer in current window
-			if #wins > 1 then
-				vim.cmd("enew")
-			end
+		local current_win = vim.api.nvim_get_current_win()
+		local wins = vim.fn.win_findbuf(event.buf)
+		-- If terminal is shown in multiple windows, create new buffer in current window
+		if #wins > 1 then
+			vim.cmd("enew")
 		end
 	end,
 })

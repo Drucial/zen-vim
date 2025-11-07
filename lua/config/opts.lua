@@ -82,7 +82,6 @@ opt.foldlevelstart = 99 -- Start with all folds open
 opt.foldenable = true
 
 -- Performance optimizations
-opt.lazyredraw = true -- Don't redraw screen during macros/scripts
 opt.synmaxcol = 240 -- Only syntax highlight first 240 columns (helps with very long lines)
 
 -- Cleaner UI
