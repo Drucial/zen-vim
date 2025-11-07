@@ -80,3 +80,10 @@ opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldlevel = 99 -- Start with all folds open
 opt.foldlevelstart = 99 -- Start with all folds open
 opt.foldenable = true
+
+-- Performance optimizations
+opt.lazyredraw = true -- Don't redraw screen during macros/scripts
+opt.synmaxcol = 240 -- Only syntax highlight first 240 columns (helps with very long lines)
+
+-- Cleaner UI
+opt.cmdheight = 0 -- Hide command line when not in use (Noice handles messages)

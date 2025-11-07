@@ -78,16 +78,12 @@ keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window" })
 keymap.set("n", "<leader>wq", "<C-W>q", { desc = "Quit Window" })
 keymap.set("n", "<leader>wo", "<C-W>o", { desc = "Close All Other Windows" })
 
--- Resize
+-- Resize (no conflict with split keymaps)
 keymap.set("n", "<leader>w+", "<cmd>resize +2<CR>", { desc = "Increase Height" })
-keymap.set("n", "<leader>w-", "<cmd>resize -2<CR>", { desc = "Decrease Height" })
+keymap.set("n", "<leader>w_", "<cmd>resize -2<CR>", { desc = "Decrease Height" })
 keymap.set("n", "<leader>w>", "<cmd>vertical resize +2<CR>", { desc = "Increase Width" })
 keymap.set("n", "<leader>w<", "<cmd>vertical resize -2<CR>", { desc = "Decrease Width" })
 keymap.set("n", "<leader>w=", "<C-W>=", { desc = "Equalize Windows" })
-
--- Maximize
-keymap.set("n", "<leader>w_", "<C-W>_", { desc = "Maximize Height" })
-keymap.set("n", "<leader>w|", "<C-W>|", { desc = "Maximize Width" })
 
 -- Swap & Zoom
 keymap.set("n", "<leader>wx", "<C-W>x", { desc = "Swap with Next" })
