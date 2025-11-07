@@ -55,10 +55,10 @@ return {
 					enabled = false,
 				},
 
-				-- Auto-brackets
+				-- Auto-brackets: DISABLED (mini.pairs handles this better)
 				accept = {
 					auto_brackets = {
-						enabled = true,
+						enabled = false,
 					},
 				},
 

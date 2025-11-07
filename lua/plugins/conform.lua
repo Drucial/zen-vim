@@ -15,10 +15,10 @@ return {
 		},
 		opts = {
 			formatters_by_ft = {
-				javascript = { "prettier", "eslint_d" }, -- Run prettier first, then eslint_d for fixes
-				typescript = { "prettier", "eslint_d" },
-				javascriptreact = { "prettier", "eslint_d" },
-				typescriptreact = { "prettier", "eslint_d" },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescriptreact = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
@@ -35,31 +35,16 @@ return {
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 					return
 				end
-				return { timeout_ms = 3000, lsp_fallback = true } -- Increased timeout for eslint_d
+				return { timeout_ms = 3000, lsp_fallback = true }
 			end,
 			-- Customize formatters
 			formatters = {
 				shfmt = {
 					prepend_args = { "-i", "2" }, -- 2 space indentation
 				},
-				eslint_d = {
-					-- Increase timeout and add better error handling
-					timeout_ms = 3000,
-					-- Only run if eslint config exists (supports both old and new flat config)
-					condition = function(self, ctx)
-						return vim.fs.find({
-							".eslintrc",
-							".eslintrc.js",
-							".eslintrc.cjs",
-							".eslintrc.json",
-							"eslint.config.js",
-							"eslint.config.mjs",
-							"eslint.config.cjs",
-						}, {
-							path = ctx.filename,
-							upward = true,
-						})[1]
-					end,
+				prettier = {
+					-- Use cache for faster formatting
+					prepend_args = { "--cache", "--cache-strategy", "content" },
 				},
 			},
 		},

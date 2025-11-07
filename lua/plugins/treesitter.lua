@@ -7,6 +7,8 @@ return {
 		priority = 1000, -- Load before other plugins
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-context",
+			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -14,7 +16,11 @@ return {
 				ensure_installed = {
 					"bash",
 					"c",
+					"css",
+					"scss",
 					"diff",
+					"dockerfile",
+					"gitignore",
 					"html",
 					"javascript",
 					"jsdoc",
@@ -26,9 +32,11 @@ return {
 					"markdown",
 					"markdown_inline",
 					"printf",
+					"prisma",
 					"python",
 					"query",
 					"regex",
+					"ruby",
 					"toml",
 					"tsx",
 					"typescript",
@@ -59,61 +67,61 @@ return {
 					additional_vim_regex_highlighting = false,
 				},
 
-			-- Indentation based on treesitter
-			indent = {
-				enable = true,
-				-- Disable for these languages (LSP handles it better)
-				disable = { "ruby", "python" },
-			},
-
-			-- Incremental selection based on treesitter
-			-- <C-space> in normal/visual mode (blink.cmp uses it only in insert mode)
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>", -- Start in normal mode
-					node_incremental = "<C-space>", -- Expand in visual mode
-					scope_incremental = false,
-					node_decremental = "<bs>", -- Shrink selection
-				},
-			},
-
-			-- Textobjects configuration
-			textobjects = {
-				select = {
+				-- Indentation based on treesitter
+				indent = {
 					enable = true,
-					lookahead = true,
+					-- Disable for these languages (LSP handles it better)
+					disable = { "ruby", "python" },
+				},
+
+				-- Incremental selection based on treesitter
+				-- <C-space> in normal/visual mode (blink.cmp uses it only in insert mode)
+				incremental_selection = {
+					enable = true,
 					keymaps = {
-						-- You can use the capture groups defined in textobjects.scm
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						["ac"] = "@class.outer",
-						["ic"] = "@class.inner",
-						["aa"] = "@parameter.outer",
-						["ia"] = "@parameter.inner",
+						init_selection = "<C-space>", -- Start in normal mode
+						node_incremental = "<C-space>", -- Expand in visual mode
+						scope_incremental = false,
+						node_decremental = "<bs>", -- Shrink selection
 					},
 				},
-				move = {
-					enable = true,
-					set_jumps = true,
-					goto_next_start = {
-						["]f"] = "@function.outer",
-						["]c"] = "@class.outer",
+
+				-- Textobjects configuration
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true,
+						keymaps = {
+							-- You can use the capture groups defined in textobjects.scm
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							["ic"] = "@class.inner",
+							["aa"] = "@parameter.outer",
+							["ia"] = "@parameter.inner",
+						},
 					},
-					goto_next_end = {
-						["]F"] = "@function.outer",
-						["]C"] = "@class.outer",
-					},
-					goto_previous_start = {
-						["[f"] = "@function.outer",
-						["[c"] = "@class.outer",
-					},
-					goto_previous_end = {
-						["[F"] = "@function.outer",
-						["[C"] = "@class.outer",
+					move = {
+						enable = true,
+						set_jumps = true,
+						goto_next_start = {
+							["]f"] = "@function.outer",
+							["]c"] = "@class.outer",
+						},
+						goto_next_end = {
+							["]F"] = "@function.outer",
+							["]C"] = "@class.outer",
+						},
+						goto_previous_start = {
+							["[f"] = "@function.outer",
+							["[c"] = "@class.outer",
+						},
+						goto_previous_end = {
+							["[F"] = "@function.outer",
+							["[C"] = "@class.outer",
+						},
 					},
 				},
-			},
 			})
 
 			-- Explicitly start treesitter highlighting on FileType (LazyVim approach)
@@ -123,8 +131,16 @@ return {
 					pcall(vim.treesitter.start, ev.buf)
 				end,
 			})
+
+			-- Treesitter context: Shows current function/class at top of window
+			require("treesitter-context").setup({
+				enable = true,
+				max_lines = 3, -- Maximum number of lines to show
+				trim_scope = "outer", -- Remove outer scope when empty
+			})
 		end,
 	},
+
 	-- Auto tag for HTML, XML, JSX, etc
 	{
 		"windwp/nvim-ts-autotag",

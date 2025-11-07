@@ -51,7 +51,6 @@ return {
 		opts = {
 			ensure_installed = {
 				"prettier", -- JS/TS/CSS/HTML/JSON/YAML/Markdown formatter
-				"eslint_d", -- ESLint daemon for fast linting/fixing
 				"stylua", -- Lua formatter
 				"black", -- Python formatter
 				"isort", -- Python import sorter
@@ -168,6 +167,13 @@ return {
 			vim.api.nvim_create_autocmd("CursorHold", {
 				group = vim.api.nvim_create_augroup("diagnostic_float", { clear = true }),
 				callback = function()
+					-- Don't show if any float window exists (prevents overlap with hover)
+					for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+						if vim.api.nvim_win_get_config(winid).relative ~= "" then
+							return
+						end
+					end
+
 					-- Check if there are diagnostics at the current cursor position
 					local cursor_pos = vim.api.nvim_win_get_cursor(0)
 					local line = cursor_pos[1] - 1 -- 0-indexed
@@ -243,10 +249,37 @@ return {
 			})
 
 			-- TypeScript/JavaScript
-			vim.lsp.config("ts_ls", {})
+			vim.lsp.config("ts_ls", {
+				flags = {
+					debounce_text_changes = 150, -- Performance: reduce update frequency
+				},
+			})
 
-			-- ESLint
-			vim.lsp.config("eslint", {})
+			-- ESLint (diagnostics + autofixes, no formatting)
+			vim.lsp.config("eslint", {
+				on_attach = function(client, bufnr)
+					-- Disable formatting capability (Prettier handles this via conform)
+					client.server_capabilities.documentFormattingProvider = false
+					client.server_capabilities.documentRangeFormattingProvider = false
+
+					-- Autofix on save
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						callback = function()
+							vim.lsp.buf.code_action({
+								context = {
+									only = { "source.fixAll.eslint" },
+									diagnostics = {},
+								},
+								apply = true,
+							})
+						end,
+					})
+				end,
+				settings = {
+					workingDirectories = { mode = "auto" },
+				},
+			})
 
 			-- Ruby (Rails)
 			vim.lsp.config("ruby_lsp", {})
@@ -267,18 +300,80 @@ return {
 			-- Bash
 			vim.lsp.config("bashls", {})
 
-			-- Tailwind CSS
+			-- Tailwind CSS - Enhanced for maximum utility
 			vim.lsp.config("tailwindcss", {
+				-- Ensure Tailwind attaches to these file types
+				filetypes = {
+					"html",
+					"css",
+					"scss",
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact",
+					"vue",
+					"svelte",
+				},
+				init_options = {
+					userLanguages = {
+						-- Support for custom template languages
+						eelixir = "html-eex",
+						eruby = "erb",
+					},
+				},
 				settings = {
 					tailwindCSS = {
+						-- Completion suggestions
+						suggestions = true,
+						-- Color decorators in editor
+						colorDecorators = true,
+						-- Validate Tailwind classes
+						validate = true,
+						-- Lint for Tailwind-specific issues
+						lint = {
+							cssConflict = "warning",
+							invalidApply = "error",
+							invalidConfigPath = "error",
+							invalidScreen = "error",
+							invalidTailwindDirective = "error",
+							invalidVariant = "error",
+							recommendedVariantOrder = "warning",
+						},
+						-- Class attributes for completion
+						classAttributes = {
+							"class",
+							"className",
+							"classList",
+							"ngClass",
+							-- Add custom attributes if you use them
+							"class:list", -- Astro
+						},
+						-- Experimental features
 						experimental = {
+							-- Support for various CSS-in-JS syntaxes
 							classRegex = {
+								-- Standard
+								"class:\\s*[\"'`]([^\"'`]*)[\"'`]",
+								-- Conditional/template strings
+								"className\\s*=\\s*[\"'`]([^\"'`]*)[\"'`]",
+								-- tw`` template literals (styled-components, emotion)
 								"tw`([^`]*)",
-								'tw="([^"]*)',
+								"tw=\"([^\"]*)",
 								'tw={"([^"}]*)',
 								"tw\\.\\w+`([^`]*)",
 								"tw\\(.*?\\)`([^`]*)",
+								-- cx/clsx/classnames utilities
+								{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+								{ "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+								{ "classnames\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+								-- Conditional classes
+								{ "class:\\s*{([^}]*)}", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
 							},
+						},
+						-- Include language you use with Tailwind
+						includeLanguages = {
+							typescript = "javascript",
+							typescriptreact = "javascript",
 						},
 					},
 				},
