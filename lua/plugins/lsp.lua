@@ -262,17 +262,21 @@ return {
 					client.server_capabilities.documentFormattingProvider = false
 					client.server_capabilities.documentRangeFormattingProvider = false
 
-					-- Autofix on save
+					-- Autofix on save (silently, without notifications)
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = bufnr,
 						callback = function()
-							vim.lsp.buf.code_action({
-								context = {
-									only = { "source.fixAll.eslint" },
-									diagnostics = {},
-								},
-								apply = true,
-							})
+							-- Only apply fixes if there are ESLint diagnostics
+							local diagnostics = vim.diagnostic.get(bufnr, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
+							if #diagnostics > 0 then
+								vim.lsp.buf.code_action({
+									context = {
+										only = { "source.fixAll.eslint" },
+										diagnostics = {},
+									},
+									apply = true,
+								})
+							end
 						end,
 					})
 				end,
