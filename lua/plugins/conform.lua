@@ -2,7 +2,6 @@ return {
 	-- Autoformatting
 	{
 		"stevearc/conform.nvim",
-		event = { "BufReadPre", "BufNewFile" }, -- Load earlier to avoid first-save delays
 		cmd = { "ConformInfo" },
 		keys = {
 			{
