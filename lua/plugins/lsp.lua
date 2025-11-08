@@ -340,7 +340,7 @@ return {
 								"className\\s*=\\s*[\"'`]([^\"'`]*)[\"'`]",
 								-- tw`` template literals (styled-components, emotion)
 								"tw`([^`]*)",
-								"tw=\"([^\"]*)",
+								'tw="([^"]*)',
 								'tw={"([^"}]*)',
 								"tw\\.\\w+`([^`]*)",
 								"tw\\(.*?\\)`([^`]*)",
