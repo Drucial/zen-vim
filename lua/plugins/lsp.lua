@@ -51,6 +51,7 @@ return {
 		opts = {
 			ensure_installed = {
 				"prettier", -- JS/TS/CSS/HTML/JSON/YAML/Markdown formatter
+				"eslint_d", -- ESLint daemon for fast linting/fixing
 				"stylua", -- Lua formatter
 				"black", -- Python formatter
 				"isort", -- Python import sorter
@@ -255,31 +256,8 @@ return {
 				},
 			})
 
-			-- ESLint (diagnostics + autofixes, no formatting)
+			-- ESLint (diagnostics only, eslint_d via conform handles autofixes)
 			vim.lsp.config("eslint", {
-				on_attach = function(client, bufnr)
-					-- Disable formatting capability (Prettier handles this via conform)
-					client.server_capabilities.documentFormattingProvider = false
-					client.server_capabilities.documentRangeFormattingProvider = false
-
-					-- Autofix on save (silently, without notifications)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						callback = function()
-							-- Only apply fixes if there are ESLint diagnostics
-							local diagnostics = vim.diagnostic.get(bufnr, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
-							if #diagnostics > 0 then
-								vim.lsp.buf.code_action({
-									context = {
-										only = { "source.fixAll.eslint" },
-										diagnostics = {},
-									},
-									apply = true,
-								})
-							end
-						end,
-					})
-				end,
 				settings = {
 					workingDirectories = { mode = "auto" },
 				},

@@ -12,6 +12,10 @@ return {
 		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
+				-- Required fields for newer nvim-treesitter
+				modules = {},
+				ignore_install = {},
+
 				-- Automatically install parsers for these languages
 				ensure_installed = {
 					"bash",

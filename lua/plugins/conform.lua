@@ -2,6 +2,7 @@ return {
 	-- Autoformatting
 	{
 		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		cmd = { "ConformInfo" },
 		keys = {
 			{
@@ -15,10 +16,11 @@ return {
 		},
 		opts = {
 			formatters_by_ft = {
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
+				-- Run ESLint fixes first, then Prettier formatting
+				javascript = { "eslint_d", "prettier" },
+				typescript = { "eslint_d", "prettier" },
+				javascriptreact = { "eslint_d", "prettier" },
+				typescriptreact = { "eslint_d", "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
