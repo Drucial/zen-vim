@@ -65,7 +65,7 @@ opt.timeoutlen = 300
 opt.completeopt = "menu,menuone,noselect"
 
 -- Scrolling
-opt.scrolloff = 16
+opt.scrolloff = 999
 opt.sidescrolloff = 16
 
 -- Preview substitutions live

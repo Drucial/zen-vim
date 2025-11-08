@@ -43,8 +43,8 @@ return {
 					prepend_args = { "-i", "2" }, -- 2 space indentation
 				},
 				prettier = {
-					-- Use cache for faster formatting
-					prepend_args = { "--cache", "--cache-strategy", "content" },
+					-- Note: --cache doesn't work with stdin formatting
+					prepend_args = {},
 				},
 			},
 		},

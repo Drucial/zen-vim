@@ -33,11 +33,10 @@ keymap.set("n", "<C-S-Up>", ":t.-1<CR>==", { desc = "Duplicate line above" })
 keymap.set("v", "<C-S-Down>", ":t'><CR>gv=gv", { desc = "Duplicate lines below" })
 keymap.set("v", "<C-S-Up>", ":t'<-1<CR>gv=gv", { desc = "Duplicate lines above" })
 
+-- Paging with arrows
+keymap.set("n", "<C-Down>", "<C-d>", { desc = "Scroll down and center" })
+keymap.set("n", "<C-Up>", "<C-u>", { desc = "Scroll up and center" })
 -- Keep cursor centered
-keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
-keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
-keymap.set("n", "<C-Down>", "<C-d>zz", { desc = "Scroll down and center" })
-keymap.set("n", "<C-Up>", "<C-u>zz", { desc = "Scroll up and center" })
 keymap.set("n", "n", "nzzzv", { desc = "Next search result and center" })
 keymap.set("n", "N", "Nzzzv", { desc = "Previous search result and center" })
 
