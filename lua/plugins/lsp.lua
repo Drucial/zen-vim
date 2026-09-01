@@ -23,6 +23,17 @@ return {
 
       vim.lsp.config("ruby_lsp", { cmd = { "bundle", "exec", "ruby-lsp" } })
       vim.lsp.enable({ "ruby_lsp", "sourcekit" })
+
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("lsp-keymaps", { clear = true }),
+        callback = function(event)
+          local function map(lhs, rhs, desc)
+            vim.keymap.set("n", lhs, rhs, { buffer = event.buf, desc = desc })
+          end
+          map("gd", vim.lsp.buf.definition, "Go to definition")
+          map("gD", vim.lsp.buf.declaration, "Go to declaration")
+        end,
+      })
     end,
   },
 
