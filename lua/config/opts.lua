@@ -5,6 +5,10 @@ local opt = vim.opt
 
 opt.number = true
 opt.relativenumber = true
+opt.cursorline = true
+opt.laststatus = 0
+opt.ruler = false
+opt.showmode = false
 
 -- System clipboard
 opt.clipboard = "unnamedplus"
