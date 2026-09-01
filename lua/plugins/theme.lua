@@ -1,24 +1,8 @@
-local omarchy = require("config.omarchy_theme")
-local plugins, colorscheme = omarchy.read()
-
-local specs = {}
+local plugins = require("config.omarchy_theme").read()
 
 for _, plugin in ipairs(plugins) do
   plugin.lazy = false
   plugin.priority = 1000
-  specs[#specs + 1] = plugin
 end
 
-if colorscheme then
-  specs[#specs + 1] = {
-    name = "omarchy-colorscheme",
-    dir = vim.fn.stdpath("config"),
-    lazy = false,
-    priority = 999,
-    config = function()
-      pcall(vim.cmd.colorscheme, colorscheme)
-    end,
-  }
-end
-
-return specs
+return plugins
