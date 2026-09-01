@@ -23,6 +23,8 @@ local groups = {
   "FoldColumn",
   "Folded",
   "SignColumn",
+  "StatusLine",
+  "StatusLineNC",
   "LineNr",
   "CursorLineNr",
   "NormalNC",
