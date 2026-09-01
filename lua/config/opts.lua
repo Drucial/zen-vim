@@ -6,13 +6,12 @@ local opt = vim.opt
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
-opt.laststatus = 0
+opt.laststatus = 3
 opt.ruler = false
 opt.showmode = false
 opt.cmdheight = 0
 opt.signcolumn = "number"
-opt.statusline = "%="
-opt.fillchars:append({ eob = " ", stl = "─", stlnc = "─" })
+opt.fillchars:append({ eob = " " })
 
 -- System clipboard
 opt.clipboard = "unnamedplus"
