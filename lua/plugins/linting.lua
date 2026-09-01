@@ -9,8 +9,6 @@ return {
       swift = { "swiftlint" },
     }
 
-    -- No InsertLeave: golangci-lint analyses the whole package, too heavy to
-    -- run every time insert mode is left.
     vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost" }, {
       group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
       callback = function()

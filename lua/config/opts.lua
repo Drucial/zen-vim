@@ -3,7 +3,6 @@ vim.g.maplocalleader = "\\"
 
 local opt = vim.opt
 
--- Hybrid line numbers (absolute on cursor line, relative elsewhere)
 opt.number = true
 opt.relativenumber = true
 

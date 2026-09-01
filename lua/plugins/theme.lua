@@ -10,7 +10,6 @@ for _, plugin in ipairs(plugins) do
 end
 
 if colorscheme then
-  -- Lower priority so this runs once the theme plugins above have loaded.
   specs[#specs + 1] = {
     name = "omarchy-colorscheme",
     dir = vim.fn.stdpath("config"),

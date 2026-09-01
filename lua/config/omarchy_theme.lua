@@ -1,7 +1,5 @@
--- Omarchy publishes the active theme as a lazy.nvim spec list, naming the
--- colorscheme through a `LazyVim/LazyVim` marker entry. This config does not
--- use LazyVim, so read the file rather than importing it: the marker supplies
--- the colorscheme name, the remaining entries are the theme plugins themselves.
+-- Reads Omarchy's published theme spec, which names the colorscheme through a
+-- LazyVim marker entry this config does not otherwise use.
 
 local M = {}
 

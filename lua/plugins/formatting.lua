@@ -23,7 +23,6 @@ return {
         swift = { "swift_format" },
       },
       formatters = {
-        -- Match the Gemfile-pinned rubocop rather than a Mason-installed one.
         rubocop = {
           command = "bundle",
           prepend_args = { "exec", "rubocop" },
