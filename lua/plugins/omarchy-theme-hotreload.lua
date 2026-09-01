@@ -5,7 +5,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      local transparency_file = vim.fn.stdpath("config") .. "/after/plugin/transparency.lua"
+      local transparency_file = vim.fn.stdpath("config") .. "/plugin/after/transparency.lua"
 
       vim.api.nvim_create_autocmd("User", {
         pattern = "LazyReload",
