@@ -24,14 +24,18 @@ return {
       vim.lsp.config("ruby_lsp", { cmd = { "bundle", "exec", "ruby-lsp" } })
       vim.lsp.enable({ "ruby_lsp", "sourcekit" })
 
+      pcall(vim.keymap.del, "n", "gra")
+      pcall(vim.keymap.del, "x", "gra")
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-keymaps", { clear = true }),
         callback = function(event)
-          local function map(lhs, rhs, desc)
-            vim.keymap.set("n", lhs, rhs, { buffer = event.buf, desc = desc })
+          local function map(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, { buffer = event.buf, desc = desc })
           end
-          map("gd", vim.lsp.buf.definition, "Go to definition")
-          map("gD", vim.lsp.buf.declaration, "Go to declaration")
+          map("n", "gd", vim.lsp.buf.definition, "Go to definition")
+          map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+          map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
         end,
       })
     end,
