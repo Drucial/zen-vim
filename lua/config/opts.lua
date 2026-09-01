@@ -1,0 +1,21 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+local opt = vim.opt
+
+-- Hybrid line numbers (absolute on cursor line, relative elsewhere)
+opt.number = true
+opt.relativenumber = true
+
+-- System clipboard
+opt.clipboard = "unnamedplus"
+
+-- Centered cursor (keeps cursor in middle of screen)
+opt.scrolloff = 999
+
+-- Better horizontal scroll context
+opt.sidescrolloff = 16
+
+-- Silence all bells (no macOS funk sound on unmapped keys in neovide)
+opt.belloff = "all"
+opt.visualbell = false
