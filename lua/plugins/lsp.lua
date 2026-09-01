@@ -20,8 +20,16 @@ return {
     },
     config = function(_, opts)
       require("mason-lspconfig").setup(opts)
-      -- Not Mason-installable: ruby-lsp comes from the bundle, sourcekit-lsp
-      -- from the Swift toolchain.
+
+      -- Ruby tooling is Gemfile-pinned (rubocop ~> 1.88 plus rails/capybara/
+      -- performance plugins), so the server must come from the bundle. This has
+      -- to go through vim.lsp.config rather than an lsp/ruby_lsp.lua file:
+      -- runtimepath configs merge last-wins, and nvim-lspconfig's copy sorts
+      -- after ours.
+      vim.lsp.config("ruby_lsp", { cmd = { "bundle", "exec", "ruby-lsp" } })
+
+      -- Not Mason-installable: ruby-lsp from the bundle, sourcekit-lsp from the
+      -- Swift toolchain.
       vim.lsp.enable({ "ruby_lsp", "sourcekit" })
     end,
   },
