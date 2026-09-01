@@ -1,7 +1,32 @@
 local map = vim.keymap.set
 
 -- Buffer Management
-map("n", "<leader>bn", ":bnext<CR>", { desc = "Cycle to next buffer" })
-map("n", "<leader>bp", ":bprevious<CR>", { desc = "Cycle to previous buffer" })
+map("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "Next buffer" })
+map("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
 map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
 map("n", "<leader>bD", "<cmd>bdelete!<CR>", { desc = "Delete buffer (force)" })
+
+-- Window Management
+map("n", "<leader>ws", "<C-w>s", { desc = "Split horizontally" })
+map("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" })
+map("n", "<leader>wc", "<C-w>c", { desc = "Close window" })
+map("n", "<leader>wo", "<C-w>o", { desc = "Close other windows" })
+map("n", "<leader>wh", "<C-w>h", { desc = "Go to left window" })
+map("n", "<leader>wj", "<C-w>j", { desc = "Go to lower window" })
+map("n", "<leader>wk", "<C-w>k", { desc = "Go to upper window" })
+map("n", "<leader>wl", "<C-w>l", { desc = "Go to right window" })
+map("n", "<leader>ww", "<C-w>w", { desc = "Cycle windows" })
+map("n", "<leader>wp", "<C-w>p", { desc = "Go to previous window" })
+map("n", "<leader>wH", "<C-w>H", { desc = "Move window far left" })
+map("n", "<leader>wJ", "<C-w>J", { desc = "Move window to bottom" })
+map("n", "<leader>wK", "<C-w>K", { desc = "Move window to top" })
+map("n", "<leader>wL", "<C-w>L", { desc = "Move window far right" })
+map("n", "<leader>wx", "<C-w>x", { desc = "Swap with next window" })
+map("n", "<leader>wr", "<C-w>r", { desc = "Rotate windows" })
+map("n", "<leader>w=", "<C-w>=", { desc = "Equalize window sizes" })
+map("n", "<leader>wT", "<C-w>T", { desc = "Move window to new tab" })
+
+-- Code
+map({ "n", "v" }, "<leader>cf", function()
+  require("conform").format({ async = true, lsp_format = "fallback" })
+end, { desc = "Format buffer" })
