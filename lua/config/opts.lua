@@ -10,6 +10,8 @@ opt.laststatus = 0
 opt.ruler = false
 opt.showmode = false
 opt.cmdheight = 0
+opt.signcolumn = "number"
+opt.fillchars:append({ eob = " " })
 
 -- System clipboard
 opt.clipboard = "unnamedplus"
