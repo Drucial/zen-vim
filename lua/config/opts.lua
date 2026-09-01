@@ -11,7 +11,8 @@ opt.ruler = false
 opt.showmode = false
 opt.cmdheight = 0
 opt.signcolumn = "number"
-opt.fillchars:append({ eob = " " })
+opt.statusline = "%="
+opt.fillchars:append({ eob = " ", stl = "─", stlnc = "─" })
 
 -- System clipboard
 opt.clipboard = "unnamedplus"
