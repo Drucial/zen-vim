@@ -9,6 +9,7 @@ opt.cursorline = true
 opt.laststatus = 0
 opt.ruler = false
 opt.showmode = false
+opt.cmdheight = 0
 
 -- System clipboard
 opt.clipboard = "unnamedplus"
