@@ -2,7 +2,6 @@ local M = {}
 
 local MAX_PATH = 50
 local MAX_BRANCH = 20
-local MAX_DIAG = 60
 
 local MODES = {
   n = { "N", "Directory" },
@@ -37,31 +36,27 @@ function M.apply_highlights()
   end
 end
 
-local SEVERITY_HL = {
-  [vim.diagnostic.severity.ERROR] = "DiagnosticError",
-  [vim.diagnostic.severity.WARN] = "DiagnosticWarn",
-  [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
-  [vim.diagnostic.severity.HINT] = "DiagnosticHint",
+local SEVERITIES = {
+  { vim.diagnostic.severity.ERROR, "", "DiagnosticError" },
+  { vim.diagnostic.severity.WARN, "", "DiagnosticWarn" },
+  { vim.diagnostic.severity.INFO, "", "DiagnosticInfo" },
+  { vim.diagnostic.severity.HINT, "", "DiagnosticHint" },
 }
 
--- The underline marks which line is bad; this says what is wrong with it.
-local function diagnostic(buf)
-  local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
-  local worst
-  for _, d in ipairs(vim.diagnostic.get(buf, { lnum = lnum })) do
-    if not worst or d.severity < worst.severity then
-      worst = d
-    end
-  end
-  if not worst then
-    return ""
+local function diagnostics(buf)
+  local counts = {}
+  for _, d in ipairs(vim.diagnostic.get(buf)) do
+    counts[d.severity] = (counts[d.severity] or 0) + 1
   end
 
-  local msg = worst.message:gsub("%s+", " ")
-  if vim.fn.strchars(msg) > MAX_DIAG then
-    msg = vim.fn.strcharpart(msg, 0, MAX_DIAG - 1) .. "…"
+  local parts = {}
+  for _, severity in ipairs(SEVERITIES) do
+    local n = counts[severity[1]]
+    if n then
+      parts[#parts + 1] = "%#" .. severity[3] .. "#" .. severity[2] .. " " .. n .. "%*"
+    end
   end
-  return "%#" .. (SEVERITY_HL[worst.severity] or "DiagnosticHint") .. "#" .. msg .. "%*"
+  return table.concat(parts, " ")
 end
 
 local function git_root(buf)
@@ -148,7 +143,7 @@ function M.render()
     right = (head and head .. " " or "") .. block .. " " .. vim.fs.basename(root) .. " %*"
   end
 
-  local diag = diagnostic(buf)
+  local diag = diagnostics(buf)
 
   return table.concat({
     block .. " " .. mode[1] .. " %*",
