@@ -66,6 +66,9 @@ end, { desc = "Explorer" })
 map("n", "<leader>z", function()
   Snacks.zen()
 end, { desc = "Zen mode" })
+map("n", "<leader>Z", function()
+  Snacks.zen.zoom()
+end, { desc = "Zoom window" })
 
 -- Find
 map("n", "<leader>ff", function()
