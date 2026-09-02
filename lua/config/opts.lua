@@ -22,10 +22,11 @@ opt.swapfile = false
 opt.winborder = "rounded"
 
 -- Themes disagree wildly on WinSeparator and several render it near the
--- background. Comment is muted but always legible. Note nvim has drawn
+-- background -- nord points it at its own background. Following FloatBorder
+-- keeps split dividers and float borders the same weight. Note nvim has drawn
 -- separators with WinSeparator since 0.7 -- overriding VertSplit does nothing.
 local function win_separator()
-  vim.api.nvim_set_hl(0, "WinSeparator", { link = "Comment" })
+  vim.api.nvim_set_hl(0, "WinSeparator", { link = "FloatBorder" })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", {
