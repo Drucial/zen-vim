@@ -15,13 +15,6 @@ in a split takes the split with it. `Snacks.bufdelete` preserves the layout.
 `bundle exec`. On a large file that stall is visible. Consider
 `format_after_save` for ruby specifically.
 
-### Omarchy symlink dangles on macOS
-
-`lua/plugins/theme.lua` symlinks to the absolute path
-`~/.local/state/omarchy/current/theme/neovim.lua`, which does not exist on the
-Mac this config also targets. Pre-existing from the backup config, not a
-regression.
-
 ### Colorscheme ownership is decided by event ordering
 
 Omarchy applies the colorscheme after `lazy.setup()`; zen-theme applies its own

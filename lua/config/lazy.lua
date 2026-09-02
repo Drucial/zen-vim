@@ -15,6 +15,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Omarchy rewrites its theme spec on every `omarchy theme set`. Link it into
+-- lua/plugins/ so lazy imports it and its change detector fires LazyReload on a
+-- switch. Created here rather than committed: the target is absent off Omarchy,
+-- where a dangling link breaks the `plugins` import.
+local omarchy = require("config.omarchy_theme")
+local uv = vim.uv or vim.loop
+local theme_link = vim.fn.stdpath("config") .. "/lua/plugins/theme.lua"
+if uv.fs_stat(omarchy.path) and not uv.fs_lstat(theme_link) then
+  uv.fs_symlink(omarchy.path, theme_link)
+end
+
 require("lazy").setup({
   spec = {
     { import = "plugins" },
@@ -23,7 +34,7 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
-local _, colorscheme = require("config.omarchy_theme").read()
-if colorscheme then
-  pcall(vim.cmd.colorscheme, colorscheme)
-end
+-- Off Omarchy nothing names a colorscheme at startup, so fall back. zen-theme.nvim
+-- still gets the last word on VimEnter when ZenTerm publishes one.
+local _, colorscheme = omarchy.read()
+pcall(vim.cmd.colorscheme, colorscheme or "rose-pine-moon")
