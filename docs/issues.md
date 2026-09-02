@@ -26,8 +26,3 @@ Pick one and make the precedence explicit.
 The `LazyReload` autocmd is registered and lazy's reloader tracks `theme.lua`,
 but an actual `omarchy theme set` has never been run to confirm nvim follows.
 Verified structurally only.
-
-### Evaluate remaining snacks modules
-
-Snacks currently loads with only the picker configured. Worth assessing
-`bufdelete`, `input`, `notifier`, `statuscolumn`, `indent`, and `lazygit`.
