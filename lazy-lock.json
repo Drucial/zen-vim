@@ -51,6 +51,7 @@
   "vesper.nvim": { "branch": "main", "commit": "1717b1ad657c94bec3fc2bdebb0c55452d9fe46d" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
   "white.nvim": { "branch": "main", "commit": "e3c3c3cc4b943b521032299e4f9b0d84a02e06d1" },
+  "yanky.nvim": { "branch": "main", "commit": "dd6689fdda85f66cab7d9b1a1664625f3be0920d" },
   "zen-navigator.nvim": { "branch": "main", "commit": "365a8e4f3fd82b50d130ee87b37ba1ec4fdafa0c" },
   "zen-theme.nvim": { "branch": "main", "commit": "373233ce6eeaa9bd34d95d4df31febfaa4553ccc" },
   "zenbones.nvim": { "branch": "main", "commit": "8304d8df9b823ff11e103afa62f38c39f534abe6" }
