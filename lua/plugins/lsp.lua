@@ -36,6 +36,11 @@ return {
           map("n", "gd", vim.lsp.buf.definition, "Go to definition")
           map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
           map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
+          map({ "n", "x" }, "<leader>cq", function()
+            vim.lsp.buf.code_action({ context = { only = { "quickfix" } }, apply = true })
+          end, "Quickfix")
+          map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
+          map("n", "<leader>cs", vim.lsp.buf.document_symbol, "Document symbols")
         end,
       })
     end,

@@ -27,6 +27,7 @@ map("n", "<leader>w=", "<C-w>=", { desc = "Equalize window sizes" })
 map("n", "<leader>wT", "<C-w>T", { desc = "Move window to new tab" })
 
 -- Code
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 map({ "n", "v" }, "<leader>cf", function()
   require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format buffer" })
