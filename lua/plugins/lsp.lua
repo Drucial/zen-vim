@@ -24,9 +24,6 @@ return {
       vim.lsp.config("ruby_lsp", { cmd = { "bundle", "exec", "ruby-lsp" } })
       vim.lsp.enable({ "ruby_lsp", "sourcekit" })
 
-      pcall(vim.keymap.del, "n", "gra")
-      pcall(vim.keymap.del, "x", "gra")
-
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-keymaps", { clear = true }),
         callback = function(event)
@@ -35,15 +32,13 @@ return {
           end
           map("n", "gd", vim.lsp.buf.definition, "Go to definition")
           map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
-          map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
           map({ "n", "x" }, "<leader>cA", function()
             vim.lsp.buf.code_action({ context = { only = { "source" } } })
           end, "Source actions")
           map({ "n", "x" }, "<leader>cq", function()
             vim.lsp.buf.code_action({ context = { only = { "quickfix" } }, apply = true })
           end, "Quickfix")
-          map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
-          map("n", "<leader>cs", function()
+          map("n", "gO", function()
             Snacks.picker.lsp_symbols()
           end, "Document symbols")
         end,
