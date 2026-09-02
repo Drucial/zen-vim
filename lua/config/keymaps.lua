@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 -- Config
-map("n", "<leader>R", "<cmd>restart<CR>", { desc = "Reload Nvim" })
+map("n", "<leader>R", "<cmd>restart +confirm\\ qall<CR>", { desc = "Reload Nvim" })
 
 -- Buffer Management
 map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
