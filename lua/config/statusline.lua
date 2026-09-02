@@ -60,13 +60,14 @@ local function diagnostics(buf)
 end
 
 local function git_root(buf)
-  local cached = vim.b[buf].statusline_git_root
-  if cached ~= nil then
-    return cached ~= "" and cached or nil
-  end
   local name = vim.api.nvim_buf_get_name(buf)
+  local cached = vim.b[buf].statusline_git_root
+  if cached and cached.name == name then
+    return cached.root ~= "" and cached.root or nil
+  end
+
   local root = name ~= "" and vim.fs.root(name, ".git") or nil
-  vim.b[buf].statusline_git_root = root or ""
+  vim.b[buf].statusline_git_root = { name = name, root = root or "" }
   return root
 end
 
@@ -80,10 +81,11 @@ local function shorten(path)
     prefix = "/"
     table.remove(parts, 1)
   end
-  if #parts <= 2 then
-    return path
+  local short = #parts > 2 and (prefix .. parts[1] .. "/…/" .. parts[#parts]) or path
+  if #short > MAX_PATH then
+    short = "…" .. short:sub(#short - MAX_PATH + 2)
   end
-  return prefix .. parts[1] .. "/…/" .. parts[#parts]
+  return short
 end
 
 local function path(buf, root)
@@ -100,7 +102,9 @@ local function git_dir(root)
   local stat = vim.uv.fs_stat(git)
   if stat and stat.type == "file" then
     local link = (vim.fn.readfile(git, "", 1)[1] or ""):match("^gitdir: (.+)$")
-    git = link and vim.fs.normalize(link) or git
+    if link then
+      git = vim.fs.normalize(link:sub(1, 1) == "/" and link or root .. "/" .. link)
+    end
   end
   return git
 end
@@ -216,7 +220,12 @@ local function branch(root)
   end
 
   local git = git_dir(root)
-  local head = (vim.fn.readfile(git .. "/HEAD", "", 1) or {})[1] or ""
+  if not vim.uv.fs_stat(git .. "/HEAD") then
+    branches[root] = ""
+    return nil
+  end
+
+  local head = vim.fn.readfile(git .. "/HEAD", "", 1)[1] or ""
   local name = head:match("^ref: refs/heads/(.+)$") or head:sub(1, 7)
   if #name > MAX_BRANCH then
     name = name:sub(1, MAX_BRANCH - 1) .. "…"
@@ -236,7 +245,8 @@ function M.render()
     return ""
   end
 
-  local mode = MODES[vim.api.nvim_get_mode().mode] or MODES.n
+  local m = vim.api.nvim_get_mode().mode
+  local mode = MODES[m] or MODES[m:sub(1, 1)] or MODES.n
   local block = "%#StatusMode" .. mode[1] .. "#"
   local root = git_root(buf)
 
