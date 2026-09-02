@@ -5,14 +5,19 @@ map("n", "<leader>R", "<cmd>restart +confirm\\ qall<CR>", { desc = "Reload Nvim"
 
 -- Buffer Management
 local function show_dashboard()
-  pcall(Snacks.dashboard.open, { win = 0 })
+  Snacks.dashboard.open({ win = 0 })
 end
 
--- A "real" buffer is listed and named on disk. Excludes the unnamed scratch
--- buffer left behind after the last delete, plus help, terminal and quickfix.
+-- A "real" buffer is listed and either named on disk or holds unsaved work.
+-- Excludes the empty scratch buffer left behind after the last delete, plus
+-- help, terminal and quickfix.
 local function has_real_buffer()
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buflisted and vim.api.nvim_buf_get_name(buf) ~= "" then
+    if
+      vim.api.nvim_buf_is_loaded(buf)
+      and vim.bo[buf].buflisted
+      and (vim.api.nvim_buf_get_name(buf) ~= "" or vim.bo[buf].modified)
+    then
       return true
     end
   end
