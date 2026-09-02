@@ -43,7 +43,9 @@ return {
             vim.lsp.buf.code_action({ context = { only = { "quickfix" } }, apply = true })
           end, "Quickfix")
           map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
-          map("n", "<leader>cs", vim.lsp.buf.document_symbol, "Document symbols")
+          map("n", "<leader>cs", function()
+            Snacks.picker.lsp_symbols()
+          end, "Document symbols")
         end,
       })
     end,
