@@ -10,7 +10,6 @@ return {
     { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put before" },
     { "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Put after, cursor after" },
     { "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" }, desc = "Put before, cursor after" },
-    { "<C-p>", "<Plug>(YankyPreviousEntry)", desc = "Previous yank" },
-    { "<C-n>", "<Plug>(YankyNextEntry)", desc = "Next yank" },
+    { "<leader>fy", "<cmd>YankyRingHistory<cr>", desc = "Yank history" },
   },
 }
