@@ -9,6 +9,7 @@ return {
       { "<leader>c", group = "code" },
       { "<leader>d", group = "diagnostics" },
       { "<leader>f", group = "find" },
+      { "<leader>g", group = "git" },
       { "<leader>s", group = "surround" },
       { "<leader>sd", group = "delete surround" },
       { "<leader>sc", group = "change surround" },
