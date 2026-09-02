@@ -43,6 +43,29 @@ local SEVERITIES = {
   { vim.diagnostic.severity.HINT, "H", "DiagnosticHint" },
 }
 
+local BUF_DIFF = {
+  { key = "add", text = "+%d", hl = "MiniDiffSignAdd" },
+  { key = "change", text = "~%d", hl = "MiniDiffSignChange" },
+  { key = "delete", text = "-%d", hl = "MiniDiffSignDelete" },
+}
+
+-- Hunks in this buffer, from mini.diff. The repo-wide counts live on the right.
+local function buf_diff(buf)
+  local summary = vim.b[buf].minidiff_summary
+  if not summary then
+    return ""
+  end
+
+  local parts = {}
+  for _, item in ipairs(BUF_DIFF) do
+    local n = summary[item.key]
+    if n and n > 0 then
+      parts[#parts + 1] = "%#" .. item.hl .. "#" .. item.text:format(n) .. "%*"
+    end
+  end
+  return table.concat(parts, " ")
+end
+
 local function diagnostics(buf)
   local counts = {}
   for _, d in ipairs(vim.diagnostic.get(buf)) do
@@ -253,17 +276,23 @@ function M.render()
   local right = ""
   if root then
     local head = branch(root)
-    right = (head and head .. " " or "") .. block .. " " .. vim.fs.basename(root) .. " %*"
+    local changes = git_status(root)
+    right = (changes ~= "" and changes .. " " or "")
+      .. (head and head .. " " or "")
+      .. block
+      .. " "
+      .. vim.fs.basename(root)
+      .. " %*"
   end
 
-  local changes = root and git_status(root) or ""
+  local hunks = buf_diff(buf)
   local diag = diagnostics(buf)
 
   return table.concat({
     block .. " " .. mode[1] .. " %*",
     " ",
     path(buf, root),
-    changes ~= "" and " " .. changes or "",
+    hunks ~= "" and " " .. hunks or "",
     diag ~= "" and " " .. diag or "",
     "%=",
     right,
@@ -284,6 +313,13 @@ function M.setup()
       if root then
         refresh(root)
       end
+    end,
+  })
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "MiniDiffUpdated",
+    group = vim.api.nvim_create_augroup("statusline-diff", { clear = true }),
+    callback = function()
+      vim.cmd("redrawstatus")
     end,
   })
   vim.o.statusline = "%!v:lua.require'config.statusline'.render()"
