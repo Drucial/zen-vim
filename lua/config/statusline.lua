@@ -1,6 +1,7 @@
 local M = {}
 
 local MAX_PATH = 50
+local MAX_BRANCH = 20
 
 local MODES = {
   n = { "N", "Directory" },
@@ -57,23 +58,65 @@ local function shorten(path)
   return parts[1] .. "/…/" .. parts[#parts]
 end
 
-local function path()
-  local buf = vim.api.nvim_get_current_buf()
+local function path(buf, root)
   local name = vim.api.nvim_buf_get_name(buf)
   if name == "" or vim.bo[buf].buftype ~= "" then
     return ""
   end
-  local root = git_root(buf)
   local rel = root and name:sub(#root + 2) or vim.fn.fnamemodify(name, ":~")
   return shorten(rel)
 end
 
+-- Read .git/HEAD directly rather than spawning git, so this stays cheap enough
+-- to run on every statusline redraw. Cached per root; cleared on the autocmds
+-- in setup().
+local branches = {}
+
+local function branch(root)
+  local cached = branches[root]
+  if cached ~= nil then
+    return cached ~= "" and cached or nil
+  end
+
+  local git = root .. "/.git"
+  local stat = vim.uv.fs_stat(git)
+  if stat and stat.type == "file" then
+    local link = (vim.fn.readfile(git, "", 1)[1] or ""):match("^gitdir: (.+)$")
+    git = link and vim.fs.normalize(link) or git
+  end
+
+  local head = (vim.fn.readfile(git .. "/HEAD", "", 1) or {})[1] or ""
+  local name = head:match("^ref: refs/heads/(.+)$") or head:sub(1, 7)
+  if #name > MAX_BRANCH then
+    name = name:sub(1, MAX_BRANCH - 1) .. "…"
+  end
+
+  branches[root] = name
+  return name ~= "" and name or nil
+end
+
+function M.clear_cache()
+  branches = {}
+end
+
 function M.render()
+  local buf = vim.api.nvim_get_current_buf()
   local mode = MODES[vim.api.nvim_get_mode().mode] or MODES.n
+  local block = "%#StatusMode" .. mode[1] .. "#"
+  local root = git_root(buf)
+
+  local right = ""
+  if root then
+    local head = branch(root)
+    right = (head and head .. " " or "") .. block .. " " .. vim.fs.basename(root) .. " %*"
+  end
+
   return table.concat({
-    "%#StatusMode" .. mode[1] .. "# " .. mode[1] .. " %*",
+    block .. " " .. mode[1] .. " %*",
     " ",
-    path(),
+    path(buf, root),
+    "%=",
+    right,
   })
 end
 
@@ -82,6 +125,10 @@ function M.setup()
   vim.api.nvim_create_autocmd("ColorScheme", {
     group = vim.api.nvim_create_augroup("statusline-highlights", { clear = true }),
     callback = M.apply_highlights,
+  })
+  vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "DirChanged" }, {
+    group = vim.api.nvim_create_augroup("statusline-git", { clear = true }),
+    callback = M.clear_cache,
   })
   vim.o.statusline = "%!v:lua.require'config.statusline'.render()"
 end

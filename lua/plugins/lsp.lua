@@ -21,6 +21,9 @@ return {
     config = function(_, opts)
       require("mason-lspconfig").setup(opts)
 
+      vim.lsp.config("lua_ls", {
+        settings = { Lua = { diagnostics = { disable = { "missing-fields" } } } },
+      })
       vim.lsp.config("ruby_lsp", { cmd = { "bundle", "exec", "ruby-lsp" } })
       vim.lsp.enable({ "ruby_lsp", "sourcekit" })
 
