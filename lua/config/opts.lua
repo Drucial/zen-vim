@@ -21,6 +21,19 @@ opt.swapfile = false
 -- Set here rather than per-plugin so it survives theme switches.
 opt.winborder = "rounded"
 
+-- Themes disagree wildly on WinSeparator and several render it near the
+-- background. Comment is muted but always legible. Note nvim has drawn
+-- separators with WinSeparator since 0.7 -- overriding VertSplit does nothing.
+local function win_separator()
+  vim.api.nvim_set_hl(0, "WinSeparator", { link = "Comment" })
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = vim.api.nvim_create_augroup("win-separator", { clear = true }),
+  callback = win_separator,
+})
+win_separator()
+
 -- Live :s preview, with a split listing every affected line.
 opt.inccommand = "split"
 
