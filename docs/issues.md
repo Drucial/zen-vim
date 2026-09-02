@@ -4,12 +4,6 @@ Open tasks for this config. Newest at the bottom.
 
 ## Open
 
-### Add treesitter
-
-No treesitter yet, so highlighting still runs on regex syntax. Also means no
-structural text objects and weaker symbol awareness in filetypes without a
-language server.
-
 ### `<leader>bd` collapses split layouts
 
 `:bdelete` closes every window showing the buffer, so deleting the last buffer
