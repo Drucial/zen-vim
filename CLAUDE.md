@@ -2,6 +2,11 @@
 
 Hand-built config on Neovim 0.12.5. Ports to macOS as well as Linux.
 
+Known problems and planned work live in [docs/issues.md](docs/issues.md). Read it
+before starting anything — a surprise you hit is likely already described there.
+Add an entry when you find something worth fixing later, and delete the entry in
+the same commit that fixes it.
+
 ## Non-negotiables
 
 **No distro.** LazyVim is deliberately absent. `lua/plugins/lazyvim-disable.lua`
@@ -73,5 +78,5 @@ Target is 0 lua_ls diagnostics across all tracked Lua files.
 `stylua` formats everything except the generated `theme.lua`. No comments by
 default — top-of-file and contract docs only.
 
-Open work lives in `docs/issues.md`, one `###` heading per task. Entries are
-deleted when done, not ticked.
+`docs/issues.md` uses one `###` heading per task: a short title and two or three
+lines of context, enough to pick up cold.
