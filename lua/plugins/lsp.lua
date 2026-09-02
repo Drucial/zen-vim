@@ -24,6 +24,9 @@ return {
       vim.lsp.config("lua_ls", {
         settings = { Lua = { diagnostics = { disable = { "missing-fields" } } } },
       })
+      vim.lsp.config("vtsls", {
+        settings = { typescript = { tsserver = { maxTsServerMemory = 8192 } } },
+      })
       vim.lsp.config("ruby_lsp", { cmd = { "bundle", "exec", "ruby-lsp" } })
       vim.lsp.enable({ "ruby_lsp", "sourcekit" })
 
