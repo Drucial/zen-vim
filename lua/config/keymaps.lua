@@ -3,6 +3,14 @@ local map = vim.keymap.set
 -- Config
 map("n", "<leader>R", "<cmd>restart +confirm\\ qall<CR>", { desc = "Reload Nvim" })
 
+-- Navigation
+-- zen-navigator binds <C-hjkl> in normal mode itself; terminal mode has to leave
+-- terminal mode first, so those are set here.
+for key, dir in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
+  local nav = ([[<C-\><C-n><cmd>lua require("zen-navigator").navigate("%s")<cr>]]):format(key)
+  map("t", "<C-" .. key .. ">", nav, { silent = true, desc = "ZenNavigator: move " .. dir })
+end
+
 -- Buffer Management
 local function show_dashboard()
   Snacks.dashboard.open({ win = 0 })
