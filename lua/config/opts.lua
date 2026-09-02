@@ -24,6 +24,12 @@ opt.winborder = "rounded"
 -- Live :s preview, with a split listing every affected line.
 opt.inccommand = "split"
 
+-- Full message below the cursor line only, so nothing renders until you land on
+-- a diagnostic. Long tsserver messages survive intact, which virtual text truncates.
+vim.diagnostic.config({
+  virtual_lines = { current_line = true },
+})
+
 -- Default status bar
 opt.laststatus = 3
 opt.ruler = false
