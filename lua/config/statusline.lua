@@ -253,21 +253,17 @@ function M.render()
   local right = ""
   if root then
     local head = branch(root)
-    local changes = git_status(root)
-    right = (changes ~= "" and changes .. " " or "")
-      .. (head and head .. " " or "")
-      .. block
-      .. " "
-      .. vim.fs.basename(root)
-      .. " %*"
+    right = (head and head .. " " or "") .. block .. " " .. vim.fs.basename(root) .. " %*"
   end
 
+  local changes = root and git_status(root) or ""
   local diag = diagnostics(buf)
 
   return table.concat({
     block .. " " .. mode[1] .. " %*",
     " ",
     path(buf, root),
+    changes ~= "" and " " .. changes or "",
     diag ~= "" and " " .. diag or "",
     "%=",
     right,
