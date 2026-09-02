@@ -68,6 +68,7 @@ return {
         "goimports",
         "golangci-lint",
         "swiftlint",
+        "tree-sitter-cli",
       },
     },
   },
