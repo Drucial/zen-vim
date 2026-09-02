@@ -40,6 +40,19 @@ silently defeated. This was a real bug once.
 Built-in 0.11+ keymaps are global and already exist: `gra` `grn` `grr` `gri`
 `grt` `grx` `gO` `K`. `gd`/`gD` are not defaults and are set in `LspAttach`.
 
+**TypeScript is `vtsls` only.** Never run `ts_ls` alongside it — they are the
+same tsserver twice, and both attach to every buffer. Dropping `ts_ls` from the
+config is not enough: `mason-lspconfig` enables whatever is installed, so the
+mason package must be uninstalled too. This shipped broken for a day.
+
+Two `vtsls` settings are load-bearing on large monorepos, both measured against
+craftwork: `autoUseWorkspaceTsdk` (repos pin their own TypeScript; the bundled
+copy drifts) and `maxTsServerMemory` (one server indexes craftwork to ~4.5 GB,
+and tsserver's 3 GB default aborts with `SIGABRT` in a restart loop).
+
+Repos may ship a `.vscode/settings.json` that nvim never reads. It is worth
+checking when a repo behaves worse here than for colleagues on VSCode.
+
 ## Keymaps
 
 **Leader is for things Vim has no concept of** — pickers, LSP actions,
