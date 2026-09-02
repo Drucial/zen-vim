@@ -52,10 +52,15 @@ local function shorten(path)
     return path
   end
   local parts = vim.split(path, "/")
+  local prefix = ""
+  if parts[1] == "" then
+    prefix = "/"
+    table.remove(parts, 1)
+  end
   if #parts <= 2 then
     return path
   end
-  return parts[1] .. "/…/" .. parts[#parts]
+  return prefix .. parts[1] .. "/…/" .. parts[#parts]
 end
 
 local function path(buf, root)
@@ -63,7 +68,7 @@ local function path(buf, root)
   if name == "" or vim.bo[buf].buftype ~= "" then
     return ""
   end
-  local rel = root and name:sub(#root + 2) or vim.fn.fnamemodify(name, ":~")
+  local rel = root and name:sub(#root + 2) or vim.fn.fnamemodify(name, ":~:.")
   return shorten(rel)
 end
 
@@ -101,6 +106,10 @@ end
 
 function M.render()
   local buf = vim.api.nvim_get_current_buf()
+  if vim.bo[buf].filetype == "snacks_dashboard" then
+    return ""
+  end
+
   local mode = MODES[vim.api.nvim_get_mode().mode] or MODES.n
   local block = "%#StatusMode" .. mode[1] .. "#"
   local root = git_root(buf)
