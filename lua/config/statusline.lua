@@ -37,10 +37,10 @@ function M.apply_highlights()
 end
 
 local SEVERITIES = {
-  { vim.diagnostic.severity.ERROR, "", "DiagnosticError" },
-  { vim.diagnostic.severity.WARN, "", "DiagnosticWarn" },
-  { vim.diagnostic.severity.INFO, "", "DiagnosticInfo" },
-  { vim.diagnostic.severity.HINT, "", "DiagnosticHint" },
+  { vim.diagnostic.severity.ERROR, "E", "DiagnosticError" },
+  { vim.diagnostic.severity.WARN, "W", "DiagnosticWarn" },
+  { vim.diagnostic.severity.INFO, "I", "DiagnosticInfo" },
+  { vim.diagnostic.severity.HINT, "H", "DiagnosticHint" },
 }
 
 local function diagnostics(buf)
@@ -53,7 +53,7 @@ local function diagnostics(buf)
   for _, severity in ipairs(SEVERITIES) do
     local n = counts[severity[1]]
     if n then
-      parts[#parts + 1] = "%#" .. severity[3] .. "#" .. severity[2] .. " " .. n .. "%*"
+      parts[#parts + 1] = "%#" .. severity[3] .. "#" .. severity[2] .. n .. "%*"
     end
   end
   return table.concat(parts, " ")
@@ -149,7 +149,7 @@ function M.render()
     block .. " " .. mode[1] .. " %*",
     " ",
     path(buf, root),
-    diag ~= "" and "  " .. diag or "",
+    diag ~= "" and " " .. diag or "",
     "%=",
     right,
   })
