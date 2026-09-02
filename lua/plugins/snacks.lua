@@ -56,12 +56,10 @@ return {
     },
     zen = {
       enabled = true,
-      -- Values are the desired state, not "hide". Only ids backed by a
-      -- Snacks.toggle.<id> constructor resolve; git_signs is not one of them.
+      -- Values are the desired state, not "hide", so anything listed here
+      -- overrides the global setting on entry. Only dim is worth overriding.
       toggles = {
         dim = false,
-        diagnostics = true,
-        inlay_hints = true,
       },
       show = {
         statusline = false,
