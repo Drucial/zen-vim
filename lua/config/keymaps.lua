@@ -1,16 +1,7 @@
 local map = vim.keymap.set
 
 -- Config
-map("n", "<leader>R", function()
-  for name in pairs(package.loaded) do
-    if name:match("^config%.") then
-      package.loaded[name] = nil
-    end
-  end
-  require("config.opts")
-  require("config.keymaps")
-  vim.notify("Config reloaded")
-end, { desc = "Reload config" })
+map("n", "<leader>R", "<cmd>restart<CR>", { desc = "Reload Nvim" })
 
 -- Buffer Management
 map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
