@@ -27,15 +27,6 @@ The `LazyReload` autocmd is registered and lazy's reloader tracks `theme.lua`,
 but an actual `omarchy theme set` has never been run to confirm nvim follows.
 Verified structurally only.
 
-### Mason installs enable themselves without being declared
-
-`mason-lspconfig`'s `automatic_enable` defaults to true, so any server present in
-mason starts attaching whether or not the config asks for it. A leftover `ts_ls`
-ran alongside `vtsls` this way for a day, doubling diagnostics and memory.
-`html-lsp` is currently installed and undeclared. Either set
-`automatic_enable = false` and enable servers explicitly, or treat
-`ensure_installed` as authoritative and prune mason to match.
-
 ### Evaluate remaining snacks modules
 
 Snacks currently loads with only the picker configured. Worth assessing

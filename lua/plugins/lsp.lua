@@ -12,6 +12,7 @@ return {
         "jsonls",
         "yamlls",
         "marksman",
+        "html",
       },
     },
     dependencies = {
