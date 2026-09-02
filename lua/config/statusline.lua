@@ -2,6 +2,7 @@ local M = {}
 
 local MAX_PATH = 50
 local MAX_BRANCH = 20
+local MAX_DIAG = 60
 
 local MODES = {
   n = { "N", "Directory" },
@@ -34,6 +35,33 @@ function M.apply_highlights()
   for _, mode in pairs(MODES) do
     block_hl("StatusMode" .. mode[1], mode[2])
   end
+end
+
+local SEVERITY_HL = {
+  [vim.diagnostic.severity.ERROR] = "DiagnosticError",
+  [vim.diagnostic.severity.WARN] = "DiagnosticWarn",
+  [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+  [vim.diagnostic.severity.HINT] = "DiagnosticHint",
+}
+
+-- The underline marks which line is bad; this says what is wrong with it.
+local function diagnostic(buf)
+  local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+  local worst
+  for _, d in ipairs(vim.diagnostic.get(buf, { lnum = lnum })) do
+    if not worst or d.severity < worst.severity then
+      worst = d
+    end
+  end
+  if not worst then
+    return ""
+  end
+
+  local msg = worst.message:gsub("%s+", " ")
+  if vim.fn.strchars(msg) > MAX_DIAG then
+    msg = vim.fn.strcharpart(msg, 0, MAX_DIAG - 1) .. "…"
+  end
+  return "%#" .. (SEVERITY_HL[worst.severity] or "DiagnosticHint") .. "#" .. msg .. "%*"
 end
 
 local function git_root(buf)
@@ -120,10 +148,13 @@ function M.render()
     right = (head and head .. " " or "") .. block .. " " .. vim.fs.basename(root) .. " %*"
   end
 
+  local diag = diagnostic(buf)
+
   return table.concat({
     block .. " " .. mode[1] .. " %*",
     " ",
     path(buf, root),
+    diag ~= "" and "  " .. diag or "",
     "%=",
     right,
   })
