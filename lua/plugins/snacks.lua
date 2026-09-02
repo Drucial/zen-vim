@@ -56,33 +56,22 @@ return {
     },
     zen = {
       enabled = true,
+      -- Values are the desired state, not "hide". Only ids backed by a
+      -- Snacks.toggle.<id> constructor resolve; git_signs is not one of them.
       toggles = {
-        dim = false, -- don't dim inactive windows
-        git_signs = true, -- hide git signs
-        diagnostics = true, -- hide diagnostics
-        inlay_hints = true, -- hide inlay hints
+        dim = false,
+        diagnostics = true,
+        inlay_hints = true,
       },
       show = {
-        statusline = false, -- hide statusline
-        tabline = false, -- hide tabline
+        statusline = false,
+        tabline = false,
       },
+      -- Line numbers stay on: mini.diff renders hunks by tinting them.
       win = {
-        width = 110, -- width in columns (or use 0.8 for 80% of screen)
-        height = 0, -- 0 = full height
+        width = 110,
+        height = 0,
       },
-      on_open = function()
-        -- Save current line number settings
-        vim.b.zen_number = vim.wo.number
-        vim.b.zen_relativenumber = vim.wo.relativenumber
-        -- Disable line numbers
-        vim.wo.number = false
-        vim.wo.relativenumber = false
-      end,
-      on_close = function()
-        -- Restore line number settings
-        vim.wo.number = vim.b.zen_number
-        vim.wo.relativenumber = vim.b.zen_relativenumber
-      end,
     },
   },
 }
