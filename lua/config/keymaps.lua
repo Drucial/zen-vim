@@ -63,6 +63,10 @@ map("n", "<leader>e", function()
   Snacks.picker.explorer()
 end, { desc = "Explorer" })
 
+map("n", "<leader>z", function()
+  Snacks.zen()
+end, { desc = "Zen mode" })
+
 -- Find
 map("n", "<leader>ff", function()
   Snacks.picker.files()
