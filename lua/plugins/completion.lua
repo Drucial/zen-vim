@@ -9,11 +9,10 @@ return {
       list = {
         selection = { preselect = false, auto_insert = false },
       },
-      menu = { auto_show = true, border = "rounded" },
-      documentation = { auto_show = false, window = { border = "rounded" } },
+      menu = { auto_show = true },
+      documentation = { auto_show = false },
       ghost_text = { enabled = false },
     },
-    signature = { window = { border = "rounded" } },
     sources = {
       default = { "lazydev", "lsp", "path", "snippets", "buffer" },
       providers = {

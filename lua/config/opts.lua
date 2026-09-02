@@ -1,6 +1,13 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- GUI launches (Neovide, Finder) never source the shell profile, so binaries
+-- here would be missing from anything nvim spawns.
+local local_bin = vim.fn.expand("~/.local/bin")
+if not vim.env.PATH:find(local_bin, 1, true) then
+  vim.env.PATH = local_bin .. ":" .. vim.env.PATH
+end
+
 local opt = vim.opt
 
 opt.number = true
@@ -8,6 +15,14 @@ opt.relativenumber = true
 opt.cursorline = true
 opt.signcolumn = "number"
 opt.fillchars:append({ eob = " " })
+opt.breakindent = true
+opt.swapfile = false
+
+-- Set here rather than per-plugin so it survives theme switches.
+opt.winborder = "rounded"
+
+-- Live :s preview, with a split listing every affected line.
+opt.inccommand = "split"
 
 -- Default status bar
 opt.laststatus = 3
