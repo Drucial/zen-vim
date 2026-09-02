@@ -3,12 +3,23 @@ return {
   event = "VeryLazy",
   opts = {
     preset = "helix",
+    icons = { mappings = false, rules = false },
     spec = {
       { "<leader>b", group = "buffer" },
       { "<leader>c", group = "code" },
       { "<leader>d", group = "diagnostics" },
       { "<leader>f", group = "find" },
       { "<leader>w", group = "window" },
+      { "g", group = "goto" },
+      { "gc", group = "comment" },
+      { "gr", group = "lsp" },
+      { "gO", desc = "Document symbols" },
+      { "grn", desc = "Rename symbol" },
+      { "grr", desc = "References" },
+      { "gri", desc = "Implementations" },
+      { "grt", desc = "Type definition" },
+      { "grx", desc = "Run codelens" },
+      { "gx", desc = "Open file or URI under cursor" },
     },
   },
 }
