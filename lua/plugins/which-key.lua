@@ -9,6 +9,7 @@ return {
       { "<leader>c", group = "code" },
       { "<leader>d", group = "diagnostics" },
       { "<leader>f", group = "find" },
+      { "<leader>s", group = "surround" },
       { "g", group = "goto" },
       { "gc", group = "comment" },
       { "gr", group = "lsp" },
