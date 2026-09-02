@@ -164,16 +164,29 @@ local function tally(lines)
   return counts
 end
 
+local pending = {}
+
 local function refresh(root)
+  if pending[root] then
+    return
+  end
+  pending[root] = true
+
+  -- Resolved here, not in on_exit: that callback is a fast event context, where
+  -- git_dir's readfile raises E5560 for the .git-as-a-file case (worktrees,
+  -- submodules).
+  local stash = git_dir(root) .. "/refs/stash"
+
   vim.system({ "git", "-C", root, "status", "--porcelain=v1", "--branch" }, { text = true }, function(result)
     local counts = {}
     if result.code == 0 then
       counts = tally(vim.split(result.stdout or "", "\n", { trimempty = true }))
     end
-    if vim.uv.fs_stat(git_dir(root) .. "/refs/stash") then
+    if vim.uv.fs_stat(stash) then
       counts.stashed = 1
     end
     vim.schedule(function()
+      pending[root] = nil
       statuses[root] = counts
       vim.cmd("redrawstatus")
     end)
