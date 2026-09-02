@@ -54,6 +54,14 @@ vim.api.nvim_create_user_command("Bdall", delete_all_buffers, { desc = "Delete a
 map({ "n", "v" }, "<leader>cf", function()
   require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format buffer" })
+map("n", "<leader>cR", function()
+  Snacks.rename.rename_file()
+end, { desc = "Rename file" })
+
+-- Files
+map("n", "<leader>e", function()
+  Snacks.picker.explorer()
+end, { desc = "Explorer" })
 
 -- Find
 map("n", "<leader>ff", function()
