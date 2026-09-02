@@ -10,6 +10,8 @@ return {
       { "<leader>d", group = "diagnostics" },
       { "<leader>f", group = "find" },
       { "<leader>s", group = "surround" },
+      { "<leader>sd", group = "delete surround" },
+      { "<leader>sc", group = "change surround" },
       { "g", group = "goto" },
       { "gc", group = "comment" },
       { "gr", group = "lsp" },
