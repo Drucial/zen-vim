@@ -40,13 +40,6 @@ silently defeated. This was a real bug once.
 Built-in 0.11+ keymaps are global and already exist: `gra` `grn` `grr` `gri`
 `grt` `grx` `gO` `K`. `gd`/`gD` are not defaults and are set in `LspAttach`.
 
-`grr` `gri` `grt` `gO` and `gd`/`gD` are deliberately rebound in `LspAttach` to
-the matching `Snacks.picker.lsp_*` source. This is the exception to "do not
-duplicate a built-in": those handlers push multi-result locations to a quickfix
-window and accept no `on_list` from the mapping, so rebinding the key is the only
-way to redirect them. `gra` and `grx` need no override — they go through
-`vim.ui.select`, which snacks already owns via `picker.ui_select`.
-
 **TypeScript is `vtsls` only.** Never run `ts_ls` alongside it — they are the
 same tsserver twice, and both attach to every buffer. Dropping `ts_ls` from the
 config is not enough: `mason-lspconfig` enables whatever is installed, so the
