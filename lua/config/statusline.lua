@@ -95,10 +95,106 @@ local function path(buf, root)
   return shorten(rel)
 end
 
+local function git_dir(root)
+  local git = root .. "/.git"
+  local stat = vim.uv.fs_stat(git)
+  if stat and stat.type == "file" then
+    local link = (vim.fn.readfile(git, "", 1)[1] or ""):match("^gitdir: (.+)$")
+    git = link and vim.fs.normalize(link) or git
+  end
+  return git
+end
+
 -- Read .git/HEAD directly rather than spawning git, so this stays cheap enough
 -- to run on every statusline redraw. Cached per root; cleared on the autocmds
 -- in setup().
 local branches = {}
+
+-- Shapes and order mirror the git_status module in ~/.config/starship.toml.
+-- Starship names ANSI colors; these map to semantic groups instead so the
+-- statusline follows a theme switch.
+local GIT_STATUS = {
+  { key = "ahead", text = "⇡ %d", hl = "Directory" },
+  { key = "behind", text = "⇣ %d", hl = "DiagnosticError" },
+  { key = "staged", text = "+%d", hl = "DiagnosticInfo" },
+  { key = "modified", text = "~%d", hl = "DiagnosticWarn" },
+  { key = "untracked", text = "?%d", hl = "WarningMsg" },
+  { key = "renamed", text = "»", hl = "Identifier" },
+  { key = "deleted", text = "-%d", hl = "DiagnosticError" },
+  { key = "conflicted", text = "≠", hl = "Statement" },
+  { key = "stashed", text = "󰏢", hl = "String" },
+}
+
+-- Unlike branch, this needs `git status`, so it runs off the autocmds in
+-- setup() and repaints when the result lands. Never spawned from render().
+local statuses = {}
+
+local function tally(lines)
+  local counts = {}
+  local function bump(key)
+    counts[key] = (counts[key] or 0) + 1
+  end
+
+  for _, line in ipairs(lines) do
+    if line:sub(1, 2) == "##" then
+      counts.ahead = tonumber(line:match("ahead (%d+)"))
+      counts.behind = tonumber(line:match("behind (%d+)"))
+    else
+      local x, y = line:sub(1, 1), line:sub(2, 2)
+      if x == "?" then
+        bump("untracked")
+      elseif x == "U" or y == "U" or (x == "A" and y == "A") or (x == "D" and y == "D") then
+        bump("conflicted")
+      else
+        if x == "R" then
+          bump("renamed")
+        end
+        if x == "D" or y == "D" then
+          bump("deleted")
+        end
+        if x ~= " " then
+          bump("staged")
+        end
+        if y == "M" then
+          bump("modified")
+        end
+      end
+    end
+  end
+  return counts
+end
+
+local function refresh(root)
+  vim.system({ "git", "-C", root, "status", "--porcelain=v1", "--branch" }, { text = true }, function(result)
+    local counts = {}
+    if result.code == 0 then
+      counts = tally(vim.split(result.stdout or "", "\n", { trimempty = true }))
+    end
+    if vim.uv.fs_stat(git_dir(root) .. "/refs/stash") then
+      counts.stashed = 1
+    end
+    vim.schedule(function()
+      statuses[root] = counts
+      vim.cmd("redrawstatus")
+    end)
+  end)
+end
+
+local function git_status(root)
+  local counts = statuses[root]
+  if not counts then
+    return ""
+  end
+
+  local parts = {}
+  for _, item in ipairs(GIT_STATUS) do
+    local n = counts[item.key]
+    if n and n > 0 then
+      parts[#parts + 1] = "%#" .. item.hl .. "#" .. item.text:format(n) .. "%*"
+    end
+  end
+  return table.concat(parts, " ")
+end
 
 local function branch(root)
   local cached = branches[root]
@@ -106,13 +202,7 @@ local function branch(root)
     return cached ~= "" and cached or nil
   end
 
-  local git = root .. "/.git"
-  local stat = vim.uv.fs_stat(git)
-  if stat and stat.type == "file" then
-    local link = (vim.fn.readfile(git, "", 1)[1] or ""):match("^gitdir: (.+)$")
-    git = link and vim.fs.normalize(link) or git
-  end
-
+  local git = git_dir(root)
   local head = (vim.fn.readfile(git .. "/HEAD", "", 1) or {})[1] or ""
   local name = head:match("^ref: refs/heads/(.+)$") or head:sub(1, 7)
   if #name > MAX_BRANCH then
@@ -140,7 +230,13 @@ function M.render()
   local right = ""
   if root then
     local head = branch(root)
-    right = (head and head .. " " or "") .. block .. " " .. vim.fs.basename(root) .. " %*"
+    local changes = git_status(root)
+    right = (changes ~= "" and changes .. " " or "")
+      .. (head and head .. " " or "")
+      .. block
+      .. " "
+      .. vim.fs.basename(root)
+      .. " %*"
   end
 
   local diag = diagnostics(buf)
@@ -161,9 +257,15 @@ function M.setup()
     group = vim.api.nvim_create_augroup("statusline-highlights", { clear = true }),
     callback = M.apply_highlights,
   })
-  vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "DirChanged" }, {
+  vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "DirChanged", "BufWritePost" }, {
     group = vim.api.nvim_create_augroup("statusline-git", { clear = true }),
-    callback = M.clear_cache,
+    callback = function()
+      M.clear_cache()
+      local root = git_root(vim.api.nvim_get_current_buf())
+      if root then
+        refresh(root)
+      end
+    end,
   })
   vim.o.statusline = "%!v:lua.require'config.statusline'.render()"
 end
