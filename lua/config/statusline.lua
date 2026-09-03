@@ -94,6 +94,12 @@ local function git_root(buf)
   return root
 end
 
+-- render() is a %! expression, so its result is re-parsed for statusline items.
+-- Anything derived from a path or branch name has to escape its percent signs.
+local function escape(text)
+  return (text:gsub("%%", "%%%%"))
+end
+
 local function shorten(path)
   if #path <= MAX_PATH then
     return path
@@ -278,10 +284,10 @@ function M.render()
     local head = branch(root)
     local changes = git_status(root)
     right = (changes ~= "" and changes .. " " or "")
-      .. (head and head .. " " or "")
+      .. (head and escape(head) .. " " or "")
       .. block
       .. " "
-      .. vim.fs.basename(root)
+      .. escape(vim.fs.basename(root))
       .. " %*"
   end
 
@@ -291,7 +297,7 @@ function M.render()
   return table.concat({
     block .. " " .. mode[1] .. " %*",
     " ",
-    path(buf, root),
+    escape(path(buf, root)),
     hunks ~= "" and " " .. hunks or "",
     diag ~= "" and " " .. diag or "",
     "%=",
