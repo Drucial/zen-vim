@@ -53,8 +53,9 @@ opt.shiftround = true
 -- System clipboard
 opt.clipboard = "unnamedplus"
 
--- Centered cursor (keeps cursor in middle of screen)
-opt.scrolloff = 999
+-- Vertical context around the cursor. Not 999: a pinned cursor line makes zz,
+-- zt and zb inert, so half-page scrolls re-center themselves in keymaps.lua.
+opt.scrolloff = 8
 
 -- Better horizontal scroll context
 opt.sidescrolloff = 16

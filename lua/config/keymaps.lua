@@ -11,6 +11,10 @@ for key, dir in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
   map("t", "<C-" .. key .. ">", nav, { silent = true, desc = "ZenNavigator: move " .. dir })
 end
 
+-- Half-page scrolls land centered.
+map({ "n", "x" }, "<C-d>", "<C-d>zz", { desc = "Half page down" })
+map({ "n", "x" }, "<C-u>", "<C-u>zz", { desc = "Half page up" })
+
 -- Buffer Management
 local function show_dashboard()
   Snacks.dashboard.open({ win = 0 })
