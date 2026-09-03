@@ -28,7 +28,7 @@ return {
     dashboard = {
       enabled = true,
       preset = {
-        --styula:ignore start
+        -- stylua: ignore start
         header = [[
 ┏┓┏┓┳┓┓┏┳┳┳┓
 ┏┛┣ ┃┃┃┃┃┃┃┃
@@ -36,7 +36,7 @@ return {
 
 01011010 01000101 01001110 01010110 01001001 01001101
 ]],
-        -- styula:ignore end
+        -- stylua: ignore end
       },
     },
     indent = {
