@@ -24,6 +24,7 @@ local function has_real_buffer()
     if
       vim.api.nvim_buf_is_loaded(buf)
       and vim.bo[buf].buflisted
+      and vim.bo[buf].buftype == ""
       and (vim.api.nvim_buf_get_name(buf) ~= "" or vim.bo[buf].modified)
     then
       return true
@@ -34,7 +35,11 @@ end
 
 local function delete_all_buffers()
   Snacks.bufdelete.all()
-  vim.schedule(show_dashboard)
+  vim.schedule(function()
+    if not has_real_buffer() then
+      show_dashboard()
+    end
+  end)
 end
 
 map("n", "<leader>bd", function()
