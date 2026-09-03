@@ -20,7 +20,7 @@ return {
             local theme_plugin_name = nil
             for _, spec in ipairs(theme_plugins) do
               if spec[1] then
-                theme_plugin_name = spec.name or spec[1]
+                theme_plugin_name = spec.name or require("lazy.core.plugin").Spec.get_name(spec[1])
                 break
               end
             end
