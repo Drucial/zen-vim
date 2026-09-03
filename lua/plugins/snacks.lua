@@ -52,6 +52,10 @@ return {
       sources = {
         files = { hidden = true, ignored = true, exclude = exclude },
         grep = { hidden = true, ignored = true, exclude = exclude },
+        explorer = {
+          layout = { hidden = { "input" }, auto_hide = { "input" } },
+          jump = { close = true },
+        },
       },
     },
     zen = {
