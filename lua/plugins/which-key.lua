@@ -3,7 +3,8 @@ return {
   event = "VeryLazy",
   opts = {
     preset = "helix",
-    icons = { mappings = false, rules = false },
+    icons = { mappings = false, rules = false, group = "" },
+    plugins = { spelling = { suggestions = 10 } },
     spec = {
       { "<leader>b", group = "buffer" },
       { "<leader>c", group = "code" },
