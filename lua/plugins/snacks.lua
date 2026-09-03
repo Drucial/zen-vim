@@ -39,6 +39,7 @@ return {
         -- stylua: ignore end
       },
     },
+    explorer = { enabled = true },
     indent = {
       indent = { enabled = false },
       scope = { enabled = true },
