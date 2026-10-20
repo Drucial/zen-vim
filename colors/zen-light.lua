@@ -1,5 +1,10 @@
+local syntax = require("config.zen_syntax")
+
 require("aether").load({
   name = "zen-light",
+  styles = { keywords = { italic = false } },
+  on_colors = syntax.on_colors,
+  on_highlights = syntax.on_highlights,
   colors = {
     bg = "#f9f9fa",
     dark_bg = "#efeff0",
