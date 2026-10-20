@@ -18,7 +18,7 @@ require("aether").load({
     muted = "#727881",
 
     red = "#da615d",
-    yellow = "#e9c131",
+    yellow = "#f7ba33",
     orange = "#e69d5a",
     green = "#6ab586",
     cyan = "#58b3cb",
@@ -27,7 +27,7 @@ require("aether").load({
     brown = "#a8834a",
 
     bright_red = "#ec7771",
-    bright_yellow = "#fbd557",
+    bright_yellow = "#ffc85b",
     bright_green = "#80c79a",
     bright_cyan = "#71c6dd",
     bright_blue = "#7b87ef",
